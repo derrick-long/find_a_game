@@ -18,6 +18,7 @@
   "homepage": "https://github.com/derrick-long/find_a_game#readme",
   "dependencies": {
     "express": "^4.16.3",
+    "nodemon": "^1.17.2",
     "npm": "^5.8.0"
   }
 }
