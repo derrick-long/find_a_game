@@ -2,14 +2,19 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const port = process.env.PORT || 5000;
+const ejs = require('ejs');
+
+
+
+//set view engine
+app.set('view engine', 'ejs');
+
+//simple route
 
 app.get('/', (req,res)=>{
-  res.send('howdy');
+  res.render('home');
 });
 
-app.get('/about', (req,res)=>{
-  res.send('about');
-});
 
 
 //connect mongoose
@@ -19,6 +24,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/find-game-dev')
   .then(()=> console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
+
 
 
 
