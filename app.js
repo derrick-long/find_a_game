@@ -3,12 +3,12 @@ const app = express();
 const mongoose = require('mongoose');
 const port = process.env.PORT || 5000;
 const ejs = require('ejs');
-
+const expressLayouts = require('express-ejs-layouts');
 
 
 //set view engine
 app.set('view engine', 'ejs');
-
+app.use(expressLayouts);
 //simple route
 
 app.get('/', (req,res)=>{
