@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 5000;
 const ejs = require('ejs');
@@ -17,6 +18,8 @@ app.get('/', (req,res)=>{
 
 
 
+
+
 //connect mongoose
 
 mongoose.Promise = global.Promise;
@@ -25,7 +28,8 @@ mongoose.connect('mongodb://localhost/find-game-dev')
   .then(()=> console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
-
+//set static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 //set server
