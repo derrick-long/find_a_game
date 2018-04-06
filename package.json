@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/derrick-long/find_a_game#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "bootstrap": "^4.0.0",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.8",
@@ -26,6 +27,8 @@
     "mongoose": "^5.0.12",
     "nodemon": "^1.17.2",
     "npm": "^5.8.0",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
     "path": "^0.12.7"
   }
 }

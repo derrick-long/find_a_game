@@ -7,11 +7,21 @@ const ejs = require('ejs');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const expressLayouts = require('express-ejs-layouts');
+const bodyParser = require('body-parser');
+const passport = require('passport');
 
+//Load Routes
+const auth = require('./routes/auth');
+
+//load models
+
+require('./models/user');
 
 //set view engine
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
+
+
 //simple route
 
 app.get('/', (req,res)=>{
@@ -30,13 +40,13 @@ mongoose.connect('mongodb://localhost/find-game-dev')
   .then(()=> console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
-//load models
 
-require('./models/user');
 
 //set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+//use routes
+app.use('/auth', auth);
 
 //set server
 app.listen(port, ()=>{
