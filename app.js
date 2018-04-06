@@ -28,7 +28,9 @@ app.get('/', (req,res)=>{
   res.render('home');
 });
 
+//passport config
 
+require('./config/passport')(passport);
 
 
 
