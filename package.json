@@ -18,9 +18,11 @@
   "homepage": "https://github.com/derrick-long/find_a_game#readme",
   "dependencies": {
     "bootstrap": "^4.0.0",
+    "cookie-parser": "^1.4.3",
     "ejs": "^2.5.8",
     "express": "^4.16.3",
     "express-ejs-layouts": "^2.4.0",
+    "express-session": "^1.15.6",
     "mongoose": "^5.0.12",
     "nodemon": "^1.17.2",
     "npm": "^5.8.0",

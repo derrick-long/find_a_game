@@ -4,6 +4,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 5000;
 const ejs = require('ejs');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const expressLayouts = require('express-ejs-layouts');
 
 
@@ -27,6 +29,10 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/find-game-dev')
   .then(()=> console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
+
+//load models
+
+require('./models/user');
 
 //set static folder
 app.use(express.static(path.join(__dirname, 'public')));
