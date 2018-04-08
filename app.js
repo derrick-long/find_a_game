@@ -50,6 +50,13 @@ mongoose.connect('mongodb://localhost/find-game-dev')
 app.use(passport.initialize());
 app.use(passport.session());
 
+//global vars
+//gets curr user if logged
+app.use((req, res, next)=>{
+  res.local.user = req.user || null;
+  next();
+});
+
 //set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
