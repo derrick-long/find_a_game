@@ -12,7 +12,7 @@ const passport = require('passport');
 
 //Load Routes
 const auth = require('./routes/auth');
-
+const index = require('./routes/index');
 //load models
 
 require('./models/user');
@@ -51,9 +51,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //global vars
+
+
 //gets curr user if logged
-app.use((req, res, next)=>{
-  res.local.user = req.user || null;
+app.use((req, res, next)=> {
+  res.locals.user = req.user || null;
   next();
 });
 
@@ -62,7 +64,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //use routes
 app.use('/auth', auth);
-
+app.use('/', index);
 //set server
 app.listen(port, ()=>{
   console.log(`Server started on port ${port}`);
