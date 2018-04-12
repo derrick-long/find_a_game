@@ -22,11 +22,7 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
 
-//simple route
 
-app.get('/', (req,res)=>{
-  res.render('home');
-});
 
 //passport config
 
