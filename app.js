@@ -10,24 +10,6 @@ const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
-//Load Routes
-const auth = require('./routes/auth');
-const index = require('./routes/index');
-//load models
-
-require('./models/user');
-
-//set view engine
-app.set('view engine', 'ejs');
-app.use(expressLayouts);
-
-
-
-
-//passport config
-
-require('./config/passport')(passport);
-
 
 
 //connect mongoose
@@ -39,6 +21,24 @@ mongoose.connect('mongodb://localhost/find-game-dev')
   .catch(err => console.log(err));
 
 
+
+//load models
+require('./models/game');
+require('./models/user');
+
+//Load Routes
+const auth = require('./routes/auth');
+const index = require('./routes/index');
+const games = require('./routes/games');
+
+
+//set view engine
+app.set('view engine', 'ejs');
+app.use(expressLayouts);
+
+//passport config
+
+require('./config/passport')(passport);
 
 
 //passport middleware
@@ -61,6 +61,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 //use routes
 app.use('/auth', auth);
 app.use('/', index);
+app.use('/games', games);
+
+
+
 //set server
 app.listen(port, ()=>{
   console.log(`Server started on port ${port}`);

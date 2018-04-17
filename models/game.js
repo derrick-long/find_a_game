@@ -5,13 +5,15 @@ const Schema = mongoose.Schema;
 // time
 // date
 // type
-// 
+//
 
 
 
 
 const GameSchema = new Schema ({
-
+  title: {
+  type: String,
+  required: true}
 });
 
-mongoose.model('games', GameSchema, 'games');
+mongoose.model('games', GameSchema);

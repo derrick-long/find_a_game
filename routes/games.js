@@ -7,4 +7,12 @@ const User = mongoose.model('users');
 
 
 /// route for games, probably want sorted by most recent by default
-// or closest? 
+// or closest?
+
+
+router.get('/', (req,res)=> {
+  res.render('games/index');
+});
+
+
+module.exports = router;
