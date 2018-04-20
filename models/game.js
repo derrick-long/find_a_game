@@ -41,4 +41,4 @@ const GameSchema = new Schema ({
 
 });
 
-mongoose.model('games', GameSchema);
+mongoose.model('games', GameSchema, 'games');

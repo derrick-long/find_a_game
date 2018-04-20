@@ -9,7 +9,8 @@ const User = mongoose.model('users');
 /// route for games, probably want sorted by most recent by default
 // or closest?
 
-
+//basically find all games
+//add date and sort by it
 router.get('/', (req,res)=> {
   res.render('games/index');
 });
@@ -20,18 +21,19 @@ router.get('/add', (req,res)=>{
 
 //single game
 
-router.get('show/:id', (req,res)=> {
+
+router.get('/show/:id', (req,res)=> {
   Game.findOne({
     _id: req.params.id
   })
   .then(game => {
-    res.render('games/show',{
-      game:game
+    res.render('games/show', {
+      game: game
     });
   });
 });
 
-
+//edit
 
 router.post('/', (req,res)=>{
 
