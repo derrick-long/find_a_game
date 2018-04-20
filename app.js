@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const methodOverride = require('method-override');
 
 
 

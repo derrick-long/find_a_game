@@ -13,7 +13,32 @@ const Schema = mongoose.Schema;
 const GameSchema = new Schema ({
   title: {
   type: String,
-  required: true}
+  required: true
+  },
+  address: {
+  type: String,
+  required: true
+  },
+  zip: {
+    type: String,
+    required: true
+  },
+  locationType: {
+    type: String,
+    required: true
+  },
+  numberOfPlayers: {
+    type: String,
+  },
+  experience: {
+    type: String,
+  },
+  description: {
+    type: String,
+    required: true
+  }
+
+
 });
 
 mongoose.model('games', GameSchema);
