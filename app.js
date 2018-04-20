@@ -49,6 +49,24 @@ app.use(passport.session());
 
 //global vars
 
+// cookie parser
+app.use(cookieParser());
+
+//session
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false
+}));
+
+
+//method override middleware
+app.use(methodOverride('_method'));
+
+
+//body parser middle
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
 
 //gets curr user if logged
 app.use((req, res, next)=> {
