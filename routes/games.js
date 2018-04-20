@@ -51,7 +51,7 @@ router.post('/', (req,res)=>{
   new Game(newGame)
   .save()
   .then(game => {
-    res.redirect('/games/show/${game.id}');
+    res.redirect(`/games/show/${game.id}`);
   });
 });
 
