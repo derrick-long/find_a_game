@@ -13,6 +13,26 @@ const methodOverride = require('method-override');
 
 
 
+//load models
+require('./models/game');
+require('./models/user');
+
+//passport config
+
+require('./config/passport')(passport);
+
+//load keys
+const keys = require('./config/keys');
+
+
+
+//Load Routes
+const auth = require('./routes/auth');
+const index = require('./routes/index');
+const games = require('./routes/games');
+
+
+
 //connect mongoose
 
 mongoose.Promise = global.Promise;
@@ -22,42 +42,29 @@ mongoose.connect('mongodb://localhost/find-game-dev')
   .catch(err => console.log(err));
 
 
+// cookie parser
+  app.use(cookieParser());
 
-//load models
-require('./models/game');
-require('./models/user');
+//session
+  app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false
+}));
 
-//Load Routes
-const auth = require('./routes/auth');
-const index = require('./routes/index');
-const games = require('./routes/games');
 
 
 //set view engine
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
-//passport config
 
-require('./config/passport')(passport);
 
 
 //passport middleware
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-//global vars
-
-// cookie parser
-app.use(cookieParser());
-
-//session
-app.use(session({
-  secret: 'secret',
-  resave: false,
-  saveUninitialized: false
-}));
 
 
 //method override middleware

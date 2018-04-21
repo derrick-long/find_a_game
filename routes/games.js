@@ -4,6 +4,8 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const Game = mongoose.model('games');
 const User = mongoose.model('users');
+const {ensureAuthenticated} = require('../helpers/auth');
+
 
 
 /// route for games, probably want sorted by most recent by default
@@ -15,7 +17,7 @@ router.get('/', (req,res)=> {
   res.render('games/index');
 });
 
-router.get('/add', (req,res)=>{
+router.get('/add', ensureAuthenticated, (req,res)=>{
   res.render('games/add');
 });
 
@@ -44,7 +46,8 @@ router.post('/', (req,res)=>{
   locationType: req.body.locationType,
   numberOfPlayers: req.body.number,
   experience: req.body.experience,
-  description: req.body.description
+  description: req.body.description,
+  user: req.user.id
   };
 
   //create game
