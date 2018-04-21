@@ -28,6 +28,8 @@ router.get('/show/:id', (req,res)=> {
   Game.findOne({
     _id: req.params.id
   })
+  .populate('user')
+  //comment placeholder
   .then(game => {
     res.render('games/show', {
       game: game
