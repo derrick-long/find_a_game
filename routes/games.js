@@ -14,7 +14,14 @@ const {ensureAuthenticated} = require('../helpers/auth');
 //basically find all games
 //add date and sort by it
 router.get('/', (req,res)=> {
-  res.render('games/index');
+  Game.find({})
+  .populate('user')
+  .sort({date:'desc'})
+  .then(games =>{
+    res.render('games/index', {
+      games: games
+    });
+  });
 });
 
 router.get('/add', ensureAuthenticated, (req,res)=>{

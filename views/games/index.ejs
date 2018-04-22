@@ -1,1 +1,17 @@
-<h1> this is the game index </h1> 
+
+<div class="row">
+
+<% games.forEach(function(game){ %>
+  <div class="col-12">
+    <div class="card card-inline">
+      <div class="card-body">
+        <h5 class="card-title"><%= game.title %> </h5>
+        <p class="card-text"><%= game.description %> </p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+<% }) %>
+
+
+</div>
