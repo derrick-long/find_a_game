@@ -15,7 +15,7 @@ const {ensureAuthenticated} = require('../helpers/auth');
 //add date and sort by it
 router.get('/', (req,res)=> {
   Game.find({})
-  .populate('user')
+  .populate('host')
   .sort({date:'desc'})
   .then(games =>{
     res.render('games/index', {
@@ -35,7 +35,7 @@ router.get('/show/:id', (req,res)=> {
   Game.findOne({
     _id: req.params.id
   })
-  .populate('user')
+  .populate('host')
   //comment placeholder
   .then(game => {
     res.render('games/show', {
@@ -56,7 +56,7 @@ router.post('/', (req,res)=>{
   numberOfPlayers: req.body.number,
   experience: req.body.experience,
   description: req.body.description,
-  user: req.user.id
+  host: req.user.id
   };
 
   //create game

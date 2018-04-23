@@ -37,14 +37,15 @@ const GameSchema = new Schema ({
     type: String,
     required: true
   },
-  user: {
+  host: {
   type: Schema.Types.ObjectId,
   ref: 'users'
   },
   datePosted: {
   type: Date,
   default: Date.now
-  }
+  },
+  
 
 });
 
