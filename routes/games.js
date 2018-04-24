@@ -67,5 +67,24 @@ router.post('/', (req,res)=>{
   });
 });
 
+router.post('/add_player/:id', (req, res)=> {
+  Game.findOne({
+    _id:req.params.id
+  })
+  .then(game =>{
+    const newPlayer = {
+      playerUser: req.player
+      //add in validations
+    };
+     //add player to player array
+     //need validations
+    game.players.unshift(newPlayer);
+
+    game.save()
+    .then(game =>{
+      res.redirect(`games/show/${game.id}`);
+    });
+  });
+});
 
 module.exports = router;

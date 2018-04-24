@@ -1,6 +1,12 @@
 <h1> <%= game.title %>  </h1>
 <p> <%= game.description %> </p>
-<a href="#"> Join Game </a>
+<!-- need another val don't show button if game is full  -->
+<% if(user) { %>
+<form action="games/add_player/<%= game.id %>" method= "post">
+  <input type="hidden" name="player" value="<%= user.id %>">
+  <input type="submit" value="Join Game" class="btn-success">
+</form>
+<% } %>
 <!-- So basically we're going to use our currently logged in user
 And we're going to use this button to have them added to the game object
 found here as a player. Then we need to deincrement our numberofPlayers attribute
