@@ -46,7 +46,7 @@ router.get('/show/:id', (req,res)=> {
 
 //edit
 
-router.post('/', (req,res)=>{
+router.post('/', ensureAuthenticated, (req,res)=>{
 
   const newGame = {
   title: req.body.title,
@@ -67,14 +67,13 @@ router.post('/', (req,res)=>{
   });
 });
 
-router.post('/add_player/:id', (req, res)=> {
+router.post('/player/:id', ensureAuthenticated, (req, res)=>{
   Game.findOne({
     _id:req.params.id
   })
   .then(game =>{
     const newPlayer = {
-      playerUser: req.player
-      //add in validations
+      playerUser: req.user.id
     };
      //add player to player array
      //need validations
@@ -82,9 +81,10 @@ router.post('/add_player/:id', (req, res)=> {
 
     game.save()
     .then(game =>{
-      res.redirect(`games/show/${game.id}`);
+      res.redirect(`/games/show/${game.id}`);
     });
   });
 });
+
 
 module.exports = router;

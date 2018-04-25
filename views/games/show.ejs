@@ -2,8 +2,7 @@
 <p> <%= game.description %> </p>
 <!-- need another val don't show button if game is full  -->
 <% if(user) { %>
-<form action="games/add_player/<%= game.id %>" method= "post">
-  <input type="hidden" name="player" value="<%= user.id %>">
+<form action="/games/player/<%= game.id %>" method="post">
   <input type="submit" value="Join Game" class="btn-success">
 </form>
 <% } %>
