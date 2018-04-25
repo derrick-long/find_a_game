@@ -81,7 +81,7 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
 
     game.save()
     .then(game =>{
-      res.redirect(`/games/show/${game.id}`);
+      res.redirect('/users/dashboard');
     });
   });
 });

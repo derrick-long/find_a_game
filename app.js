@@ -30,7 +30,7 @@ const keys = require('./config/keys');
 const auth = require('./routes/auth');
 const index = require('./routes/index');
 const games = require('./routes/games');
-
+const users = require('./routes/users');
 
 
 //body parser middle
@@ -90,7 +90,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/auth', auth);
 app.use('/', index);
 app.use('/games', games);
-
+app.use('/users', users);
 
 
 //set server
