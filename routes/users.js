@@ -7,16 +7,20 @@ const User = mongoose.model('users');
 const {ensureAuthenticated} = require('../helpers/auth');
 
 
-router.get('/dashboard', (req,res) => {
+router.get('/dashboard', ensureAuthenticated, (req,res) => {
+  res.render('users/dashboard');
+});
+
+
+router.get('/hosted', (req,res)=> {
   Game.find({host: req.user.id})
   .populate('user')
   .then(games => {
-    res.render('users/dashboard', {
+    res.render('users/hosted', {
       games:games
     });
   });
 });
-
 
 // so basically I want games shown here that the player
 // signed up for
