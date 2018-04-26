@@ -22,15 +22,17 @@ router.get('/hosted', (req,res)=> {
   });
 });
 
-// so basically I want games shown here that the player
-// signed up for
-// also want ones the player is hosting
-// so should signed up games be saved on the user obj?
+//so now we need to think about a played router
 
-
-
-
-
+router.get('/played', (req,res)=>{
+  Game.find({"players.playerUser":req.user.id})
+  .populate('user')
+  .then(games => {
+    res.render('users/played', {
+      games:games
+    });
+  });
+});
 
 
 

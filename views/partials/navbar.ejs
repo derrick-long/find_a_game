@@ -12,18 +12,18 @@
         <a class="nav-link" href="/"><i class="fa fa-home"></i> Home </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"> Dashboard </a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="/games/add">Host A Game</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/about">About</a>
       </li>
       <% if (user) { %>
-      <li class="nav-item">
+        <li class="nav-item">
+          <a class="nav-link" href="/users/dashboard"> Dashboard </a>
+        </li>
+        <li class="nav-item">
          <a href="/auth/logout" a class= "nav-link"><i class= "fa fa-sign-out"> </i> Logout </a>
-       </li>
+        </li>
       <% } %>
     </ul>
   </div>
