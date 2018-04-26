@@ -5,4 +5,18 @@
   <li> Other Stats if I am not lazy </li>
   <li> Upcoming games </li>
   <li> Past Games / games in general?  </li>
-</ul> 
+</ul>
+
+<% games.forEach(function(game){ %>
+  <div class="col-12">
+    <div class="card card-inline">
+      <div class="card-body">
+        <h5 class="card-title"><%= game.title %> </h5>
+        <p class="card-text"><%= game.description %> </p>
+        <p class="card-text"> Seeking <%= game.numberOfPlayers %>
+          players </p>
+        <a href="games/show/<%= game.id %>" class="btn btn-primary">See Details</a>
+      </div>
+    </div>
+  </div>
+<% }) %>
