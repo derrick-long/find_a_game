@@ -12,12 +12,13 @@ router.get('/dashboard', ensureAuthenticated, (req,res) => {
 });
 
 
-router.get('/hosted', (req,res)=> {
+router.get('/hosted',(req,res, next)=> {
   Game.find({host: req.user.id})
   .populate('user')
   .then(games => {
-    res.render('users/hosted', {
-      games:games
+    res.render('users/user_games', {
+      games:games,
+      title: "Hosted Games"
     });
   });
 });
@@ -28,8 +29,9 @@ router.get('/played', (req,res)=>{
   Game.find({"players.playerUser":req.user.id})
   .populate('user')
   .then(games => {
-    res.render('users/played', {
-      games:games
+    res.render('users/user_games', {
+      games:games,
+      title: "Games Played In"
     });
   });
 });

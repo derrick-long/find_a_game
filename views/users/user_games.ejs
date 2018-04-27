@@ -1,4 +1,4 @@
-<h1> games you hosted, yay! </h1> 
+<h1> <%= title %>   </h1>
 <% games.forEach(function(game){ %>
   <div class="col-12">
     <div class="card card-inline">
@@ -7,7 +7,7 @@
         <p class="card-text"><%= game.description %> </p>
         <p class="card-text"> Seeking <%= game.numberOfPlayers %>
           players </p>
-        <a href="games/show/<%= game.id %>" class="btn btn-primary">See Details</a>
+        <a href="/games/show/<%= game.id %>" class="btn btn-primary">See Details</a>
       </div>
     </div>
   </div>
