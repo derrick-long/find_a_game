@@ -5,9 +5,11 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
+      <% if (user == null) { %>
       <li class="nav-item">
         <a class="nav-link" href="/auth/google/"> <i tag class="fa fa-google left"> </i> Login With Google</a>
       </li>
+      <% } %> 
       <li class="nav-item">
         <a class="nav-link" href="/"><i class="fa fa-home"></i> Home </a>
       </li>
