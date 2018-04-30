@@ -72,38 +72,29 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
     _id:req.params.id
   })
   .then(game =>{
-    if(game.players[0].playerUser == req.user.id) {
-      res.send('woo you dumb');
-    } else {
-      res.send('shit');
-    }
+    game.players.forEach(function(player){
+      if(player.playerUser == req.user.id){
+        res.send('Already signed up!');
+      } else {
 
+        game.players.unshift(newPlayer);
 
-
-
-    //
-    // { //still wrong!
-    //   if (player.playerUser == req.user.id) {
-    //     res.send('error!');
-    //   } else {
-    //     const newPlayer = {
-    //       playerUser: req.user.id
-    //     };
-    //
-    //     game.players.unshift(newPlayer);
-    //
-    //     game.save()
-    //     .then(game =>{
-    //       res.redirect('/users/dashboard');
-    //     })
-    //     .catch((err)=> {
-    //       res.send(err);
-    //     });
-    //   }
-    // });
-
+        game.save()
+        .then(game =>{
+          res.redirect('/users/dashboard');
+        })
+        .catch((err)=> {
+          res.send(err);
+        });
+        }
+      });
+    });
   });
-});
+
+
+
+
+
 
 
 module.exports = router;
