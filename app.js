@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const flash= require('connect-flash');
 const path = require('path');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 5000;
@@ -85,6 +86,9 @@ app.use((req, res, next)=> {
 
 //set static folder
 app.use(express.static(path.join(__dirname, 'public')));
+
+//use flash
+app.use(flash());
 
 //use routes
 app.use('/auth', auth);

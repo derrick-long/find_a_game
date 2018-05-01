@@ -73,8 +73,9 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
   })
   .then(game =>{
     game.players.forEach(function(player){
+      //add host validation
       if(player.playerUser == req.user.id){
-        res.send('Already signed up!');
+        res.redirect('games/index');
       } else {
 
         game.players.unshift(newPlayer);
