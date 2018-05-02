@@ -22,6 +22,7 @@ router.get('/verify', (req, res) => {
 
 router.get('/logout', (req, res) => {
   req.logout();
+  req.flash('success_msg', 'Logged out');
   res.redirect('/');
 });
 

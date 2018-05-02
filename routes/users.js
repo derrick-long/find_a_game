@@ -40,7 +40,7 @@ router.get('/played', (req,res)=>{
 
 
 
-
+// add flash alert for not being authenticated
 
 
 

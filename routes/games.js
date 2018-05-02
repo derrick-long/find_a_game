@@ -11,8 +11,7 @@ const {ensureAuthenticated} = require('../helpers/auth');
 /// route for games, probably want sorted by most recent by default
 // or closest?
 
-//basically find all games
-//add date and sort by it
+
 router.get('/', (req,res)=> {
   Game.find({})
   .populate('host')
@@ -47,6 +46,8 @@ router.get('/show/:id', (req,res)=> {
 //edit
 
 router.post('/', ensureAuthenticated, (req,res)=>{
+  // need flash errors for form, also look up
+  // zip verification etc
 
   const newGame = {
   title: req.body.title,
