@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const flash= require('connect-flash');
+const flash = require('connect-flash');
 const path = require('path');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 5000;
@@ -65,7 +65,8 @@ mongoose.connect('mongodb://localhost/find-game-dev')
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
-
+//use flash
+app.use(flash());
 
 
 //passport middleware
@@ -78,8 +79,11 @@ app.use(passport.session());
 app.use(methodOverride('_method'));
 
 
-//gets curr user if logged
+//local vars, for flash and user
 app.use((req, res, next)=> {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg') ;
+  res.locals.error = req.flash('error');
   res.locals.user = req.user || null;
   next();
 });
@@ -87,8 +91,7 @@ app.use((req, res, next)=> {
 //set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-//use flash
-app.use(flash());
+
 
 //use routes
 app.use('/auth', auth);

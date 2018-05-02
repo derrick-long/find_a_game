@@ -1,0 +1,16 @@
+<% if (success_msg == '') {  %>
+  <!-- uh find a way to clean this up -->
+<% } else { %>
+  <div class= "alert alert-success">
+    <%= success_msg %>
+  </div>
+<% } %>
+
+
+<% if (error_msg == '') {  %>
+
+<% } else { %>
+  <div class= "alert alert-danger">
+    <%= error_msg %>
+  </div>
+<% } %>

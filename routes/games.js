@@ -75,7 +75,8 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
     game.players.forEach(function(player){
       //add host validation
       if(player.playerUser == req.user.id){
-        res.redirect('games/index');
+        req.flash('error_msg', 'Already registered!');
+        res.redirect('/');
       } else {
 
         game.players.unshift(newPlayer);
