@@ -6,7 +6,24 @@ const Game = mongoose.model('games');
 const User = mongoose.model('users');
 const {ensureAuthenticated} = require('../helpers/auth');
 
+function checkPlayer(game){
+  game.players.forEach(function(player){
+    //add host validation
+    if(player.playerUser == req.user.id){
+      req.flash('error_msg', 'Already registered!');
+      res.send('butt');
+    } else {
+      const newPlayer = req.user.id;
 
+      game.players.unshift(newPlayer);
+
+      game.save()
+      .then(game =>{
+        res.redirect('/users/dashboard');
+      });
+    }
+  });
+}
 
 /// route for games, probably want sorted by most recent by default
 // or closest?
@@ -23,7 +40,7 @@ router.get('/', (req,res)=> {
   });
 });
 
-router.get('/add', ensureAuthenticated, (req,res)=>{
+router.get('/add', (req,res)=>{
   res.render('games/add');
 });
 
@@ -64,36 +81,50 @@ router.post('/', ensureAuthenticated, (req,res)=>{
   new Game(newGame)
   .save()
   .then(game => {
+    req.flash('success_msg', 'Game Added!');
     res.redirect(`/games/show/${game.id}`);
   });
 });
 
+
+//add player to game
+//  should probably show the game in question on the dashboard somewhere?
 router.post('/player/:id', ensureAuthenticated, (req, res)=>{
   Game.findOne({
     _id:req.params.id
   })
-  .then(game =>{
-    game.players.forEach(function(player){
-      //add host validation
-      if(player.playerUser == req.user.id){
-        req.flash('error_msg', 'Already registered!');
-        res.redirect('/');
-      } else {
+  .then(game => {
+    if(game.players.length > 0){
+      game.players.forEach(function(player){
+        if(player.id == req.user.id){
+            req.flash('error_msg', 'Already Registed!');
+            res.redirect('/games');
+        } else {
+          const newPlayer = req.user.id;
 
-        game.players.unshift(newPlayer);
+          game.players.unshift(newPlayer);
 
-        game.save()
-        .then(game =>{
-          res.redirect('/users/dashboard');
-        })
-        .catch((err)=> {
-          res.send(err);
-        });
+          game.save()
+          .then(game =>{
+            req.flash('success_msg', 'Signed up for game!');
+            res.redirect('/users/dashboard');
+          });
         }
       });
-    });
-  });
+    } else {
 
+      const newPlayer = req.user.id;
+      game.players.unshift(newPlayer);
+
+      game.save()
+      .then(game =>{
+        req.flash('success_msg', 'Signed up for game!');
+
+        res.redirect('/users/dashboard');
+      });
+    }
+    });
+});
 
 
 
