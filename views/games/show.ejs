@@ -1,7 +1,7 @@
 <h1> <%= game.title %>  </h1>
 <p> <%= game.description %> </p>
 <!-- need another val don't show button if game is full  -->
-<% if(user) { %>
+<% if(user && game.numberOfPlayers > 0) { %>
 <form action="/games/player/<%= game.id %>" method="post">
   <input type="submit" value="Join Game" class="btn-success">
 </form>

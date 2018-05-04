@@ -96,14 +96,14 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
   .then(game => {
     if(game.players.length > 0){
       game.players.forEach(function(player){
-        if(player.id == req.user.id){
+        if(player.id == req.user.id ){
             req.flash('error_msg', 'Already Registed!');
             res.redirect('/games');
         } else {
           const newPlayer = req.user.id;
 
           game.players.unshift(newPlayer);
-
+          game.numberOfPlayers -= 1;
           game.save()
           .then(game =>{
             req.flash('success_msg', 'Signed up for game!');
@@ -115,7 +115,7 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
 
       const newPlayer = req.user.id;
       game.players.unshift(newPlayer);
-
+      game.numberOfPlayers -= 1;
       game.save()
       .then(game =>{
         req.flash('success_msg', 'Signed up for game!');
