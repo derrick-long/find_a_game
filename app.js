@@ -11,7 +11,7 @@ const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const methodOverride = require('method-override');
-
+const pluralize = require('pluralize');
 
 
 //load models
@@ -87,6 +87,13 @@ app.use((req, res, next)=> {
   res.locals.user = req.user || null;
   next();
 });
+
+//pluralize helper
+
+app.locals.makePlural = function(item, number){
+  return pluralize(item, number);
+};
+
 
 //set static folder
 app.use(express.static(path.join(__dirname, 'public')));

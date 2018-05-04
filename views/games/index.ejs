@@ -9,7 +9,7 @@
         <p class="card-text"><%= game.description %> </p>
         <% if (game.numberOfPlayers > 0) { %>
         <p class="card-text"> Seeking <%= game.numberOfPlayers %>
-          players </p>
+        <%= makePlural('Player', Number(game.numberOfPlayers)) %></p>
         <% } else { %>
           <div class="alert alert-success"> <p class="card-text"> Game Full </p>
           </div>
@@ -17,6 +17,7 @@
           <a href="games/show/<%= game.id %>" class="btn btn-primary">See Details</a>
       </div>
     </div>
+
   </div>
 <% }) %>
 
