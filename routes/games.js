@@ -63,8 +63,25 @@ router.get('/show/:id', (req,res)=> {
 //edit
 
 router.post('/', ensureAuthenticated, (req,res)=>{
-  // need flash errors for form, also look up
-  // zip verification etc
+  let errors = [];
+  if(!req.body.title){
+    errors.push({text: 'Please add a title.'});
+  }
+  if(!req.body.address){
+    errors.push({text: 'Please add where the game is located'});
+  }
+  if(errors.length > 0){
+    res.render('games/add', {
+      errors: errors,
+      title: req.body.title,
+      address: req.body.address,
+      zip: req.body.zip,
+      locationType: req.body.locationType,
+      numberOfPlayers: req.body.number,
+      experience: req.body.experience,
+      description: req.body.description,
+    });
+  } else {
 
   const newGame = {
   title: req.body.title,
@@ -84,6 +101,7 @@ router.post('/', ensureAuthenticated, (req,res)=>{
     req.flash('success_msg', 'Game Added!');
     res.redirect(`/games/show/${game.id}`);
   });
+  }
 });
 
 
