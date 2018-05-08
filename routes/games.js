@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const Game = mongoose.model('games');
 const User = mongoose.model('users');
 const {ensureAuthenticated} = require('../helpers/auth');
+const errors = [];
+
 
 function checkPlayer(game){
   game.players.forEach(function(player){
@@ -41,7 +43,9 @@ router.get('/', (req,res)=> {
 });
 
 router.get('/add', (req,res)=>{
-  res.render('games/add');
+  res.render('games/add',{
+    errors:errors
+  });
 });
 
 //single game
@@ -63,7 +67,6 @@ router.get('/show/:id', (req,res)=> {
 //edit
 
 router.post('/', ensureAuthenticated, (req,res)=>{
-  let errors = [];
   if(!req.body.title){
     errors.push({text: 'Please add a title.'});
   }
@@ -71,6 +74,7 @@ router.post('/', ensureAuthenticated, (req,res)=>{
     errors.push({text: 'Please add where the game is located'});
   }
   if(errors.length > 0){
+    console.log(errors);
     res.render('games/add', {
       errors: errors,
       title: req.body.title,
@@ -80,7 +84,10 @@ router.post('/', ensureAuthenticated, (req,res)=>{
       numberOfPlayers: req.body.number,
       experience: req.body.experience,
       description: req.body.description,
+      host: req.user.id
+
     });
+
   } else {
 
   const newGame = {
