@@ -71,8 +71,18 @@ router.post('/', ensureAuthenticated, (req,res)=>{
     errors.push({text: 'Please add a title.'});
   }
   if(!req.body.address){
-    errors.push({text: 'Please add where the game is located'});
+    errors.push({text: 'Please add an address.'});
   }
+  if(!req.body.zip){
+    errors.push({text: 'Please add a zip code.'});
+  }
+  if(!req.body.number){
+    errors.push({text: 'Please select a number of players for the game.'});
+  }
+  if(req.body.description == " "){
+    errors.push({text: 'Please tell us about the game.'});
+  }
+  // maybe add a min length for description
   if(errors.length > 0){
     console.log(errors);
     res.render('games/add', {
