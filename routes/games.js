@@ -8,24 +8,6 @@ const {ensureAuthenticated} = require('../helpers/auth');
 const errors = [];
 
 
-function checkPlayer(game){
-  game.players.forEach(function(player){
-    //add host validation
-    if(player.playerUser == req.user.id){
-      req.flash('error_msg', 'Already registered!');
-      res.send('butt');
-    } else {
-      const newPlayer = req.user.id;
-
-      game.players.unshift(newPlayer);
-
-      game.save()
-      .then(game =>{
-        res.redirect('/users/dashboard');
-      });
-    }
-  });
-}
 
 /// route for games, probably want sorted by most recent by default
 // or closest?
@@ -129,6 +111,11 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
     _id:req.params.id
   })
   .then(game => {
+    if(req.user.id == game.host) {
+        req.flash('error_msg', 'Hosts cannot be players');
+        res.redirect('/games');
+      }
+
     if(game.players.length > 0){
       game.players.forEach(function(player){
         if(player.id == req.user.id ){
