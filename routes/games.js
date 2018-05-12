@@ -148,8 +148,23 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
     });
 });
 
+router.post('/playerReview/:id', ensureAuthenticated, (req, res)=>{
+
+  const reviewedGame =
+  Game.findOne({
+    _id:req.params.id
+  });
+
+  User.findOne({
+    _id:req.user.id
+  })
+  .then(user =>{
+    // then we can match player id with our users id, if it matches, then do add a review to our
+    //host?
 
 
+  });
+});
 
 
 

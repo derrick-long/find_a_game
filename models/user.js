@@ -33,6 +33,10 @@ const UserSchema = new Schema({
       type: Date,
       default: Date.now
     },
+    reviewScore:{
+      type: Number,
+      required: true
+    },
     reviewUser: {
       type: Schema.Types.ObjectId,
       ref:'users'
