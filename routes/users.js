@@ -36,6 +36,23 @@ router.get('/played', (req,res)=>{
   });
 });
 
+router.post('/playerReview/:id', ensureAuthenticated, (req, res)=>{
+//figure out if this goes here or with the games
+  const reviewedGame =
+  Game.findOne({
+    _id:req.params.id
+  });
+
+  User.findOne({
+    _id:req.user.id
+  })
+  .then(user =>{
+    res.send(user);
+
+
+  });
+});
+
 
 
 
