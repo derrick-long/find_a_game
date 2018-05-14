@@ -105,23 +105,24 @@ router.post('/', ensureAuthenticated, (req,res)=>{
 
 
 //add player to game
-//  should probably show the game in question on the dashboard somewhere?
 router.post('/player/:id', ensureAuthenticated, (req, res)=>{
   Game.findOne({
     _id:req.params.id
   })
   .then(game => {
+    //broken need to find a way to check for host without repeating
     if(req.user.id == game.host) {
         req.flash('error_msg', 'Hosts cannot be players');
         res.redirect('/games');
       }
 
-    if(game.players.length > 0){
+    else if(game.players.length > 0){
       game.players.forEach(function(player){
         if(player.id == req.user.id ){
             req.flash('error_msg', 'Already Registed!');
             res.redirect('/games');
         } else {
+
           const newPlayer = req.user.id;
 
           game.players.unshift(newPlayer);
@@ -149,7 +150,7 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
 });
 
 // remove game
-router.delete('/:id', (req,res) => {
+router.delete('/:id', ensureAuthenticated, (req,res) => {
   Game.remove({_id: req.params.id})
     .then(()=> {
       req.flash('success_msg', 'Game Removed!');
@@ -157,6 +158,6 @@ router.delete('/:id', (req,res) => {
     });
 });
 
-
+// edit placeholder
 
 module.exports = router;

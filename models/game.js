@@ -23,7 +23,8 @@ const GameSchema = new Schema ({
     required: true
   },
   numberOfPlayers: {
-    type: String,
+    type: Number,
+    min: 0
   },
   experience: {
     type: String,
