@@ -148,6 +148,14 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
     });
 });
 
+// remove game
+router.delete('/:id', (req,res) => {
+  Game.remove({_id: req.params.id})
+    .then(()=> {
+      req.flash('success_msg', 'Game Removed!');
+      res.redirect('/users/dashboard');
+    });
+});
 
 
 

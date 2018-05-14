@@ -8,6 +8,13 @@
         <p class="card-text"> Seeking <%= game.numberOfPlayers %>
           players </p>
         <a href="/games/show/<%= game.id %>" class="btn btn-primary">See Details</a>
+        <% if (game.host == user.id) { %>
+          <form action="/games/<%= game.id %>/?_method=DELETE" method="post" id="delete-form">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="btn btn-danger"><i class= "fa fa-remove"></i>
+              Delete </button>
+          </form>
+        <% } %>
       </div>
     </div>
   </div>
