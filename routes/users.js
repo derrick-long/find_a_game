@@ -23,10 +23,10 @@ router.get('/hosted',(req,res, next)=> {
   });
 });
 
-//so now we need to think about a played router
+//broken query
 
 router.get('/played', (req,res)=>{
-  Game.find({"players.playerUser":req.user.id})
+  Game.find({"players.playerUser.id":req.user.id})
   .populate('user')
   .then(games => {
     res.render('users/user_games', {
@@ -36,6 +36,8 @@ router.get('/played', (req,res)=>{
   });
 });
 
+//maybe change naming convention
+
 router.post('/playerReview/:id', ensureAuthenticated, (req, res)=>{
 //figure out if this goes here or with the games
   const reviewedGame =
@@ -44,11 +46,19 @@ router.post('/playerReview/:id', ensureAuthenticated, (req, res)=>{
   });
 
   User.findOne({
-    _id:req.user.id
+    _id:reviewedGame.host
   })
   .then(user =>{
     res.send(user);
-
+    // const newHostReview = {
+    //   game: reviewedGame.id,
+    //   reviewBody: req.body.playerReviewBody,
+    //   reviewScore: 1, // come back and change
+    //   reviewUser: req.user.id
+    // };
+    //
+    // user.
+    // req.flash('success_msg', 'review added!');
 
   });
 });
