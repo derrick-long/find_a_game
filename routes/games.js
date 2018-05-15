@@ -110,7 +110,7 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
     _id:req.params.id
   })
   .then(game => {
-    //broken need to find a way to check for host without repeating
+
     if(req.user.id == game.host) {
         req.flash('error_msg', 'Hosts cannot be players');
         res.redirect('/games');
