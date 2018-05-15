@@ -64,10 +64,10 @@ router.post('/playerReview/:id', ensureAuthenticated, (req, res)=>{
 });
 
 
+//okay so we need to make it so only one review can be added per user
+//need to add star interface
 
 
-
-// add flash alert for not being authenticated
 
 
 
