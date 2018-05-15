@@ -40,27 +40,27 @@ router.get('/played', (req,res)=>{
 
 router.post('/playerReview/:id', ensureAuthenticated, (req, res)=>{
 //figure out if this goes here or with the games
-  const reviewedGame =
   Game.findOne({
-    _id:req.params.id
-  });
-
-  User.findOne({
-    _id:reviewedGame.host
+    _id: req.params.id
   })
-  .then(user =>{
-    res.send(user);
-    // const newHostReview = {
-    //   game: reviewedGame.id,
-    //   reviewBody: req.body.playerReviewBody,
-    //   reviewScore: 1, // come back and change
-    //   reviewUser: req.user.id
-    // };
-    //
-    // user.
-    // req.flash('success_msg', 'review added!');
+  .populate('host')
+  .then(game=> {
+    const newHostReview = {
+      game: game.id,
+      reviewBody: req.body.playerReviewBody,
+      reviewScore: 1, // come back and change
+      reviewUser: req.user.id
+    };
 
+    game.host.hostReviews.unshift(newHostReview);
+    game.host.save()
+    .then(game=> {
+      req.flash('success_msg', 'Review added!');
+      res.redirect('/');
+    });
   });
+
+
 });
 
 
