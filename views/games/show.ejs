@@ -1,3 +1,4 @@
+<!-- throwing error for game object on load?  -->
 <h1> <%= game.title %>  </h1>
 <p> <%= game.description %> </p>
 
@@ -7,10 +8,11 @@
 </form>
 <% } %>
 
-<!-- need to clean up this view logic/make into a drop down  -->
+<!-- need to clean up this view logic/make into a drop down   -->
 <% if(user) { %>
   <% game.players.forEach(function(player){
         if(player.id == user.id ) { %>
+
           <div class="form-group">
             <form action="/users/playerReview/<%= game.id %>" method ="post">
               <label for="playerReviewBody"> Review Your Game Master </label>

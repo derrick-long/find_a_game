@@ -38,6 +38,7 @@ router.get('/show/:id', (req,res)=> {
     _id: req.params.id
   })
   .populate('host')
+  //loook up populate 
   //comment placeholder
   .then(game => {
     res.render('games/show', {

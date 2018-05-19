@@ -26,7 +26,7 @@ router.get('/hosted',(req,res, next)=> {
 //broken query
 
 router.get('/played', (req,res)=>{
-  Game.find({"players.playerUser.id":req.user.id})
+  Game.find({"players": { "_id" : req.user.id} })
   .populate('user')
   .then(games => {
     res.render('users/user_games', {
