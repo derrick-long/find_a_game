@@ -35,14 +35,13 @@ router.get('/add', (req,res)=>{
 
 router.get('/show/:id', (req,res)=> {
   Game.findOne({  _id: req.params.id })
-  .populate('players').exec(function (err, player){
-    console.log(game.players[0].firstName);
+  .populate('host')
+  .populate('players.playerUser')
+  .then(game => {
+    res.render('games/show', {
+      game: game
+    });
   });
-  // .then(game => {
-  //   res.render('games/show', {
-  //     game: game
-  //   });
-  // });
 });
 
 //edit
@@ -118,7 +117,7 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
 
     else if(game.players.length > 0){
       game.players.forEach(function(player){
-        if(player.id == req.user.id ){
+        if(player.playerUser == req.user.id ){
             req.flash('error_msg', 'Already Registed!');
             res.redirect('/games');
         } else {
@@ -137,8 +136,10 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
         }
       });
     } else {
-
-      const newPlayer = req.user.id;
+      //dry up later
+      const newPlayer = {
+        playerUser: req.user.id
+      };
       game.players.unshift(newPlayer);
       game.numberOfPlayers -= 1;
       game.save()
