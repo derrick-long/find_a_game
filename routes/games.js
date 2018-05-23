@@ -123,7 +123,9 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
             res.redirect('/games');
         } else {
 
-          const newPlayer = req.user.id;
+          const newPlayer = {
+            playerUser: req.user.id
+          };
 
           game.players.unshift(newPlayer);
           game.numberOfPlayers -= 1;
