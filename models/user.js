@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // create schema
+// save player reviews  with number
 
 const UserSchema = new Schema({
   googleID: {
