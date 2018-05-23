@@ -1,5 +1,5 @@
-<!-- throwing error for game object on load?  -->
-<h1> <%= game.title %>  </h1>
+<!-- throwing error for game object on load?  --> -->
+ <h1> <%= game.title %>  </h1>
 <p> <%= game.description %> </p>
 
 <% if(user && game.numberOfPlayers > 0) { %>
@@ -23,5 +23,7 @@
           <% } %>
   <% }) %>
 <% } %>
+
+<p> <%= game.players[0].firstName %> </p>
 
 <p> Hosted by <%= game.host.firstName %>  <%= game.host.lastName %> </p>

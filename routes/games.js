@@ -34,17 +34,15 @@ router.get('/add', (req,res)=>{
 
 
 router.get('/show/:id', (req,res)=> {
-  Game.findOne({
-    _id: req.params.id
-  })
-  .populate('host')
-  //loook up populate 
-  //comment placeholder
-  .then(game => {
-    res.render('games/show', {
-      game: game
-    });
+  Game.findOne({  _id: req.params.id })
+  .populate('players').exec(function (err, player){
+    console.log(game.players[0].firstName);
   });
+  // .then(game => {
+  //   res.render('games/show', {
+  //     game: game
+  //   });
+  // });
 });
 
 //edit
@@ -93,6 +91,7 @@ router.post('/', ensureAuthenticated, (req,res)=>{
   description: req.body.description,
   host: req.user.id
   };
+  //add a date created vs date of game and time
 
   //create game
   new Game(newGame)
