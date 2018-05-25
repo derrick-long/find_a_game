@@ -11,7 +11,7 @@
 <!-- need to clean up this view logic/make into a drop down   -->
 <% if(user) { %>
   <% game.players.forEach(function(player){
-        if(player.playerUser == user.id ) { %>
+      if(player.playerUser == user.id ) { %>
 
           <div class="form-group">
             <form action="/users/playerReview/<%= game.id %>" method ="post">
@@ -25,5 +25,10 @@
 <% } %>
 
 <!-- create dropdown and loop through players in the game, clean up review space  -->
+
+  <% game.players.forEach(function(player){ %>
+    <%= player.playerUser.firstName %>
+  <% }) %>
+
 
 <p> Hosted by <%= game.host.firstName %>  <%= game.host.lastName %> </p>
