@@ -25,10 +25,17 @@
 <% } %>
 
 <!-- create dropdown and loop through players in the game, clean up review space  -->
-
+<div class="dropdown mt-1">
+<button class="btn btn-success dropdown-toggle" type="button" id="playersDropdown" data-toggle="dropdown">
+  Signed Up Players
+</button>
+<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
   <% game.players.forEach(function(player){ %>
-    <%= player.playerUser.firstName %>
+    <a class="dropdown-item" href=#>  <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </a>
   <% }) %>
+</div>
+</div>
+
 
 
 <p> Hosted by <%= game.host.firstName %>  <%= game.host.lastName %> </p>
