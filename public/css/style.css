@@ -18,6 +18,10 @@ footer {
   margin-top: 2em;
 }
 
+#player-list {
+  height: 2em;
+}
+
 #google-profile {
-  width: 10%; 
+  width: 10%;
 }

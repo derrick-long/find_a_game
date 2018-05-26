@@ -29,7 +29,7 @@
 <button class="btn btn-success dropdown-toggle" type="button" id="playersDropdown" data-toggle="dropdown">
   Signed Up Players
 </button>
-<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+<div class="dropdown-menu player-list" aria-labelledby="dropdownMenuButton">
   <% game.players.forEach(function(player){ %>
     <a class="dropdown-item" href=#> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" id="google-profile"></img>
        <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </a>
@@ -38,7 +38,7 @@
 </div>
 
 
-<div id="host">
+<div class="h-25 d-inline-block mt-2">
   <img src="<%= game.host.image %>" class="img-fluid rounded-circle float-left" id="google-profile"></img>
   <p> Hosted by <%= game.host.firstName %>  <%= game.host.lastName %> </p>
 </div>
