@@ -1,44 +1,55 @@
 <!-- throwing error for game object on load?  -->
- <h1> <%= game.title %>  </h1>
-<p> <%= game.description %> </p>
+<div class="row h-100 align-items-center">
+  <div class="col">
+  </div>
+  <div class="col-8 text-center bg-light">
 
-<% if(user && game.numberOfPlayers > 0) { %>
-<form action="/games/player/<%= game.id %>" method="post">
-  <input type="submit" value="Join Game" class="btn-success">
-</form>
-<% } %>
+    <h1> <%= game.title %>  </h1>
+    <p> <%= game.description %> </p>
 
-<!-- need to clean up this view logic/make into a drop down   -->
-<% if(user) { %>
-  <% game.players.forEach(function(player){
-      if(player.playerUser == user.id ) { %>
+    <% if(user && game.numberOfPlayers > 0) { %>
 
-          <div class="form-group">
-            <form action="/users/playerReview/<%= game.id %>" method ="post">
-              <label for="playerReviewBody"> Review Your Game Master </label>
-              <textarea class="form-control" name="playerReviewBody"> </textarea>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
-          <% } %>
-  <% }) %>
-<% } %>
+    <form action="/games/player/<%= game.id %>" method="post">
+      <input type="submit" value="Join Game" class="btn-success">
+    </form>
+    <% } %>
 
-<!-- create dropdown and loop through players in the game, clean up review space  -->
-<div class="dropdown mt-1">
-<button class="btn btn-success dropdown-toggle" type="button" id="playersDropdown" data-toggle="dropdown">
-  Signed Up Players
-</button>
-<div class="dropdown-menu player-list" aria-labelledby="dropdownMenuButton">
-  <% game.players.forEach(function(player){ %>
-    <a class="dropdown-item" href=#> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" id="google-profile"></img>
-       <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </a>
-  <% }) %>
-</div>
-</div>
+    <!-- need to clean up this view logic/make into a drop down   -->
+    <% if(user) { %>
+      <% game.players.forEach(function(player){
+          if(player.playerUser == user.id ) { %>
+
+              <div class="form-group">
+                <form action="/users/playerReview/<%= game.id %>" method ="post">
+                  <label for="playerReviewBody"> Review Your Game Master </label>
+                  <textarea class="form-control" name="playerReviewBody"> </textarea>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+              <% } %>
+      <% }) %>
+    <% } %>
+
+    <!-- create dropdown and loop through players in the game, clean up review space  -->
+    <div class="dropdown mt-1">
+    <button class="btn btn-success dropdown-toggle" type="button" id="playersDropdown" data-toggle="dropdown">
+      Signed Up Players
+    </button>
+    <div class="dropdown-menu player-list" aria-labelledby="dropdownMenuButton">
+      <% game.players.forEach(function(player){ %>
+        <a class="dropdown-item" href=#> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" id="google-profile"></img>
+           <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </a>
+      <% }) %>
+    </div>
+    </div>
 
 
-<div class="h-25 d-inline-block mt-2">
-  <img src="<%= game.host.image %>" class="img-fluid rounded-circle float-left" id="google-profile"></img>
-  <p> Hosted by <%= game.host.firstName %>  <%= game.host.lastName %> </p>
+    <div class="h-25 w-25 d-inline-block mt-2">
+      <img src="<%= game.host.image %>" class="img-fluid rounded-circle float-left" id="google-profile"></img>
+      <p> Hosted by <%= game.host.firstName %>  <%= game.host.lastName %> </p>
+    </div>
+
+  </div>
+  <div class="col">
+  </div>
 </div>
