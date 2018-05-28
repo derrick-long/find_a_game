@@ -3,11 +3,21 @@ body {
   min-height: 100vh;
   flex-direction: column;
 }
-
-
-footer {
-  margin-top: 2em;
+.brand {
+  width: 2em;
 }
+.tag {
+  font-size: .75em;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+}
+
 
 #main-content {
   margin-top: 2em;

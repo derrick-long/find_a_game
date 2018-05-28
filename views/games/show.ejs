@@ -30,18 +30,22 @@
       <% }) %>
     <% } %>
 
-    <!-- create dropdown and loop through players in the game, clean up review space  -->
+
+
+
     <div class="dropdown mt-1">
-    <button class="btn btn-success dropdown-toggle" type="button" id="playersDropdown" data-toggle="dropdown">
-      Signed Up Players
-    </button>
-    <div class="dropdown-menu player-list" aria-labelledby="dropdownMenuButton">
-      <% game.players.forEach(function(player){ %>
-        <a class="dropdown-item" href=#> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" id="google-profile"></img>
-           <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </a>
-      <% }) %>
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="playersDropdown" data-toggle="dropdown">
+        Player List
+      </button>
+      <div class="dropdown-menu player-list dropup" aria-labelledby="dropdownMenuButton">
+        <% game.players.forEach(function(player){ %>
+          <a class="dropdown-item" href=#> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" id="google-profile"></img>
+             <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </a>
+        <% }) %>
+      </div>
     </div>
-    </div>
+
+
 
 
     <div class="h-25 w-25 d-inline-block mt-2">
