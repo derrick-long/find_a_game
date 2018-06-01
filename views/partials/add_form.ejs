@@ -14,26 +14,34 @@
       <input type="text" class="form-control form-control-sm" name="address"  placeholder="Enter Address">
     </div>
 
-    <div class="col mb-3">
+    <div class="col-3 mb-3">
       <label for="zip">ZIP</label>
       <input type="text" class="form-control form-control-sm" name="zip">
     </div>
 
   </div>
-  <div class="input-group">
-    <select class="custom-select" id="locationType" name="locationType">
-      <option selected>Choose location type</option>
-      <option value="novice">Buisness</option>
-      <option value="experienced">Home</option>
-    </select>
+
+  <div class="form-group">
+    <div class="d-inline-block">
+      <label for="locationType"> Location Type </label>
+    </div>
+    <div class="d-inline-block">
+      <select class="custom-select d-inline-block" id="locationType" name="locationType">
+        <option value="novice">Buisness</option>
+        <option value="experienced">Home</option>
+      </select>
+    </div>
+
   </div>
 
-  <div class="form-inline">
-    <label for="number">Number of Players</label>
-    <input type="number" min="1" max="10" class="form-control form-control-sm" name="number">
+  <div class="form-row">
+    <label for="number" class="col-form-label">Number of Players</label>
+    <div class="col-sm-1">
+      <input type="number" min="1" max="10" class="form-control form-control-sm" name="number">
+    </div>
   </div>
 
-  <div class="input-group">
+  <div class="input-group  mt-3 mb-3">
     <select class="custom-select" id="experience" name="experience">
       <option selected>Choose Experience Level</option>
       <option value="novice">Novice</option>
