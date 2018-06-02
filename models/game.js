@@ -33,6 +33,9 @@ const GameSchema = new Schema ({
     type: String,
     required: true
   },
+  startTime: {
+    type: String
+  },
   host: {
   type: Schema.Types.ObjectId,
   ref: 'users'

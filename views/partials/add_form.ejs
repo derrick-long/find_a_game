@@ -7,32 +7,35 @@
     <input type="text" class="form-control form-control-sm" name="title" aria-describedby="title" placeholder="Enter Title">
   </div>
 
-  <div class="form-row">
-
-    <div class="col mb-3">
-      <label for="address">Address</label>
+  <div class="form-row form-group">
+      <label for="address" class="col-form-label">Address</label>
+    <div class="col-sm-3">
       <input type="text" class="form-control form-control-sm" name="address"  placeholder="Enter Address">
     </div>
 
-    <div class="col-3 mb-3">
-      <label for="zip">ZIP</label>
+      <label for="zip" class= "col-form-label">ZIP</label>
+    <div class="col-sm-3">
       <input type="text" class="form-control form-control-sm" name="zip">
     </div>
-
   </div>
 
-  <div class="form-group">
-    <div class="d-inline-block">
-      <label for="locationType"> Location Type </label>
-    </div>
-    <div class="d-inline-block">
-      <select class="custom-select d-inline-block" id="locationType" name="locationType">
-        <option value="novice">Buisness</option>
-        <option value="experienced">Home</option>
-      </select>
-    </div>
 
-  </div>
+  <div class="form-row form-group">
+
+    <label for="locationType" class="col-form-label"> Location Type </label>
+      <div class="col-sm-3">
+        <select class="custom-select d-inline-block" id="locationType" name="locationType">
+          <option value="novice">Buisness</option>
+          <option value="experienced">Home</option>
+        </select>
+      </div>
+
+      <label for="startTime" class="col-form-label"> Start Time </label>
+        <div class="col-sm-2">
+          <input type="text" class="form-control form-control-sm" name="startTime">
+        </div>
+
+    </div>
 
   <div class="form-row form-group">
     <label for="number" class="col-form-label">Number of Players</label>
