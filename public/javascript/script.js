@@ -1,19 +1,2 @@
-const ratings = {
-  placeholder: 4.7
-};
-
-//total stars
-const starsTotal = 5;
-
-
-//run getratings when Dom loads
-// get ratings
-
-function getRatings() {
-  console.log('ran');
-}
-
-//
-//
-document.addEventListener('DOMContentLoaded',
-getRatings);
+// like the css only approach but need only whole numbers
+// replace objects with the user/player object, only allow  them to review once per game
