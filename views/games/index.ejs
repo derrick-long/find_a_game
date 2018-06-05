@@ -1,22 +1,24 @@
 
 <div class="row">
 
-<% games.forEach(function(game){ %>
-  <div class="col-12">
-    <div class="card card-inline">
-      <div class="card-body">
-        <h5 class="card-title"><%= game.title %> </h5>
-        <p class="card-text"><%= game.description %> </p>
-        <% if (game.numberOfPlayers > 0) { %>
-        <p class="card-text"> Seeking <%= game.numberOfPlayers %>
-        <%= makePlural('Player', Number(game.numberOfPlayers)) %></p>
-        <% } else { %>
-          <div class="alert alert-success"> <p class="card-text"> Game Full </p>
-          </div>
-        <% } %>
-          <a href="games/show/<%= game.id %>" class="btn btn-primary">See Details</a>
+  <% games.forEach(function(game){ %>
+    <div class="col-12">
+      <div class="card card-inline">
+        <div class="card-body">
+          <h5 class="card-title"><%= game.title %> </h5>
+          <p class="card-text"><%= game.description %> </p>
+          <% if (game.numberOfPlayers > 0) { %>
+          <p class="card-text"> Seeking <%= game.numberOfPlayers %>
+          <%= makePlural('Player', Number(game.numberOfPlayers)) %></p>
+          <% } else { %>
+            <div class="alert alert-success"> <p class="card-text"> Game Full </p>
+            </div>
+          <% } %>
+            <a href="games/show/<%= game.id %>" class="btn btn-primary">See Details</a>
+        </div>
       </div>
-    </div>
 
-  </div>
-<% }) %>
+    </div>
+  <% }) %>
+
+</div>
