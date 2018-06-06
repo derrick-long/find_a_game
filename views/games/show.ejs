@@ -22,7 +22,15 @@
     <% if(user) { %>
       <% game.players.forEach(function(player){
       if(player.playerUser.id == user.id) { %>
-            <p> placeholder for review form here </p>
+          <div class="dropdown">
+            <form action="/users/playerReview/<%= game.id %>" method="post">
+              <div class="form-group">
+                <input type="hostReview" id="rating-control" class="form-control" step="0.1" max="5" placeholder="Rate 1 - 5">
+              </div>
+              <div class="form-group">
+                <label for="hostReviewBody">Host Review: </label>
+                <textarea class="form-control" placeholder= "Leave feedback for your game master here."> </textarea>
+          </div>
             <% } %>
     <% }) %>
   <% } %>

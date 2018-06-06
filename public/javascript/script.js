@@ -2,8 +2,13 @@
 // replace objects with the user/player object, only allow  them to review once per game
 
 
+//so we need to make mongodb objects available here in order to DISPLAY our ratings, or maybe just move this stuff
+//into a route
+
 
 // Initial Ratings
+
+//this functionality but replace these ratings with values stored on users 
     const ratings = {
       sony: 4.7,
       samsung: 3.4,

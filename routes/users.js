@@ -23,7 +23,7 @@ router.get('/hosted',(req,res, next)=> {
   });
 });
 
-//broken query
+
 
 router.get('/played', (req,res)=>{
   Game.find({'players.playerUser': req.user.id})
