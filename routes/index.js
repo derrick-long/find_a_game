@@ -12,6 +12,11 @@ router.get('/about', (req,res)=> {
   res.render('index/about');
 });
 
+//star test
+
+router.get('/stars', (req, res)=> {
+  res.render('index/star_test');
+});
 
 
 
