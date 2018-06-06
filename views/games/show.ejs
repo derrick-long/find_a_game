@@ -2,7 +2,7 @@
 <div class="row h-100 align-items-center">
   <div class="col">
   </div>
-  <div class="col-8 text-center bg-light">
+  <div class="col-8 text-center bg-light mt-3">
 
     <h1> <%= game.title %>  </h1>
     <p> <%= game.description %> </p>
@@ -15,22 +15,17 @@
     <% } %>
 
     <!-- need to clean up this view logic/make into a drop down   -->
+
+
+
+
     <% if(user) { %>
       <% game.players.forEach(function(player){
-          if(player.playerUser == user.id ) { %>
-
-              <div class="form-group">
-                <form action="/users/playerReview/<%= game.id %>" method ="post">
-                  <label for="playerReviewBody"> Review Your Game Master </label>
-                  <input type="number" name="playerRating"  class="rating" />
-                  <textarea class="form-control" name="playerReviewBody"> </textarea>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-              </div>
-              <% } %>
-      <% }) %>
-    <% } %>
-
+      if(player.playerUser.id == user.id) { %>
+            <p> placeholder for review form here </p>
+            <% } %>
+    <% }) %>
+  <% } %>
 
 
 
