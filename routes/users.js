@@ -34,31 +34,10 @@ router.get('/played', (req,res)=>{
       title: "Games Played In"
     });
   });
-});
+
 
 //maybe change naming convention
 
-router.post('/playerReview/:id', ensureAuthenticated, (req, res)=>{
-//figure out if this goes here or with the games
-  Game.findOne({
-    _id: req.params.id
-  })
-  .populate('host')
-  .then(game=> {
-    const newHostReview = {
-      game: game.id,
-      reviewBody: req.body.playerReviewBody,
-      reviewScore: 1, // come back and change
-      reviewUser: req.user.id
-    };
-
-    game.host.hostReviews.unshift(newHostReview);
-    game.host.save()
-    .then(game=> {
-      req.flash('success_msg', 'Review added!');
-      res.redirect('/');
-    });
-  });
 
 
 });

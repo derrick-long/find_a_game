@@ -152,6 +152,35 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
     });
 });
 
+
+//add host review
+
+router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
+
+//figure out if this goes here or with the games
+  Game.findOne({
+    _id: req.params.id
+  })
+  .populate('host')
+  .then(game=> {
+    const newHostReview = {
+      game: game.id,
+      reviewBody: req.body.hostReviewBody,
+      reviewScore: 1, // come back and change
+      reviewUser: req.user.id
+    };
+
+    game.host.hostReviews.unshift(newHostReview);
+    game.host.save()
+    .then(game=> {
+      req.flash('success_msg', 'Review added!');
+      res.redirect('/');
+    });
+  });
+});
+
+
+
 // remove game
 router.delete('/:id', ensureAuthenticated, (req,res) => {
   Game.remove({_id: req.params.id})

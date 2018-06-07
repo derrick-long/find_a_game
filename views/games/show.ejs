@@ -23,13 +23,15 @@
       <% game.players.forEach(function(player){
       if(player.playerUser.id == user.id) { %>
           <div class="dropdown">
-            <form action="/users/playerReview/<%= game.id %>" method="post">
+            <form action="/games/host_review/<%= game.id %>" method="post">
               <div class="form-group">
                 <input type="hostReview" id="rating-control" class="form-control" step="0.1" max="5" placeholder="Rate 1 - 5">
               </div>
               <div class="form-group">
                 <label for="hostReviewBody">Host Review: </label>
-                <textarea class="form-control" placeholder= "Leave feedback for your game master here."> </textarea>
+                <textarea class="form-control" name="hostReviewBody" placeholder= "Leave feedback for your game master here."> </textarea>
+                <button class="button-btn-submit"> Submit </button>
+              </div>
           </div>
             <% } %>
     <% }) %>
