@@ -166,7 +166,7 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
     const newHostReview = {
       game: game.id,
       reviewBody: req.body.hostReviewBody,
-      reviewScore: 1, // come back and change
+      reviewScore: req.body.hostReviewScore,
       reviewUser: req.user.id
     };
 
