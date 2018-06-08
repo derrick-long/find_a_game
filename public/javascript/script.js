@@ -8,13 +8,9 @@
 
 // Initial Ratings
 
-//this functionality but replace these ratings with values stored on users 
+//this functionality but replace these ratings with values stored on users
     const ratings = {
-      sony: 4.7,
-      samsung: 3.4,
-      vizio: 2.3,
-      panasonic: 3.6,
-      phillips: 4.1
+      demo: 3
     };
 
     // Total Stars
@@ -31,28 +27,28 @@
     let product;
 
     // Product select change
-    productSelect.addEventListener('change', (e) => {
-      product = e.target.value;
+    // productSelect.addEventListener('change', (e) => {
+    //   product = e.target.value;
       // Enable rating control
-      ratingControl.disabled = false;
-      ratingControl.value = ratings[product];
-    });
+    //   ratingControl.disabled = false;
+    //   ratingControl.value = ratings[product];
+    // });
 
     // Rating control change
-    ratingControl.addEventListener('blur', (e) => {
-      const rating = e.target.value;
+    // ratingControl.addEventListener('blur', (e) => {
+    //   const rating = e.target.value;
 
       // Make sure 5 or under
-      if (rating > 5) {
-        alert('Please rate 1 - 5');
-        return;
-      }
+      // if (rating > 5) {
+      //   alert('Please rate 1 - 5');
+      //   return;
+      // }
 
       // Change rating
-      ratings[product] = rating;
-
-      getRatings();
-    });
+    //   ratings[product] = rating;
+    //
+    //   getRatings();
+    // });
 
     // Get ratings
     function getRatings() {
