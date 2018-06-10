@@ -13,6 +13,9 @@ const errors = [];
 // or closest?
 
 
+
+
+
 router.get('/', (req,res)=> {
   Game.find({})
   .populate('host')

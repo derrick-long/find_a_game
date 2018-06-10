@@ -1,6 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const mongoose = require('mongoose');
+const Game = mongoose.model('games');
+const User = mongoose.model('users');
+
+
+function hostRatings(user) {
+  let average = 0;
+  user.hostReviews.forEach(function(review){
+    console.log(review.reviewScore);
+  });
+}
+
 
 
 
@@ -15,7 +27,7 @@ router.get('/about', (req,res)=> {
 //star test
 
 router.get('/stars', (req, res)=> {
-  res.render('index/star_test');
+  hostRatings(req.user);
 });
 
 
