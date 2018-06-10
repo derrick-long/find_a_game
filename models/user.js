@@ -44,7 +44,8 @@ const UserSchema = new Schema({
     }
   }],
   hostReviewAverage: {
-      type: Number
+      type: Number,
+      default: 0
   },
   playerReviews: [{
     game: {
@@ -69,7 +70,8 @@ const UserSchema = new Schema({
     }
   }],
   playerReviewAverage: {
-    type: Number
+    type: Number,
+    default: 0
   }
 
 
