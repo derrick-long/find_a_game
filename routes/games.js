@@ -177,7 +177,7 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
     };
     //works probably need to clean it up though
     game.host.hostReviews.unshift(newHostReview);
-    const newAverage = ratingsAverage(game.host);
+    const newAverage = ratingsAverage(game.host,'host');
     game.host.hostReviewAverage = newAverage;
     game.host.save()
     .then(game=> {
