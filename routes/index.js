@@ -5,12 +5,18 @@ const mongoose = require('mongoose');
 const Game = mongoose.model('games');
 const User = mongoose.model('users');
 
+//so this function averages our values
+//probably dry up by extrating a average method?
+// or pass a second argument for host or player?
 
-function hostRatings(user) {
-  let average = 0;
+
+function hostRatingsAverage(user) {
+  let total = 0;
+  let divide_by = user.hostReviews.length;
   user.hostReviews.forEach(function(review){
-    console.log(review.reviewScore);
+    total += review.reviewScore;
   });
+  return total/divide_by;
 }
 
 
