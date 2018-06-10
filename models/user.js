@@ -45,7 +45,33 @@ const UserSchema = new Schema({
   }],
   hostReviewAverage: {
       type: Number
+  },
+  playerReviews: [{
+    game: {
+      type: Schema.Types.ObjectId,
+      ref: 'games'
+    },
+    reviewBody:{
+      type: String,
+      required: true
+    },
+    reviewDate: {
+      type: Date,
+      default: Date.now
+    },
+    reviewScore:{
+      type: Number,
+      required: true
+    },
+    reviewUser: {
+      type: Schema.Types.ObjectId,
+      ref:'users'
+    }
+  }],
+  playerReviewAverage: {
+    type: Number
   }
+
 
 });
 
