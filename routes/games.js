@@ -12,6 +12,15 @@ const errors = [];
 /// route for games, probably want sorted by most recent by default
 // or closest?
 
+function hostRatingsAverage(user) {
+  let total = 0;
+  let divide_by = user.hostReviews.length;
+  user.hostReviews.forEach(function(review){
+    total += review.reviewScore;
+  });
+  return total/divide_by;
+}
+
 
 
 
@@ -172,8 +181,10 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
       reviewScore: req.body.hostReviewScore,
       reviewUser: req.user.id
     };
-
+    //works probably need to clean it up though
     game.host.hostReviews.unshift(newHostReview);
+    const newAverage = hostRatingsAverage(game.host);
+    game.host.hostReviewAverage = newAverage;
     game.host.save()
     .then(game=> {
       req.flash('success_msg', 'Review added!');

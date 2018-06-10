@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const mongoose = require('mongoose');
-const Game = mongoose.model('games');
-const User = mongoose.model('users');
+
 
 //so this function averages our values
 //probably dry up by extrating a average method?
@@ -33,7 +32,7 @@ router.get('/about', (req,res)=> {
 //star test
 
 router.get('/stars', (req, res)=> {
-  hostRatings(req.user);
+  res.render('index/star_test');
 });
 
 
