@@ -1,8 +1,12 @@
 module.exports = {
   // get ratings average/both host/player
+//add if later
+  ratingsAverage(user) {
+    let total = 0;
+    let divide_by = user.hostReviews.length;
+    user.hostReviews.forEach(function(review){
+      total += review.reviewScore;
+    });
+    return total/divide_by;
+  }
 };
-
-
-// so we're going to use req.user.id
-//going to step through the hostReviews object, and we're going to use the key for the number
-//given to us 

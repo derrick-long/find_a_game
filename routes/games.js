@@ -6,20 +6,14 @@ const Game = mongoose.model('games');
 const User = mongoose.model('users');
 const {ensureAuthenticated} = require('../helpers/auth');
 const errors = [];
+const {ratingsAverage} = require('../helpers/reviews');
 
 
 
 /// route for games, probably want sorted by most recent by default
 // or closest?
 
-function hostRatingsAverage(user) {
-  let total = 0;
-  let divide_by = user.hostReviews.length;
-  user.hostReviews.forEach(function(review){
-    total += review.reviewScore;
-  });
-  return total/divide_by;
-}
+
 
 
 
@@ -183,7 +177,7 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
     };
     //works probably need to clean it up though
     game.host.hostReviews.unshift(newHostReview);
-    const newAverage = hostRatingsAverage(game.host);
+    const newAverage = ratingsAverage(game.host);
     game.host.hostReviewAverage = newAverage;
     game.host.save()
     .then(game=> {
