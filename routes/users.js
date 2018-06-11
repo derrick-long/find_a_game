@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const Game = mongoose.model('games');
 const User = mongoose.model('users');
 const {ensureAuthenticated} = require('../helpers/auth');
+const {ratingsAverage} = require('../helpers/reviews');
+const {starPercentage} = require('../helpers/reviews');
 
 
 router.get('/dashboard', ensureAuthenticated, (req,res) => {

@@ -16,5 +16,16 @@ module.exports = {
         });
         return total/divide_by;
       }
+    },
+
+    starPercentage(user,type){
+      if(type == 'host'){
+        let star_percent = (user.hostReviewAverage/starTotal) * 100;
+        return `${Math.round(star_percent / 10) * 10}%`;
+      } else {
+        let star_percent = (user.playerReviewAverage/starTotal) * 100;
+        return `${Math.round(star_percent / 10) * 10}%`;
+      }
     }
+
 };

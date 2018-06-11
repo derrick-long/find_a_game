@@ -7,7 +7,8 @@ const User = mongoose.model('users');
 const {ensureAuthenticated} = require('../helpers/auth');
 const errors = [];
 const {ratingsAverage} = require('../helpers/reviews');
-
+const {starPercentage} = require('../helpers/reviews');
+const starTotal = 5;
 
 
 /// route for games, probably want sorted by most recent by default
