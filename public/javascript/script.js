@@ -2,7 +2,7 @@
 // replace objects with the user/player object, only allow  them to review once per game
 
 if ($(".profile")[0]){
-  console.log($(".hostRating").html());
+  makeStars(".hostRating");
 } else {
   console.log('not here');
 }
@@ -65,4 +65,14 @@ if ($(".profile")[0]){
     //     // Add number rating
     //     document.querySelector(`.${rating} .number-rating`).innerHTML = ratings[rating];
     //   }
+
     // }
+
+
+
+   function makeStars (classname){
+     let value = $(classname).html();
+     const starPercentage = (value/5) * 100;
+     const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+     document.querySelector(`.stars-inner`).style.width = starPercentageRounded;
+   }
