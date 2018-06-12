@@ -18,6 +18,7 @@ module.exports = {
       }
     },
 
+    // maybe remove this and put it in jquery file
     starPercentage(user,type){
       if(type == 'host'){
         let star_percent = (user.hostReviewAverage/starTotal) * 100;

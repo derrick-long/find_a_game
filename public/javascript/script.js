@@ -2,10 +2,16 @@
 // replace objects with the user/player object, only allow  them to review once per game
 
 if ($(".profile")[0]){
-  console.log('stuff');
+  console.log($(".hostRating").html());
 } else {
   console.log('not here');
 }
+
+//can just take the value from our div showing the ratings
+// probably the best way to do it, might have to go back and change the helpers
+// also put it in hidden input if needed
+// need a way to handle more than one on one page
+// either need to pass an object from back end and manipulate here or?
 
 
 
