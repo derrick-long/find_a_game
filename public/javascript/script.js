@@ -2,7 +2,7 @@
 // replace objects with the user/player object, only allow  them to review once per game
 
 if ($(".profile")[0]){
-  makeStars(".hostRating");
+  makeStars();
 } else {
   console.log('not here');
 }
@@ -69,10 +69,9 @@ if ($(".profile")[0]){
     // }
 
 
-
-   function makeStars (classname){
-     let value = $(classname).html();
-     const starPercentage = (value/5) * 100;
+   function makeStars() {
+     let value = document.getElementById('rating');
+     const starPercentage = (value.dataset.rating/ 5) * 100;
      const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
      document.querySelector(`.stars-inner`).style.width = starPercentageRounded;
    }
