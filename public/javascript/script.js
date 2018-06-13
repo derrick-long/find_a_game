@@ -1,12 +1,16 @@
 // so now we scale this for all values on the page, iterate through them and then call our helper
 // method for each
 
+const starTotal = 5;
+
+
 if ($(".rating")[0]){
-  // call method for filling in stars on each element of array
+
   let ratings = Array.from(document.getElementsByClassName('rating'));
-  // so iterate through stuff and then call the method below on each
+
   ratings.forEach(function(rating){
-    console.log(rating.dataset.rating);
+    // now call custom method
+    makeStars(rating);
   });
 } else {
   console.log('not here');
@@ -73,10 +77,13 @@ if ($(".rating")[0]){
 
     // }
 
+    //fix selector, try using child of a element?
 
-   function makeStars() {
-     let value = document.getElementById('rating');
-     const starPercentage = (value.dataset.rating/ 5) * 100;
+
+
+   function makeStars(value) {
+     const starPercentage = (value.dataset.rating/starTotal) * 100;
      const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
-     document.querySelector(`.stars-inner`).style.width = starPercentageRounded;
+     value.getElementsByClassName(value.dataset.id)[0].style.width = starPercentageRounded;
+
    }

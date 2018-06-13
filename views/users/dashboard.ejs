@@ -5,18 +5,18 @@
 <div class="container profile" >
   <h3> <%= user.firstName %>'s  Profile </h3>
 
-  <div class="review-rating">
-    <span class="rating" data-rating= "<%= user.hostReviewAverage%>"> Host Rating: <%= user.hostReviewAverage%> </span>
+  <div class="rating" data-rating= "<%= user.hostReviewAverage%>" data-id="<%= user.id %>">
+    <span> Host Rating: <%= user.hostReviewAverage%> </span>
       <div class="stars-outer">
-      <div class="stars-inner"></div>
+      <div class="<%= user.id %> stars-inner"></div>
       </div>
   </div>
 
 
-    <div class="review-rating">
-      <span class="rating" data-rating= "<%= user.playerReviewAverage%>"> Player Rating: <%= user.playerReviewAverage%> </span>
+    <div class="rating" data-rating= "<%= user.playerReviewAverage%>" data-id="<%= user.id %>">
+      <span> Player Rating: <%= user.playerReviewAverage%> </span>
         <div class="stars-outer">
-        <div class="stars-inner"></div>
+        <div class="<%= user.id %> stars-inner"></div>
         </div>
     </div>
 
