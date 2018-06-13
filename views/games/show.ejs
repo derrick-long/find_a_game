@@ -29,15 +29,22 @@
   <% } %>
 
 
-
+ <!-- fix formating here so everything is on one line  -->
     <div class="dropdown mt-1">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="playersDropdown" data-toggle="dropdown">
         Player List
       </button>
       <div class="dropdown-menu player-list dropup" aria-labelledby="dropdownMenuButton">
         <% game.players.forEach(function(player){ %>
-          <a class="dropdown-item" href=#> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" id="google-profile"></img>
-             <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </a>
+
+             <div class="rating dropdown-item" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
+               <a class="dropdown-item" href=#> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" id="google-profile"></img>
+                  <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </a>
+
+                 <div class="stars-outer">
+                 <div class="<%= player.playerUser.id %> stars-inner"></div>
+                 </div>
+             </div>
         <% }) %>
       </div>
     </div>
