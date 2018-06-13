@@ -4,12 +4,27 @@
 
 <div class="container profile" >
   <h3> <%= user.firstName %>'s  Profile </h3>
-  <div class="stars-outer">
-    <div class="stars-inner"></div>
+
+  <div class="review-rating">
+    <span id="rating" data-rating= "<%= user.hostReviewAverage%>"> Host Rating: <%= user.hostReviewAverage%> </span>
+      <div class="stars-outer">
+      <div class="stars-inner"></div>
+      </div>
   </div>
-  <ul>
+
+
+    <div class="review-rating">
+      <span data-rating= "<%= user.playerReviewAverage%>"> Player Rating: <%= user.playerReviewAverage%> </span>
+        <div class="stars-outer">
+        <div class="stars-inner"></div>
+        </div>
+    </div>
+
+
+
+    <ul>
     <li> Need more info here </li>
-    <li> Host Rating: <span id="rating" data-rating= "<%= user.hostReviewAverage%>"> <%= user.hostReviewAverage%> </span> </li>
+
     <li> So most recent game played should show up </li>
     <li> And also the averaged reviews for both host and player </li>
     <li> hmmm could make a friends function or something? Maybe too much </li>

@@ -1,7 +1,7 @@
-// like the css only approach but need only whole numbers
-// replace objects with the user/player object, only allow  them to review once per game
+// so now we scale this for all values on the page, iterate through them and then call our helper
+// method for each
 
-if ($(".profile")[0]){
+if ($("#rating")[0]){
   makeStars();
 } else {
   console.log('not here');
