@@ -1,8 +1,13 @@
 // so now we scale this for all values on the page, iterate through them and then call our helper
 // method for each
 
-if ($("#rating")[0]){
-  makeStars();
+if ($(".rating")[0]){
+  // call method for filling in stars on each element of array
+  let ratings = Array.from(document.getElementsByClassName('rating'));
+  // so iterate through stuff and then call the method below on each
+  ratings.forEach(function(rating){
+    console.log(rating.dataset.rating);
+  });
 } else {
   console.log('not here');
 }
