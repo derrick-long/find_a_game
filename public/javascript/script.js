@@ -13,7 +13,7 @@ if ($(".rating")[0]){
     makeStars(rating);
   });
 } else {
-  console.log('not here');
+
 }
 
 //can just take the value from our div showing the ratings

@@ -39,6 +39,8 @@ body {
 
 #google-profile {
   width: 10%;
+  padding: 0;
+  margin: 0;
 }
 
 #add-form {
