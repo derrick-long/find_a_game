@@ -1,10 +1,10 @@
 <!-- throwing error for game object on load?  -->
-<div class="row h-100 align-items-center justify-content-center">
+<div class="row h-100">
 
   <div class="col">
   </div>
   <div class="col-12  bg-light">
-    <div class="game-info  d-block ">
+    <div class="game-info  d-block">
       <h1> <%= game.title %>  </h1>
       <p> <%= game.description %> </p>
     </div>
@@ -38,23 +38,23 @@
       <div class="dropdown-menu player-list dropup" aria-labelledby="dropdownMenuButton">
         <% game.players.forEach(function(player){ %>
 
-             <div class="rating dropdown-item inline-block" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
+             <div class="rating dropdown-item d-flex" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
                <a class="dropdown-item" href=#> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
                   <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </a>
-                <div class="inline-block">
 
-                   <div class="stars-outer">
+
+                   <div class="stars-outer d-inline-block">
                      <div class="<%= player.playerUser.id %> stars-inner"></div>
                    </div>
-                 </div>
+
                </div>
         <% }) %>
       </div>
     </div>
 
 
-    <div class="d-inline-block float-right">
-      <img src="<%= game.host.image %>" class="img-fluid rounded-circle float-left" id="google-profile" ></img>
+    <div class="d-flex float-right ">
+      <img src="<%= game.host.image %>" class="img-fluid rounded-circle float-left" id="google-profile"></img>
       <span> Hosted by <%= game.host.firstName %>  <%= game.host.lastName %></span>
     </div>
 
