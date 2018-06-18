@@ -193,7 +193,8 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
 
 router.post('/player_review/:id', ensureAuthenticated, (req, res)=>{
 
-
+// add host validation to corrosponding view
+// logic has to change to find each player in the array
   Game.findOne({
     _id: req.params.id
   })

@@ -22,18 +22,17 @@
 
     <% if(user) { %>
       <% game.players.forEach(function(player){
-      if(player.playerUser.id == user.id) { %>
+        if(player.playerUser.id == user.id) { %>
                 <%- include ../partials/host_review.ejs %>
         <% } else { %>
         <% } %>
-    <% }) %>
+      <% }) %>
   <% } %>
 
 
 
-<% if(user.id) == game.host %>
-  <%- include ../partials/player_review.ejs %>
-<% } %>
+
+
 
 
  <!-- fix formating here so everything is on one line also fix width of elements and general look   -->
