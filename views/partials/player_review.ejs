@@ -1,8 +1,8 @@
 <div class="dropdown">
   <!-- make this into functional dropdown  -->
-  <form action="/games/host_review/<%= game.id %>" method="post">
+  <form action="/games/player_review/<%= game.id %>" method="post">
     <div class="form-group">
-      <input type="number"  class="form-control" name="hostReviewScore"  min= "1" max="5" placeholder="Rate 1 - 5">
+      <input type="number"  class="form-control" name="playerReviewScore"  min= "1" max="5" placeholder="Rate 1 - 5">
     </div>
 
     <div class="demo">
@@ -14,8 +14,8 @@
 
 
     <div class="form-group">
-      <label for="hostReviewBody">Host Review: </label>
-      <textarea class="form-control" name="hostReviewBody" placeholder= "Leave feedback for your game master here."> </textarea>
+      <label for="playerReviewBody">Player Review: </label>
+      <textarea class="form-control" name="playerReviewBody" placeholder= "Leave feedback for your game master here."> </textarea>
       <button class="btn btn-danger"> Submit </button>
     </div>
 </div>

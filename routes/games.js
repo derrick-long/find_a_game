@@ -7,8 +7,8 @@ const User = mongoose.model('users');
 const {ensureAuthenticated} = require('../helpers/auth');
 const errors = [];
 const {ratingsAverage} = require('../helpers/reviews');
-const {starPercentage} = require('../helpers/reviews');
-const starTotal = 5;
+
+
 
 
 /// route for games, probably want sorted by most recent by default
@@ -164,7 +164,7 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
 
 router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
 
-//figure out if this goes here or with the games
+
   Game.findOne({
     _id: req.params.id
   })
@@ -187,6 +187,36 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
     });
   });
 });
+
+
+// add player review
+
+router.post('/player_review/:id', ensureAuthenticated, (req, res)=>{
+
+
+  Game.findOne({
+    _id: req.params.id
+  })
+  .populate('host')
+  .then(game=> {
+    const newHostReview = {
+      game: game.id,
+      reviewBody: req.body.hostReviewBody,
+      reviewScore: req.body.hostReviewScore,
+      reviewUser: req.user.id
+    };
+    //works probably need to clean it up though
+    game.host.hostReviews.unshift(newHostReview);
+    const newAverage = ratingsAverage(game.host,'host');
+    game.host.hostReviewAverage = newAverage;
+    game.host.save()
+    .then(game=> {
+      req.flash('success_msg', 'Review added!');
+      res.redirect('/');
+    });
+  });
+});
+
 
 
 
