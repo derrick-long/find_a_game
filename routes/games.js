@@ -170,7 +170,13 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
   })
   .populate('host')
   .then(game=> {
-    res.send(game.host.hostReviews);
+    game.host.hostReviews.forEach(function(review){
+      if (review.game == game.id && review.reviewUser == req.user.id){
+        res.send('ay it a workin!');
+      } else {
+          res.send('you a broke da pizza pie');
+        }
+    });
     //use filter method to cut down on runtime?
     // so a
     //
