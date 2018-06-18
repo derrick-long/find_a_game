@@ -172,32 +172,28 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
   .then(game=> {
     game.host.hostReviews.forEach(function(review){
       if (review.game == game.id && review.reviewUser == req.user.id){
-        res.send('ay it a workin!');
+          req.flash('error_msg', 'You already added a review!');
+          res.redirect('/');
       } else {
-          res.send('you a broke da pizza pie');
-        }
-    });
-    //use filter method to cut down on runtime?
-    // so a
-    //
-    // const newHostReview = {
-    //   game: game.id,
-    //   reviewBody: req.body.hostReviewBody,
-    //   reviewScore: req.body.hostReviewScore,
-    //   reviewUser: req.user.id
-    // };
-    // //works probably need to clean it up though
-    // game.host.hostReviews.unshift(newHostReview);
-    // const newAverage = ratingsAverage(game.host,'host');
-    // game.host.hostReviewAverage = newAverage;
-    // game.host.save()
-    // .then(game=> {
-    //   req.flash('success_msg', 'Review added!');
-    //   res.redirect('/');
-    // });
 
+        const newHostReview = {
+        game: game.id,
+        reviewBody: req.body.hostReviewBody,
+        reviewScore: req.body.hostReviewScore,
+        reviewUser: req.user.id
+        };
+        //works probably need to clean it up though
+        game.host.hostReviews.unshift(newHostReview);
+        const newAverage = ratingsAverage(game.host,'host');
+        game.host.hostReviewAverage = newAverage;
+        game.host.save()
+        .then(game=> {
+          req.flash('success_msg', 'Review added!');
+          res.redirect('/');
+        });
+      }
+    });
   });
-  // });
 });
 
 
