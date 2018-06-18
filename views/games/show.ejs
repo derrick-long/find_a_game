@@ -44,7 +44,7 @@
         <% game.players.forEach(function(player){ %>
 
              <div class="rating dropdown-item d-flex" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
-               <a class="dropdown-item" href=#> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
+               <a class="dropdown-item" href="#"> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
                   <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </a>
 
 
@@ -67,3 +67,9 @@
   <div class="col">
   </div>
 </div>
+
+
+<!--
+so review stil happens here because I need to veryify all parties played with eachother, right?
+so now we still need a way to make sure that they aren't reviewed more than once per game
+so I think reviews must save the game ID as well so that we can cross reference dbs?  -->

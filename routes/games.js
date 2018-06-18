@@ -170,21 +170,27 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
   })
   .populate('host')
   .then(game=> {
-    const newHostReview = {
-      game: game.id,
-      reviewBody: req.body.hostReviewBody,
-      reviewScore: req.body.hostReviewScore,
-      reviewUser: req.user.id
-    };
-    //works probably need to clean it up though
-    game.host.hostReviews.unshift(newHostReview);
-    const newAverage = ratingsAverage(game.host,'host');
-    game.host.hostReviewAverage = newAverage;
-    game.host.save()
-    .then(game=> {
-      req.flash('success_msg', 'Review added!');
-      res.redirect('/');
-    });
+    //use filter method to cut down on runtime?
+    game.host.hostReviews.forEach(function(review){
+        console.log(reviews);
+      });
+    // const newHostReview = {
+    //   game: game.id,
+    //   reviewBody: req.body.hostReviewBody,
+    //   reviewScore: req.body.hostReviewScore,
+    //   reviewUser: req.user.id
+    // };
+  //   //works probably need to clean it up though
+    // game.host.hostReviews.unshift(newHostReview);
+    // const newAverage = ratingsAverage(game.host,'host');
+    // game.host.hostReviewAverage = newAverage;
+    // game.host.save()
+    // .then(game=> {
+    //   req.flash('success_msg', 'Review added!');
+    //   res.redirect('/');
+    // });
+
+  // });
   });
 });
 
