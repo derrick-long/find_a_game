@@ -181,18 +181,18 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
         reviewBody: req.body.hostReviewBody,
         reviewScore: req.body.hostReviewScore,
         reviewUser: req.user.id
-        };
-        //works probably need to clean it up though
-        game.host.hostReviews.unshift(newHostReview);
-        const newAverage = ratingsAverage(game.host,'host');
-        game.host.hostReviewAverage = newAverage;
-        game.host.save()
-        .then(game=> {
-          req.flash('success_msg', 'Review added!');
-          res.redirect('/');
-        });
-      }
-    });
+      };
+      //works probably need to clean it up though
+      game.host.hostReviews.unshift(newHostReview);
+      const newAverage = ratingsAverage(game.host,'host');
+      game.host.hostReviewAverage = newAverage;
+      game.host.save()
+      .then(game=> {
+        req.flash('success_msg', 'Review added!');
+        res.redirect('/');
+      });
+    }
+  });
   });
 });
 
@@ -206,18 +206,17 @@ router.post('/player_review/:id', ensureAuthenticated, (req, res)=>{
   Game.findOne({
     _id: req.params.id
   })
-  .populate('host')
+  .populate('players.PlayerUser')
   .then(game=> {
-    const newHostReview = {
+    const newPlayerReview = {
       game: game.id,
-      reviewBody: req.body.hostReviewBody,
-      reviewScore: req.body.hostReviewScore,
+      reviewBody: req.body.playerReviewBody,
+      reviewScore: req.body.playerReviewScore,
       reviewUser: req.user.id
     };
     //works probably need to clean it up though
-    game.host.hostReviews.unshift(newHostReview);
-    const newAverage = ratingsAverage(game.host,'host');
-    game.host.hostReviewAverage = newAverage;
+
+
     game.host.save()
     .then(game=> {
       req.flash('success_msg', 'Review added!');
