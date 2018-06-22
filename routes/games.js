@@ -201,28 +201,33 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
 
 router.post('/player_review/:id', ensureAuthenticated, (req, res)=>{
 
-// add host validation to corrosponding view
-// logic has to change to find each player in the array
-  Game.findOne({
+  const reviewedGame = Game.findOne({
     _id: req.params.id
+  });
+
+  User.findOne({
+    _id: req.body.player_id
   })
-  .populate('players.PlayerUser')
-  .then(game=> {
+  .then(user=>{
+
     const newPlayerReview = {
-      game: game.id,
+      game: reviewedGame.id,
       reviewBody: req.body.playerReviewBody,
       reviewScore: req.body.playerReviewScore,
       reviewUser: req.user.id
     };
-    //works probably need to clean it up though
-
-
-    game.host.save()
-    .then(game=> {
+    user.playerReviews.unshift(newPlayerReview);
+    const newAverage = ratingsAverage(user,'player');
+    user.playerReviewAverage = newAverage;
+    user.save()
+    .then(user=>{
       req.flash('success_msg', 'Review added!');
       res.redirect('/');
     });
+    //works probably need to clean it up though
   });
+
+
 });
 
 
