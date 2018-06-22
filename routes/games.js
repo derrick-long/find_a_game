@@ -201,9 +201,6 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
 
 router.post('/player_review/:id', ensureAuthenticated, (req, res)=>{
 
-  const reviewedGame = Game.findOne({
-    _id: req.params.id
-  });
 
   User.findOne({
     _id: req.body.player_id
@@ -211,7 +208,7 @@ router.post('/player_review/:id', ensureAuthenticated, (req, res)=>{
   .then(user=>{
 
     const newPlayerReview = {
-      game: reviewedGame.id,
+      game: req.params.id,
       reviewBody: req.body.playerReviewBody,
       reviewScore: req.body.playerReviewScore,
       reviewUser: req.user.id
@@ -224,7 +221,7 @@ router.post('/player_review/:id', ensureAuthenticated, (req, res)=>{
       req.flash('success_msg', 'Review added!');
       res.redirect('/');
     });
-    //works probably need to clean it up though
+  
   });
 
 

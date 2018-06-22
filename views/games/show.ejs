@@ -57,10 +57,26 @@
                <a class="dropdown-item" href="#"> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
                   <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </a>
 
+                  <div class="dropdown-item">
+                    <form action="/games/player_review/<%= game.id %>" method="post">
+                      <div class="form-group">
+                        <input type="hidden" name="player_id" value="<%= player.playerUser.id %>">
+                        <input type="number"  class="form-control" name="hostReviewScore"  min= "1" max="5" placeholder="Rate 1 - 5">
+                      </div>
 
+
+
+                      <div class="form-group">
+                        <label for="playerReviewBody">Player Review: </label>
+                        <textarea class="form-control" name="playerReviewBody" placeholder= "Leave feedback for your players here."> </textarea>
+                        <button class="btn btn-danger"> Submit </button>
+                      </div>
+                    </div>
                    <div class="stars-outer d-inline-block">
                      <div class="<%= player.playerUser.id %> stars-inner"></div>
                    </div>
+
+
 
                </div>
         <% }) %>
