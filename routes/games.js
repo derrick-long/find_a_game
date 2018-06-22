@@ -206,6 +206,12 @@ router.post('/player_review/:id', ensureAuthenticated, (req, res)=>{
     _id: req.body.player_id
   })
   .then(user=>{
+    if(user.playerReviews.find(function(review){
+         return review.game == req.params.id && review.reviewUser == req.user.id;
+      })){
+        req.flash('error_msg', 'You already added a review!');
+        res.redirect('/');
+      } else {
 
     const newPlayerReview = {
       game: req.params.id,
@@ -221,10 +227,8 @@ router.post('/player_review/:id', ensureAuthenticated, (req, res)=>{
       req.flash('success_msg', 'Review added!');
       res.redirect('/');
     });
-  
+  }
   });
-
-
 });
 
 
