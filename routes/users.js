@@ -38,15 +38,21 @@ router.get('/played', (req,res)=>{
   });
 
 
-//maybe change naming convention
-//change to update number of players 
+
+
 router.delete('/drop_player', ensureAuthenticated, (req,res) => {
   Game.findOneAndUpdate({_id:req.body.game_id},
   {$pull: { players : {"playerUser": req.user.id }}}
     ).then(()=> {
-      req.flash('success_msg', 'Left Game!');
-      res.redirect('/users/dashboard');
+      //see if I can make this just one request
+      Game.findOne({_id:req.body.game_id})
+        .then(game =>{
+          game.numberOfPlayers = game.numberOfPlayers - game.players.length;
+          game.save();
+          req.flash('success_msg', 'Left Game!');
+          res.redirect('/users/dashboard');
     });
+  });
   });
 
 
