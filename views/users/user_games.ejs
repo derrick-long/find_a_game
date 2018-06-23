@@ -16,6 +16,14 @@
             <button type="submit" class="btn btn-danger"><i class= "fas fa-trash"></i>
               Delete </button>
           </form>
+        <% } else { %>
+          <form action="/users/drop_player/?_method=DELETE" method="post" id="delete-form">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="game_id" value="<%= game.id %>">
+            <button type="submit" class="btn btn-danger"><i class= "fas fa-trash"></i>
+              Leave Game </button>
+          </form>
+
         <% } %>
       </div>
     </div>

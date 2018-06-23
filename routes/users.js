@@ -40,6 +40,17 @@ router.get('/played', (req,res)=>{
 
 //maybe change naming convention
 
+router.delete('/drop_player', ensureAuthenticated, (req,res) => {
+  Game.findOne(
+    { _id: req.body.game_id})
+  .then(game=>{
+    game.update(
+      { "$pull": {""}}
+    )
+  });
+
+});
+
 
 
 });
