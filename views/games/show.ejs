@@ -1,4 +1,4 @@
-<!-- throwing error for game object on load?  -->
+
 <div class="row h-100">
 
   <div class="col">
@@ -50,12 +50,15 @@
       <button class="btn btn-secondary dropdown-toggle" type="button" id="playersDropdown" data-toggle="dropdown">
         Player List
       </button>
-      <div class="dropdown-menu player-list dropup" aria-labelledby="dropdownMenuButton">
+      <div class="dropdown-menu  dropup" aria-labelledby="dropdownMenuButton">
         <% game.players.forEach(function(player){ %>
 
-             <div class="rating dropdown-item d-flex" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
-               <a class="dropdown-item" href="#"> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
-                  <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </a>
+
+               <a href="#" class="player-list"> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
+                  <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %>
+                  <div class="rating dropdown-item d-flex" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
+                  </div>
+                </a>
 
                   <div class="dropdown-item">
                     <form action="/games/player_review/<%= game.id %>" method="post">
@@ -77,8 +80,6 @@
                    <div class="stars-outer d-inline-block">
                      <div class="<%= player.playerUser.id %> stars-inner"></div>
                    </div>
-
-
 
                </div>
         <% }) %>
