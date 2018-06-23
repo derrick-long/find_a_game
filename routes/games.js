@@ -148,7 +148,8 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
         playerUser: req.user.id
       };
       game.players.unshift(newPlayer);
-      game.numberOfPlayers -= 1;
+      game.numberOfPlayers = game.numberOfPlayers - game.players.length;
+
       game.save()
       .then(game =>{
         req.flash('success_msg', 'Signed up for game!');
