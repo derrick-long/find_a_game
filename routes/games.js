@@ -148,7 +148,7 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
         playerUser: req.user.id
       };
       game.players.unshift(newPlayer);
-      game.numberOfPlayers = game.numberOfPlayers - game.players.length;
+      game.numberOfPlayers -= 1;
 
       game.save()
       .then(game =>{

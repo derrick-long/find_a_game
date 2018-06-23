@@ -47,7 +47,7 @@ router.delete('/drop_player', ensureAuthenticated, (req,res) => {
       //see if I can make this just one request
       Game.findOne({_id:req.body.game_id})
         .then(game =>{
-          game.numberOfPlayers = game.numberOfPlayers - game.players.length;
+          game.numberOfPlayers += 1 ;
           game.save();
           req.flash('success_msg', 'Left Game!');
           res.redirect('/users/dashboard');
