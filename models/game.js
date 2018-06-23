@@ -40,6 +40,9 @@ const GameSchema = new Schema ({
   type: Schema.Types.ObjectId,
   ref: 'users'
   },
+  date: {
+    type: Date
+  },
   datePosted: {
   type: Date,
   default: Date.now

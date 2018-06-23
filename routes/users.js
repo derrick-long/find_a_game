@@ -59,7 +59,6 @@ router.delete('/drop_player', ensureAuthenticated, (req,res) => {
 });
 
 
-//okay so we need to make it so only one review can be added per user
 //need to add star interface
 
 

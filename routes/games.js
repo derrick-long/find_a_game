@@ -79,6 +79,8 @@ router.post('/', ensureAuthenticated, (req,res)=>{
       zip: req.body.zip,
       locationType: req.body.locationType,
       numberOfPlayers: req.body.number,
+      startTime: req.body.startTime,
+      date: req.body.date,
       experience: req.body.experience,
       description: req.body.description,
       host: req.user.id
@@ -93,11 +95,13 @@ router.post('/', ensureAuthenticated, (req,res)=>{
   zip: req.body.zip,
   locationType: req.body.locationType,
   numberOfPlayers: req.body.number,
+  startTime: req.body.startTime,
+  date: req.body.date,
   experience: req.body.experience,
   description: req.body.description,
   host: req.user.id
   };
-  //add a date created vs date of game and time
+
 
   //create game
   new Game(newGame)
