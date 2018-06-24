@@ -54,7 +54,7 @@
         <% game.players.forEach(function(player){ %>
 
 
-               <a href="#" class="player-list"> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
+               <a href="/users/profile/<%= player.playerUser.id %>" class="player-list"> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
                   <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %>
                   <div class="rating dropdown-item d-flex" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
                   </div>

@@ -14,8 +14,16 @@ router.get('/dashboard', ensureAuthenticated, (req,res) => {
 });
 
 
-router.get('/profile', ensureAuthenticated, (req,res) => {
-  res.render('users/profile');
+router.get('/profile/:id', ensureAuthenticated, (req,res) => {
+  User.findOne({
+    _id: req.params.id})
+  .then(user=>{
+    res.render('users/profile', {
+      user:user
+    });
+  });
+
+
 });
 
 
