@@ -14,6 +14,11 @@ router.get('/dashboard', ensureAuthenticated, (req,res) => {
 });
 
 
+router.get('/profile', ensureAuthenticated, (req,res) => {
+  res.render('users/profile');
+});
+
+
 router.get('/hosted',(req,res, next)=> {
   Game.find({host: req.user.id})
   .populate('user')
