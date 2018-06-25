@@ -1,13 +1,21 @@
-<!-- so here we can do like member for x time stuff
-games played in
-player rating
-Game master rating
-location, image etc.
-could do a friends list type thing but maybe wait on that?  -->
-<h1> <%= user.firstName %> | <%= user.lastName %>'s  Public Profile </h1> 
-<!-- basically make this a public profile page, with the ability to edit it, have it link on the show page!  -->
-<ul>
-  <li> So make player list link here, and then make the host also link here </li>
-  <li> This is the place for public information and what not. </li>
+<div class="row h-100">
+  <div class="col">
+  </div>
+  <div class="col-12  bg-light text-center">
 
-</ul>
+    <h1> <%= user.firstName %> | <%= user.lastName %>'s  Public Profile </h1>
+    <p> put an image up in the header that hopefully doesn't look terrible </p>
+    <span> Host Rating: <%= user.hostReviewAverage %> </span>
+    <span> Player Rating : <%= user.playerReviewAverage %> </span>
+    <ul>
+      <li> So make player list link here, and then make the host also link here </li>
+      <li> This is the place text-centertion and what not. </li>
+
+    </ul>
+
+  </div>
+
+  <div class="col">
+  </div>
+
+</div>
