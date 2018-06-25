@@ -1,12 +1,27 @@
 <div class="row h-100">
   <div class="col">
   </div>
-  <div class="col-12  bg-light text-center">
+  <div class="col-12  bg-secondary profile">
+    <!-- change bg color  -->
 
     <h1> <%= user.firstName %> | <%= user.lastName %>'s  Public Profile </h1>
     <p> put an image up in the header that hopefully doesn't look terrible </p>
-    <span> Host Rating: <%= user.hostReviewAverage %> </span>
-    <span> Player Rating : <%= user.playerReviewAverage %> </span>
+
+
+    <div class="rating" data-rating= "<%= user.hostReviewAverage%>" data-id="<%= user.id %>">
+      <span class> Host Rating: <%= user.hostReviewAverage%> </span>
+        <div class="stars-outer">
+        <div class="<%= user.id %> stars-inner"></div>
+        </div>
+    </div>
+
+    <div class="rating" data-rating= "<%= user.playerReviewAverage%>" data-id="<%= user.id %>">
+      <span> Player Rating: <%= user.playerReviewAverage%> </span>
+        <div class="stars-outer">
+        <div class="<%= user.id %> stars-inner"></div>
+        </div>
+    </div>
+
     <ul>
       <li> So make player list link here, and then make the host also link here </li>
       <li> This is the place text-centertion and what not. </li>
