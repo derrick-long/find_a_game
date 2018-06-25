@@ -2,8 +2,8 @@
 
 
 
-<div class="container profile">
-  <h3> <%= user.firstName %>'s  Profile </h3>
+<div class="container">
+
 
   <div class="rating" data-rating= "<%= user.hostReviewAverage%>" data-id="<%= user.id %>">
     <span> Host Rating: <%= user.hostReviewAverage%> </span>
@@ -22,11 +22,14 @@
 
 
 
+
+
     <ul>
     <li> Need more info here </li>
-
-    <li> So most recent game played should show up </li>
-    <li> And also the averaged reviews for both host and player </li>
-    <li> hmmm could make a friends function or something? Maybe too much </li>
-  </ul>
+    <li> most recent review as player, most recent host review as well <li>
+    <li>Upcoming game should come up  </li>
+    <li> maybe notification to leave reviews for played games? </li>
+    <li> while I'm at it make sure to finish with validation that only allows reviews for games that
+      have happened </li> 
+    </ul>
 </div>
