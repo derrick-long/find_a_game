@@ -3,22 +3,25 @@
   </div>
   <div class="col-12   profile">
     <!-- change bg color  -->
+    <% if(user.id == profileUser.id) { %>
+      <%- include ../partials/dashboard_nav.ejs %>
+    <% } %>
 
-    <h1> <%= user.firstName %> | <%= user.lastName %>'s  Public Profile </h1>
+    <h1> <%= profileUser.firstName %> | <%= profileUser.lastName %>'s  Public Profile </h1>
     <p> put an image up in the header that hopefully doesn't look terrible </p>
 
 
-    <div class="rating" data-rating= "<%= user.hostReviewAverage%>" data-id="<%= user.id %>">
-      <span class> Host Rating: <%= user.hostReviewAverage%> </span>
+    <div class="rating" data-rating= "<%= user.hostReviewAverage%>" data-id="<%= profileUser.id %>">
+      <span class> Host Rating: <%= profileUser.hostReviewAverage%> </span>
         <div class="stars-outer">
-        <div class="<%= user.id %> stars-inner"></div>
+        <div class="<%= profileUser.id %> stars-inner"></div>
         </div>
     </div>
 
-    <div class="rating" data-rating= "<%= user.playerReviewAverage%>" data-id="<%= user.id %>">
-      <span> Player Rating: <%= user.playerReviewAverage%> </span>
+    <div class="rating" data-rating= "<%= user.playerReviewAverage%>" data-id="<%= profileUser.id %>">
+      <span> Player Rating: <%= profileUser.playerReviewAverage%> </span>
         <div class="stars-outer">
-        <div class="<%= user.id %> stars-inner"></div>
+        <div class="<%= profileUser.id %> stars-inner"></div>
         </div>
     </div>
 

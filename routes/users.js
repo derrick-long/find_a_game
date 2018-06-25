@@ -19,7 +19,7 @@ router.get('/profile/:id', ensureAuthenticated, (req,res) => {
     _id: req.params.id})
   .then(user=>{
     res.render('users/profile', {
-      user:user
+      profileUser:user
     });
   });
 
