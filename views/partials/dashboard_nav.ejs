@@ -1,15 +1,15 @@
 
     <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item">
-      <a class="nav-link" href="/users/dashboard" id="dashboard-tab" role="tab"> Dashboard </a>
+      <a class="nav-link active" href="/users/dashboard" id="dashboard-tab" data-toggle="tab" role="tab"> Dashboard </a>
     <li class="nav-item">
-      <a class="nav-link" id="hosted-tab"  href="/users/hosted" role="tab">Hosted Games</a>
+      <a class="nav-link" id="hosted-tab"  href="/users/hosted" data-toggle="tab" role="tab">Hosted Games</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/users/played" id="played-tab" role="tab">Played Games</a>
+      <a class="nav-link" href="/users/played" id="played-tab" data-toggle="tab" role="tab">Played Games</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/users/profile/<%= user.id %>" id="played-tab" role="tab">Profile</a>
+      <a class="nav-link" href="/users/profile/<%= user.id %>" id="profile-tab" data-toggle="tab" role="tab">Profile</a>
     </li>
 
   </ul>
