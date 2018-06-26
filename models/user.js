@@ -77,9 +77,6 @@ const UserSchema = new Schema({
     description: {
       type: String,
       defalt: "Add a custom profile!"
-    },
-    favoriteGame: {
-      type: String
     }
   }]
 
