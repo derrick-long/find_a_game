@@ -26,6 +26,7 @@ router.get('/profile/:id', ensureAuthenticated, (req,res) => {
 
 });
 
+// get edit page
 router.get('/profile/edit/:id', ensureAuthenticated, (req,res) => {
   User.findOne({
     _id: req.params.id})
@@ -35,6 +36,9 @@ router.get('/profile/edit/:id', ensureAuthenticated, (req,res) => {
     });
   });
 });
+
+
+// add put process here  
 
 
 router.get('/hosted',(req,res, next)=> {
