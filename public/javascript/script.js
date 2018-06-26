@@ -17,17 +17,17 @@ if ($(".rating")[0]){
 
 
 
-$( document ).ready(function() {
-    if(document.querySelector(".tab")){
-      $(function(){
-          $('.tab').click(function(event) {
-            event.preventDefault();
-              $(this).toggleClass('active');
-          });
-      });
-
-    }
-});
+// $( document ).ready(function() {
+//     if(document.querySelector(".tab")){
+//       $(function(){
+//           $('.tab').click(function(event) {
+//             event.preventDefault();
+//               $(this).toggleClass('active');
+//           });
+//       });
+//
+//     }
+// });
 
 
 

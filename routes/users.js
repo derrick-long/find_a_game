@@ -26,6 +26,16 @@ router.get('/profile/:id', ensureAuthenticated, (req,res) => {
 
 });
 
+router.get('/profile/edit/:id', ensureAuthenticated, (req,res) => {
+  User.findOne({
+    _id: req.params.id})
+  .then(user=>{
+    res.render('users/profile_edit', {
+      user:user
+    });
+  });
+});
+
 
 router.get('/hosted',(req,res, next)=> {
   Game.find({host: req.user.id})
