@@ -1,2 +1,11 @@
 <h1> This is the edit page </h1>
-<p> Testing </p> 
+
+
+<form action="/users/profile_edit/<%= user.id %>" method="post">
+  <div class="form-group">
+    <label for="profileDescription">
+    <textarea class="form-control" name="profileDescription" placeholder="Tell us a little about yourself..">
+    </textarea>
+  </div>
+      <button class="btn btn-danger">Submit Changes</button>
+</form>
