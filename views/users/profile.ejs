@@ -2,10 +2,12 @@
   <div class="col">
   </div>
   <div class="col-12   profile">
-    <!-- change bg color  -->
+
     <% if(user.id == profileUser.id) { %>
       <%- include ../partials/dashboard_nav.ejs %>
     <% } %>
+
+    <!-- change bg color  -->
 
     <h1> <%= profileUser.firstName %> | <%= profileUser.lastName %>'s  Public Profile </h1>
     <p> put an image up in the header that hopefully doesn't look terrible </p>
@@ -32,6 +34,13 @@
     </ul>
 
   </div>
+
+      <% if(user.id == profileUser.id) { %>
+
+        <button class="btn btn-danger"> Edit </button>
+
+      <% } %> 
+
 
   <div class="col">
   </div>
