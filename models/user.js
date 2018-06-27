@@ -74,7 +74,8 @@ const UserSchema = new Schema({
     default: 0
   },
   profileInfo: {
-    type: String
+    type: String,
+    default: "Tell us a little about yourself here.."
   }
 
 
