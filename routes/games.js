@@ -113,6 +113,16 @@ router.post('/', ensureAuthenticated, (req,res)=>{
   }
 });
 
+// get edit game page
+
+router.get('/edit/:id', ensureAuthenticated, (req,res)=>{
+
+  res.render('games/edit');
+
+});
+
+
+
 
 //add player to game
 router.post('/player/:id', ensureAuthenticated, (req, res)=>{
