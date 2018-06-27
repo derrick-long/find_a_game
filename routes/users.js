@@ -33,12 +33,27 @@ router.get('/profile/edit/:id', ensureAuthenticated, (req,res) => {
   .then(user=>{
     res.render('users/profile_edit', {
       user:user
+
     });
   });
 });
 
 
-// add put process here  
+// add put process here
+router.put('profile/edit/:id', ensureAuthenticated, (req,res)=> {
+  User.findOne({
+    _id: req.params.id})
+  .then(user=>{
+    user.profileInfo = req.body.profileDescription;
+
+    user.save()
+      .then(user=>{
+        req.flash('success_msg', 'Profile Updated!');
+        res.redirect('/users/dashboard');
+      });
+
+  });
+});
 
 
 router.get('/hosted',(req,res, next)=> {

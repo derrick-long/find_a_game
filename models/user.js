@@ -73,12 +73,9 @@ const UserSchema = new Schema({
     type: Number,
     default: 0
   },
-  profileInfo: [{
-    description: {
-      type: String,
-      defalt: "Add a custom profile!"
-    }
-  }]
+  profileInfo: {
+    type: String
+  }
 
 
 });
