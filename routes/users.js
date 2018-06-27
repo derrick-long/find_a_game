@@ -40,7 +40,7 @@ router.get('/profile/edit/:id', ensureAuthenticated, (req,res) => {
 
 
 // add put process here
-router.put('profile/edit/:id', ensureAuthenticated, (req,res)=> {
+router.put('/:id', ensureAuthenticated, (req,res)=> {
   User.findOne({
     _id: req.params.id})
   .then(user=>{
@@ -51,6 +51,7 @@ router.put('profile/edit/:id', ensureAuthenticated, (req,res)=> {
         req.flash('success_msg', 'Profile Updated!');
         res.redirect('/users/dashboard');
       });
+
 
   });
 });

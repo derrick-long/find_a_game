@@ -1,7 +1,7 @@
 <h1> This is the edit page </h1>
 
 
-<form action="/users/profile/edit/<%= user.id %>?_method=PUT" method="post">
+<form action="/users/<%= user.id %>?_method=PUT" method="post">
   <input type="hidden" name="_method" value="PUT">
 
   <div class="form-group">
