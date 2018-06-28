@@ -116,8 +116,12 @@ router.post('/', ensureAuthenticated, (req,res)=>{
 // get edit game page
 
 router.get('/edit/:id', ensureAuthenticated, (req,res)=>{
-  res.render('games/edit',
-  {errors:errors});
+  Game.findOne({ _id: req.params.id
+  }).then(game=>{
+    res.render('games/edit',
+    {errors:errors, game:game
+    });
+  });
 });
 
 // do the editing

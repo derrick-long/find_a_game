@@ -1,6 +1,7 @@
 <h2 class="text-center"> Edit Game </h2>
 
-<form action="/games" method="post">
+<form action="/games/edit/<%= game.id %>?_method=PUT" method="post">
+    <input type="hidden" name="_method" value="PUT">
 
   <div class="form-group">
     <label for="title">Title</label>
