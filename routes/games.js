@@ -124,7 +124,7 @@ router.get('/edit/:id', ensureAuthenticated, (req,res)=>{
   });
 });
 
-// do the editing
+// do the editing // update to a patch request imo
 
 router.put('/edit/:id', ensureAuthenticated, (req,res)=>{
   Game.findOne({ _id: req.params.id
