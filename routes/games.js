@@ -116,12 +116,17 @@ router.post('/', ensureAuthenticated, (req,res)=>{
 // get edit game page
 
 router.get('/edit/:id', ensureAuthenticated, (req,res)=>{
-
   res.render('games/edit');
-
 });
 
+// do the editing
 
+router.put('/edit/:id', ensureAuthenticated, (req,res)=>{
+  Game.findOne({ _id: req.params.id
+  }).then(game=>{
+    // add in previous process from add form
+  });
+});
 
 
 //add player to game
