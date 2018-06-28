@@ -116,7 +116,8 @@ router.post('/', ensureAuthenticated, (req,res)=>{
 // get edit game page
 
 router.get('/edit/:id', ensureAuthenticated, (req,res)=>{
-  res.render('games/edit');
+  res.render('games/edit',
+  {errors:errors});
 });
 
 // do the editing
@@ -124,8 +125,58 @@ router.get('/edit/:id', ensureAuthenticated, (req,res)=>{
 router.put('/edit/:id', ensureAuthenticated, (req,res)=>{
   Game.findOne({ _id: req.params.id
   }).then(game=>{
-    // add in previous process from add form
+    if(!req.body.title){
+      errors.push({text: 'Please add a title.'});
+    }
+    if(!req.body.address){
+      errors.push({text: 'Please add an address.'});
+    }
+    if(!req.body.zip){
+      errors.push({text: 'Please add a zip code.'});
+    }
+    if(!req.body.number){
+      errors.push({text: 'Please select a number of players for the game.'});
+    }
+    if(req.body.description == " "){
+      errors.push({text: 'Please tell us about the game.'});
+    }
+    // maybe add a min length for description
+    if(errors.length > 0){
+      console.log(errors);
+      res.render('games/edit/:id', {
+        errors: errors,
+        title: req.body.title,
+        address: req.body.address,
+        zip: req.body.zip,
+        locationType: req.body.locationType,
+        numberOfPlayers: req.body.number,
+        startTime: req.body.startTime,
+        date: req.body.date,
+        experience: req.body.experience,
+        description: req.body.description,
+        host: req.user.id
+
+      });
+
+    } else {
+    game.title = req.body.title;
+    game.address = req.body.address;
+    game.zip = req.body.zip;
+    game.locationType = req.body.locationType;
+    game.numberOfPlayers = req.body.number;
+    game.startTime = req.body.startTime;
+    game.date = req.body.date;
+    game.experience = req.body.experience;
+    game.description = req.body.description;
+
+    game.save()
+    .then(game => {
+      req.flash('success_msg', 'Game Updated!');
+      res.redirect(`/games/show/${game.id}`);
+    });
+    }
   });
+
 });
 
 
