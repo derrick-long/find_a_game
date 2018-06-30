@@ -6,6 +6,10 @@ body {
 .brand {
   width: 2em;
 }
+
+.profile-image {
+  width: 4em;
+}
 .tag {
   font-size: .75em;
 }
