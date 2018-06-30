@@ -27,8 +27,13 @@ $( document ).ready(function() {
       }
 });
 
-
-
+$( document ).ready(function() {
+  $('a').each(function(){
+    if($(this).prop('href')== window.location.href){
+      $(this).attr("id","selected");
+    }
+  });
+});
 
    function makeStars(value) {
      const starPercentage = (value.dataset.rating/starTotal) * 100;

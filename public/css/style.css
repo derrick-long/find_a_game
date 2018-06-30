@@ -10,6 +10,7 @@ body {
   font-size: .75em;
 }
 
+
 .footer {
     position: fixed;
     bottom: 0;
@@ -22,6 +23,10 @@ body {
   color:inherit;
   text-decoration: none;
 
+}
+
+#selected {
+  color:black;
 }
 
 #google-profile {
