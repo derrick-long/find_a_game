@@ -8,7 +8,8 @@ body {
 }
 
 .profile-image {
-  width: 4em;
+  width: 3em;
+  margin-right: 1em;
 }
 .tag {
   font-size: .75em;
