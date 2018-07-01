@@ -8,11 +8,14 @@
       <h1> <%= game.title %>  </h1>
       <p> <%= game.description %> </p>
 
+      <p class="float-right"> Game Starts At: <%= dateFormat(game.date, "fullDate") %> | <%= game.startTime %> </p>
+
+
       <div class="d-flex">
           <img src="<%= game.host.image %>" class="img-fluid rounded-circle float-left" id="google-profile"></img>
             <a href= "/users/profile/<%= game.host.id %>" class="plain-link">
            <span class="align-middle"> Hosted by <%= game.host.firstName %>  <%= game.host.lastName %></span>
-            </a> 
+            </a>
         </a>
       </div>
 
