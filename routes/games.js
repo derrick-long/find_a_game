@@ -15,13 +15,12 @@ const {ratingsAverage} = require('../helpers/reviews');
 // or closest?
 
 
-
-
-
-
+//test better on deploy
+//get index of games that have not yet happened
 
 router.get('/', (req,res)=> {
-  Game.find({})
+  const currentDate = new Date();
+  Game.find({ date: { $gt: currentDate}})
   .populate('host')
   .sort({date:'desc'})
   .then(games =>{
@@ -30,6 +29,10 @@ router.get('/', (req,res)=> {
     });
   });
 });
+
+// add game
+
+
 
 router.get('/add', (req,res)=>{
   res.render('games/add',{
