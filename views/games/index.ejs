@@ -6,7 +6,7 @@
       <div class="card card-inline">
         <div class="card-body">
           <h5 class="card-title"><%= game.title %> </h5>
-          <p class="card-text"><%= game.description %> </p>
+          <p class="card-text"><%= truncate(game.description, 250) %> </p>
           <% if (game.numberOfPlayers > 0) { %>
           <p class="card-text"> Seeking <%= game.numberOfPlayers %>
           <%= makePlural('Player', Number(game.numberOfPlayers)) %></p>
