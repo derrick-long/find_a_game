@@ -68,6 +68,9 @@ app.use(expressLayouts);
 //use flash
 app.use(flash());
 
+//use dateformat in views
+
+app.locals.dateFormat = require('dateFormat');
 
 //passport middleware
 
