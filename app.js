@@ -12,7 +12,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const methodOverride = require('method-override');
 const pluralize = require('pluralize');
-
+const dateFormat = require('dateformat');
 
 //load models
 require('./models/game');
