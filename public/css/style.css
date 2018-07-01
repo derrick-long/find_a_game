@@ -43,7 +43,7 @@ body {
 
 
 #main-content {
-  margin-top
+  padding-bottom: 10em;
 }
 
 #profile {
@@ -60,6 +60,7 @@ body {
 #add-form {
   margin-bottom: 5em;
 }
+
 
 
 /* star stuff  */
