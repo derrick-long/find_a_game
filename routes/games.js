@@ -32,16 +32,14 @@ router.get('/', (req,res)=> {
 
 // add game
 
-
-
 router.get('/add', (req,res)=>{
   res.render('games/add',{
     errors:errors
   });
 });
 
-//single game
 
+//single game
 
 router.get('/show/:id', (req,res)=> {
   Game.findOne({  _id: req.params.id })
@@ -121,10 +119,11 @@ router.post('/', ensureAuthenticated, (req,res)=>{
 router.get('/edit/:id', ensureAuthenticated, (req,res)=>{
   Game.findOne({ _id: req.params.id
   }).then(game=>{
-    res.render('games/edit',
-    {errors:errors, game:game
+    res.render('games/edit',{
+        errors: errors,
+        game: game,
+      });
     });
-  });
 });
 
 // do the editing // update to a patch request imo
