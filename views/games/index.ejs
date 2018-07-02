@@ -6,7 +6,7 @@
       <div class="card card-inline">
         <div class="card-body">
           <h5 class="card-title"><%= game.title %> </h5>
-          <p class="card-text float-right"> Game Starts At: <%= dateFormat(game.date, "fullDate") %> | <%= game.startTime %> </p>
+          <p class="card-text float-right"> Game Starts At: <%= dateFormat(game.date, "fullDate") %> | <%= timeChange(game.startTime) %> </p>
           <p class="card-text"><%= truncate(game.description, 250) %> </p>
           <% if (game.numberOfPlayers > 0) { %>
           <p class="card-text"> Seeking <%= game.numberOfPlayers %>

@@ -7,7 +7,6 @@ const User = mongoose.model('users');
 const {ensureAuthenticated} = require('../helpers/auth');
 const errors = [];
 const {ratingsAverage} = require('../helpers/reviews');
-const {timeChange} = require('../helpers/utility');
 
 
 
@@ -90,7 +89,6 @@ router.post('/', ensureAuthenticated, (req,res)=>{
 
   } else {
 
-  const startTime = timeChange(req.body.startTime);
 
   const newGame = {
   title: req.body.title,
@@ -98,7 +96,7 @@ router.post('/', ensureAuthenticated, (req,res)=>{
   zip: req.body.zip,
   locationType: req.body.locationType,
   numberOfPlayers: req.body.number,
-  startTime: startTime,
+  startTime: req.body.startTime,
   date: req.body.date,
   experience: req.body.experience,
   description: req.body.description,
@@ -167,14 +165,14 @@ router.put('/edit/:id', ensureAuthenticated, (req,res)=>{
       });
 
     } else {
-    const startTime = timeChange(req.body.startTime);
+
 
     game.title = req.body.title;
     game.address = req.body.address;
     game.zip = req.body.zip;
     game.locationType = req.body.locationType;
     game.numberOfPlayers = req.body.number;
-    game.startTime = startTime;
+    game.startTime = req.body.startTime;
     game.date = req.body.date;
     game.experience = req.body.experience;
     game.description = req.body.description;

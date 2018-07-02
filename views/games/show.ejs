@@ -8,7 +8,7 @@
       <h1> <%= game.title %>  </h1>
       <p> <%= game.description %> </p>
 
-      <p class="float-right"> Game Starts At: <%= dateFormat(game.date, "fullDate") %> | <%= game.startTime %> </p>
+      <p class="float-right"> Game Starts At: <%= dateFormat(game.date, "fullDate") %> | <%= timeChange(game.startTime) %> </p>
 
 
       <div class="d-flex">

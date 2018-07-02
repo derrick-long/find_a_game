@@ -14,6 +14,8 @@ const methodOverride = require('method-override');
 const pluralize = require('pluralize');
 const dateFormat = require('dateformat');
 
+
+
 //load models
 require('./models/game');
 require('./models/user');
@@ -92,7 +94,7 @@ app.use((req, res, next)=> {
 });
 
 
-//ejs helper
+//ejs helpers
 app.locals.truncate = function(str, len){
     if (str.length > len && str.length > 0) {
 			var new_str = str + " ";
@@ -103,6 +105,27 @@ app.locals.truncate = function(str, len){
 		}
 		return str;
 };
+
+app.locals.timeChange =  function(time) {
+    var timeSplit = time.split(':'),
+      hours,
+      minutes,
+      meridian;
+    hours = timeSplit[0];
+    minutes = timeSplit[1];
+    if (hours > 12) {
+      meridian = 'PM';
+      hours -= 12;
+    } else if (hours < 12) {
+      meridian = 'AM';
+      if (hours == 0) {
+        hours = 12;
+      }
+    } else {
+      meridian = 'PM';
+    }
+    return(hours + ':' + minutes + ' ' + meridian);
+  };
 
 //pluralize helper
 
