@@ -49,10 +49,11 @@ $( document ).ready(function() {
 //preselect edit values
 $( document ).ready(function() {
     if(document.querySelector(".edit-form")){
-    $('.').each(function() {
-    if ($(this).prop('href') == window.location.href) {
-      $(this).addClass('active');
+
+        let selectors = Array.from(document.getElementsByClassName('edit-select'));
+        selectors.forEach(function(selector){
+        $(selector).val(selector.dataset.gameselect);
+
+      });
     }
-  });
-      }
 });

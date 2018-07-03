@@ -21,7 +21,7 @@
 
   <div class="form-group">
     <label for="locationType"> Location Type </label>
-        <select class="custom-select d-inline-block" id="locationType" name="locationType" data-gameselect="<%= game.locationType %>">
+        <select class="custom-select d-inline-block edit-select" id="locationType" name="locationType" data-gameselect="<%= game.locationType %>">
           <option value="buisness">Buisness</option>
           <option value="home">Home</option>
         </select>
@@ -44,7 +44,7 @@
 
     <div class="form-group">
       <select class="custom-select edit-select form-control" id="experience" name="experience" data-gameselect="<%= game.experience %>">
-        <option selected>Choose Experience Level</option>
+        <option> Choose Experience Level </option>
         <option value="novice">Novice</option>
         <option value="experienced">Experienced</option>
         <option value="veteran">Veteran</option>
