@@ -1,6 +1,6 @@
 <h2 class="text-center"> Edit Game </h2>
 
-<form action="/games/edit/<%= game.id %>?_method=PUT" method="post">
+<form action="/games/edit/<%= game.id %>?_method=PUT" class="edit-form" method="post">
     <input type="hidden" name="_method" value="PUT">
 
   <div class="form-group">
@@ -21,7 +21,7 @@
 
   <div class="form-group">
     <label for="locationType"> Location Type </label>
-        <select class="custom-select d-inline-block" id="locationType" name="locationType" value="<%= game.locationType %>">
+        <select class="custom-select d-inline-block" id="locationType" name="locationType" data-gameselect="<%= game.locationType %>">
           <option value="buisness">Buisness</option>
           <option value="home">Home</option>
         </select>
@@ -43,7 +43,7 @@
   </div>
 
     <div class="form-group">
-      <select class="custom-select form-control" id="experience" name="experience" value="<%= game.experience %>">
+      <select class="custom-select edit-select form-control" id="experience" name="experience" data-gameselect="<%= game.experience %>">
         <option selected>Choose Experience Level</option>
         <option value="novice">Novice</option>
         <option value="experienced">Experienced</option>

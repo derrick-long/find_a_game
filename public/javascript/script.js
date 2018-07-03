@@ -1,7 +1,15 @@
-// so now we scale this for all values on the page, iterate through them and then call our helper
-// method for each
+
 
 const starTotal = 5;
+
+//star ratings
+
+function makeStars(value) {
+  const starPercentage = (value.dataset.rating/starTotal) * 100;
+  const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+  value.getElementsByClassName(value.dataset.id)[0].style.width = starPercentageRounded;
+
+}
 
 
 if ($(".rating")[0]){
@@ -15,7 +23,7 @@ if ($(".rating")[0]){
 }
 
 
-
+// "active tabs"
 
 $( document ).ready(function() {
     if(document.querySelector(".tab")){
@@ -27,6 +35,8 @@ $( document ).ready(function() {
       }
 });
 
+
+// "active links"
 $( document ).ready(function() {
   $('a').each(function(){
     if($(this).prop('href')== window.location.href){
@@ -35,9 +45,14 @@ $( document ).ready(function() {
   });
 });
 
-   function makeStars(value) {
-     const starPercentage = (value.dataset.rating/starTotal) * 100;
-     const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
-     value.getElementsByClassName(value.dataset.id)[0].style.width = starPercentageRounded;
 
-   }
+//preselect edit values
+$( document ).ready(function() {
+    if(document.querySelector(".edit-form")){
+    $('.').each(function() {
+    if ($(this).prop('href') == window.location.href) {
+      $(this).addClass('active');
+    }
+  });
+      }
+});
