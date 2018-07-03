@@ -29,7 +29,7 @@
 
   <div class="form-group">
       <label for="date" class="col-form-label"> Date </label>
-      <input type="date" class="form-control form-control-sm" name="date" value="<%= game.date %>">
+      <input type="date" class="form-control form-control-sm" name="date" value= <%= dateFormat(game.date,"yyyy-mm-dd" )%> >
   </div>
 
   <div class="form-group">
