@@ -61,6 +61,11 @@ body {
   margin-bottom: 5em;
 }
 
+#map {
+  height: 400px;
+  width:100%;
+}
+
 
 
 /* star stuff  */
