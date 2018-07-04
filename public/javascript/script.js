@@ -12,6 +12,8 @@ function makeStars(value) {
 }
 
 
+
+
 if ($(".rating")[0]){
 
   let ratings = Array.from(document.getElementsByClassName('rating'));
@@ -57,3 +59,13 @@ $( document ).ready(function() {
       });
     }
 });
+
+//maps stuff
+//add if only run on pages with the map element 
+function initMap(){
+  var options = {
+    zoom:8,
+    center: {lat: 42.3601, lng: -71.0895}
+  };
+  var map = new google.maps.Map(document.getElementById('map'), options);
+}
