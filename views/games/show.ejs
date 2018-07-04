@@ -5,19 +5,25 @@
   </div>
   <div class="col-12  bg-light">
     <div class="game-info  d-block">
-      <h1> <%= game.title %>  </h1>
+      <h1 class="floatleft"> <%= game.title %>  </h1>
+      <span class="float-right"> Game Starts At: <%= dateFormat(game.date, "fullDate") %> | <%= timeChange(game.startTime) %> </span>
+
       <p> <%= game.description %> </p>
 
-      <p class="float-right"> Game Starts At: <%= dateFormat(game.date, "fullDate") %> | <%= timeChange(game.startTime) %> </p>
 
 
-      <div class="d-flex">
-          <img src="<%= game.host.image %>" class="img-fluid rounded-circle float-left" id="google-profile"></img>
+
+            <div class="profile-image float-left">
+                <img src="<%= user.image %>" class="img-fluid rounded-circle" ></img>
+            </div>
+            <div class="float-left">
             <a href= "/users/profile/<%= game.host.id %>" class="plain-link">
            <span class="align-middle"> Hosted by <%= game.host.firstName %>  <%= game.host.lastName %></span>
             </a>
-        </a>
-      </div>
+          </div>
+
+          <div class="clearfix">
+          </div> 
 
 
     </div>
