@@ -16,14 +16,23 @@
             <div class="profile-image float-left">
                 <img src="<%= user.image %>" class="img-fluid rounded-circle" ></img>
             </div>
+
+            <div class="rating float-left mr-2" data-rating= "<%= user.hostReviewAverage%>" data-id="<%= user.id %>">
+                <div class="stars-outer">
+                <div class="<%= user.id %> stars-inner"></div>
+                </div>
+            </div>
+
+
+
             <div class="float-left">
-            <a href= "/users/profile/<%= game.host.id %>" class="plain-link">
-           <span class="align-middle"> Hosted by <%= game.host.firstName %>  <%= game.host.lastName %></span>
-            </a>
-          </div>
+              <a href= "/users/profile/<%= game.host.id %>" class="plain-link">
+             <span class="align-middle"> Hosted by <%= game.host.firstName %>  <%= game.host.lastName %></span>
+              </a>
+            </div>
 
           <div class="clearfix">
-          </div> 
+          </div>
 
 
     </div>
