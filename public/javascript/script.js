@@ -66,7 +66,7 @@ var geocoder;
 var map;
 var infowindow;
 
-function initialize() {
+function initMap() {
   geocoder = new google.maps.Geocoder();
   var loca = new google.maps.LatLng(41.7475, -74.0872);
 
@@ -126,8 +126,8 @@ function codeAddress() {
   });
 }
 
-$( document ).ready(function() {
+// $( document ).ready(function() {
 
-google.maps.event.addDomListener(window, 'load', initialize);
-
-});
+google.maps.event.addDomListener(window, 'load', initMap);
+//
+// });
