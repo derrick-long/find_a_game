@@ -11,6 +11,8 @@ const {starPercentage} = require('../helpers/reviews');
 
 router.get('/dashboard', ensureAuthenticated, (req,res) => {
   res.render('users/dashboard');
+  //find way to display upcoming game, so game with the greatest date,
+  //probably need to add a helper function for that
 });
 
 
