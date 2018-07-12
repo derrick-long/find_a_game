@@ -2,43 +2,49 @@
 <div class="row">
   <div class="col-12">
 
-    <% if(games == null) { %>
+    <% if(games.length == 0) { %>
 
-         <div class="card card-inline">
-           <div class="card-body">
-             <h5 class="card-title"> No Games Added Yet! </h5>
-             <p class="card-text">Add some games to see games listed here instead of this dumb message </p>
-             <a href="games/add" class="btn btn-primary"><i class="fas fa-plus"></i>
-               Add New Game</a>
-           </div>
-         </div>
 
-    <% } else { %>
-
-      <% games.forEach(function(game){ %>
-
-          <div class="card card-inline border-2 border-secondary">
-            <div class="card-body">
-              <h5 class="card-title"><%= game.title %> </h5>
-              <p class="card-text float-right"> Game Starts At: <%= dateFormat(game.date, "fullDate") %> | <%= timeChange(game.startTime) %> </p>
-              <p class="card-text"><%= truncate(game.description, 250) %> </p>
-              <% if (game.numberOfPlayers > 0) { %>
-              <p class="card-text"> Seeking <%= game.numberOfPlayers %>
-              <%= makePlural('Player', Number(game.numberOfPlayers)) %></p>
-              <% } else { %>
-                <div class="alert alert-success"> <p class="card-text"> Game Full </p>
-                </div>
-              <% } %>
-                <a href="games/show/<%= game.id %>" class="btn btn-primary"><i class="fas fa-book"></i>
-                  See Details</a>
-            </div>
+      <div class="card card-inline">
+          <div class="card-body">
+            <h5 class="card-title"> No Games Added Yet! </h5>
+            <p class="card-text">Add some games to see games listed here instead of this dumb message </p>
+            <a href="games/add" class="btn btn-primary"><i class="fas fa-plus"></i>
+              Add New Game</a>
           </div>
+      </div>
 
 
-        <% }) %>
+
+
+      <% } else { %>
+
+
+
+         <% games.forEach(function(game){ %>
+
+            <div class="card card-inline border-2 border-secondary">
+              <div class="card-body">
+                <h5 class="card-title"><%= game.title %> </h5>
+                <p class="card-text float-right"> Game Starts At: <%= dateFormat(game.date, "fullDate") %> | <%= timeChange(game.startTime) %> </p>
+                <p class="card-text"><%= truncate(game.description, 250) %> </p>
+                <% if (game.numberOfPlayers > 0) { %>
+                <p class="card-text"> Seeking <%= game.numberOfPlayers %>
+                <%= makePlural('Player', Number(game.numberOfPlayers)) %></p>
+                <% } else { %>
+                  <div class="alert alert-success"> <p class="card-text"> Game Full </p>
+                  </div>
+                <% } %>
+                  <a href="games/show/<%= game.id %>" class="btn btn-primary"><i class="fas fa-book"></i>
+                    See Details</a>
+              </div>
+            </div>
+
+            <% }) %>
+
+
 
     <% } %>
-
 
   </div>
 </div>
