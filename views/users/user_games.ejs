@@ -3,7 +3,7 @@
 <h1> <%= title %>   </h1>
 <% games.forEach(function(game){ %>
   <div class="col-12">
-    <div class="card card-inline">
+    <div class="card card-inline border-2 border-secondary">
       <div class="card-body">
         <h5 class="card-title"><%= game.title %> </h5>
         <p class="card-text"><%= truncate(game.description, 250) %> </p>

@@ -9,15 +9,6 @@ const mongoose = require('mongoose');
 // or pass a second argument for host or player?
 
 
-function hostRatingsAverage(user) {
-  let total = 0;
-  let divide_by = user.hostReviews.length;
-  user.hostReviews.forEach(function(review){
-    total += review.reviewScore;
-  });
-  return total/divide_by;
-}
-
 
 
 

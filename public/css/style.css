@@ -15,6 +15,9 @@ body {
   font-size: .75em;
 }
 
+.border-2 {
+  border-width: 2px !important;
+}
 
 .footer {
     position: fixed;
@@ -59,6 +62,7 @@ body {
 
 #add-form {
   margin-bottom: 5em;
+
 }
 
 #map {
