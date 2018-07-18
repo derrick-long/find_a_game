@@ -14,8 +14,7 @@ const {ratingsAverage} = require('../helpers/reviews');
 // or closest?
 
 
-//test better on deploy
-//get index of games that have not yet happened
+
 
 router.get('/', (req,res)=> {
   const currentDate = new Date();
