@@ -20,7 +20,8 @@ google.maps.event.addDomListener(window, 'load', initMap);
 
 
 function searchAddress(){
-
+  // so basically I need to use this basic logic to query a zip code radius, then populate it with
+  // search db on click, populate with results, then pin on map centered on that zipcode 
   var addressInput = document.getElementById('map-search').value;
   var geocoder = new google.maps.Geocoder();
 

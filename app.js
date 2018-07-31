@@ -13,7 +13,7 @@ const passport = require('passport');
 const methodOverride = require('method-override');
 const pluralize = require('pluralize');
 const dateFormat = require('dateformat');
-
+const geocoder = require('node-geocoder');
 
 
 //load models
