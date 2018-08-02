@@ -18,6 +18,14 @@ const GameSchema = new Schema ({
     type: String,
     required: true
   },
+  coordinates: [{
+    x: {
+      type: Number
+    },
+    y: {
+      type: Number
+    },
+  }],
   locationType: {
     type: String,
     required: true
