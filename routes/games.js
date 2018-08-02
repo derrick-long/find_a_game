@@ -9,29 +9,41 @@ const errors = [];
 const {ratingsAverage} = require('../helpers/reviews');
 const NodeGeocoder = require('node-geocoder');
 
-// extract out later
+
+
 var options = {
   provider: 'google',
-
-  // Optional depending on the providers
-  httpAdapter: 'https', // Default
-  apiKey: 'AIzaSyDGdCjLNhY1u1ZQhXOHhVgTewhOyj71OuU', // for Mapquest, OpenCage, Google Premier
+  httpAdapter: 'https', // Default // for Mapquest, OpenCage, Google Premier
   formatter: null         // 'gpx', 'string', ...
 };
 
 const geocoder = NodeGeocoder(options);
 
+
+function codeAddress(address){
+  //change json object fields; 
+  geocoder.geocode('29 champs elysée paris')
+  .then(function(res) {
+    game.address = res[0].formattedAddress;
+    game.save();
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
+}
 /// route for games, probably want sorted by most recent by default
 // or closest?
+
+
 
 router.get('/test', (req,res)=> {
     Game.findOne({  _id:"5b3cff0695b13e05be474ec3"})
     .then(game => {
-      // use geocoder here
       res.render('games/show', {
         game: game
     });
   });
+
 });
 
 router.get('/', (req,res)=> {
