@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const locationSchema = new Schema ({
-
+const LocationSchema = new Schema ({
   location: {
     type: {
       type: String,
       enum: ['Point'],
-      required: true
+      default: 'Point'
     },
   },
   coordinates: {
@@ -17,3 +16,9 @@ const locationSchema = new Schema ({
   }
 
 });
+
+LocationSchema.index({
+  coordinates: "2d"
+});
+
+mongoose.model('locations', LocationSchema, 'locations');

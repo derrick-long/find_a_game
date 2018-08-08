@@ -4,6 +4,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const Game = mongoose.model('games');
 const User = mongoose.model('users');
+const Location = mongoose.model('locations');
 const {ensureAuthenticated} = require('../helpers/auth');
 const errors = [];
 const {ratingsAverage} = require('../helpers/reviews');
@@ -21,29 +22,38 @@ const geocoder = NodeGeocoder(options);
 
 
 function codeAddress(address){
-  //change json object fields; 
-  geocoder.geocode('29 champs elysée paris')
-  .then(function(res) {
-    game.address = res[0].formattedAddress;
-    game.save();
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
+  //change json object fields;
+
+
 }
 /// route for games, probably want sorted by most recent by default
 // or closest?
 
+router.get('/test', (req,res)=>{
+  res.render('index/test');
+});
 
 
-router.get('/test', (req,res)=> {
-    Game.findOne({  _id:"5b3cff0695b13e05be474ec3"})
-    .then(game => {
-      res.render('games/show', {
-        game: game
-    });
+router.post('/test', (req,res)=> {
+
+
+  new Location()
+  .then(location=> {
+    location.coordinates[0] = 2.34;
+    location.coordinates[1] = 2.35;
+    location.save();
+    req.flash('success_msg', 'Game Added!');
+    res.redirect('/');
   });
 
+
+
+    // Game.findOne({  _id:"5b3cff0695b13e05be474ec3"})
+    // .then(game => {
+    //   res.render('games/show', {
+    //     game: game
+    // });
+  // });
 });
 
 router.get('/', (req,res)=> {
