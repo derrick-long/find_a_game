@@ -6,19 +6,16 @@ const LocationSchema = new Schema ({
     type: {
       type: String,
       enum: ['Point'],
+      required: true,
       default: 'Point'
     },
   },
   coordinates: {
     type: [Number],
-    default: [0,0],
     required: true
   }
 
 });
 
-LocationSchema.index({
-  coordinates: "2d"
-});
 
 mongoose.model('locations', LocationSchema, 'locations');

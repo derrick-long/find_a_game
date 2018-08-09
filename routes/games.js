@@ -21,11 +21,7 @@ var options = {
 const geocoder = NodeGeocoder(options);
 
 
-function codeAddress(address){
-  //change json object fields;
 
-
-}
 /// route for games, probably want sorted by most recent by default
 // or closest?
 
@@ -36,14 +32,18 @@ router.get('/test', (req,res)=>{
 
 router.post('/test', (req,res)=> {
 
-
+// so basically pass addresses to this, making the new location joint
+// then do a bunch of other work
   new Location()
+  .save()
   .then(location=> {
-    location.coordinates[0] = 2.34;
-    location.coordinates[1] = 2.35;
-    location.save();
-    req.flash('success_msg', 'Game Added!');
-    res.redirect('/');
+    location.coordinates.unshift(23);
+    location.coordinates.unshift(24);
+    location.save()
+      .then(location=> {
+      req.flash('success_msg', 'Game Added!');
+      res.redirect('/');
+    });
   });
 
 
