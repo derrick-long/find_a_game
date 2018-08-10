@@ -26,6 +26,7 @@ const geocoder = NodeGeocoder(options);
 // or closest?
 
 router.get('/test', (req,res)=>{
+
   res.render('index/test');
 });
 
@@ -34,17 +35,24 @@ router.post('/test', (req,res)=> {
 
 // so basically pass addresses to this, making the new location joint
 // then do a bunch of other work
-  new Location()
-  .save()
-  .then(location=> {
-    location.coordinates.unshift(23);
-    location.coordinates.unshift(24);
-    location.save()
-      .then(location=> {
-      req.flash('success_msg', 'Game Added!');
-      res.redirect('/');
+  geocoder.geocode('29 champs elysée paris')
+  .then(function(response) {
+    new Location()
+    .save()
+    .then(location=> {
+      location.coordinates.unshift(response[0].latitude);
+      location.coordinates.unshift(response[0].longitude);
+      location.save()
+        .then(location=> {
+        req.flash('success_msg', 'Game Added!');
+        res.redirect('/');
+      });
     });
+  })
+  .catch(function(err) {
+    console.log(err);
   });
+
 
 
 
