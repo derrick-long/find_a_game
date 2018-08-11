@@ -26,8 +26,11 @@ const geocoder = NodeGeocoder(options);
 // or closest?
 
 router.get('/test', (req,res)=>{
+  Game.findOne({  _id:"5b6f157644a01d0606d320c8"})
+  .then(game => {
+      console.log(game.mapInfo);
+  });
 
-  res.render('index/test');
 });
 
 
@@ -40,7 +43,6 @@ router.post('/test', (req,res)=> {
     geocoder.geocode(game.address)
     .then(function(response) {
       new Location()
-      .save()
       .then(location=> {
         game.mapInfo = location.id;
         location.coordinates.push(response[0].latitude);
