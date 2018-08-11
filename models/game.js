@@ -37,8 +37,12 @@ const GameSchema = new Schema ({
     type: String
   },
   host: {
-  type: Schema.Types.ObjectId,
-  ref: 'users'
+    type: Schema.Types.ObjectId,
+    ref: 'users'
+  },
+  mapInfo: {
+    type: Schema.Types.ObjectId,
+    ref: 'locations'
   },
   date: {
     type: Date
