@@ -35,13 +35,14 @@ router.post('/test', (req,res)=> {
 
 // so basically pass addresses to this, making the new location joint
 // then do a bunch of other work
-  Game.findOne({  _id:"5b3cff0695b13e05be474ec3"})
+  Game.findOne({  _id:"5b6f157644a01d0606d320c8"})
   .then(game => {
-    geocoder.geocode('29 champs elysée paris')
+    geocoder.geocode(game.address)
     .then(function(response) {
       new Location()
       .save()
       .then(location=> {
+        game.mapInfo = location.id;
         location.coordinates.push(response[0].latitude);
         location.coordinates.push(response[0].longitude);
         location.save()
