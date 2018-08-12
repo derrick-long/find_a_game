@@ -4,7 +4,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const Game = mongoose.model('games');
 const User = mongoose.model('users');
-const Location = mongoose.model('locations');
+const MapInfo = mongoose.model('locations');
 const {ensureAuthenticated} = require('../helpers/auth');
 const errors = [];
 const {ratingsAverage} = require('../helpers/reviews');
@@ -26,39 +26,46 @@ const geocoder = NodeGeocoder(options);
 // or closest?
 
 router.get('/test', (req,res)=>{
-  Game.findOne({  _id:"5b6f157644a01d0606d320c8"})
-  .then(game => {
-      console.log(game.mapInfo);
-  });
+  res.render('index/test');
+  // Game.findOne({  _id:"5b6f157644a01d0606d320c8"})
+  // .then(game => {
+  //     console.log(game.mapInfo);
+  // });
 
 });
 
 
 router.post('/test', (req,res)=> {
 
+  Game.findOne({ _id: "5b6f6f3bc5586d05ef14ede5"})
+  .then(game => {
+    game.mapInfo = "5b703c8a0fe6d105dada2004";
+  });
+
+
 // so basically pass addresses to this, making the new location joint
 // then do a bunch of other work
-  Game.findOne({  _id:"5b6f157644a01d0606d320c8"})
-  .then(game => {
-    geocoder.geocode(game.address)
-    .then(function(response) {
-      new Location()
-      .then(location=> {
-        game.mapInfo = location.id;
-        location.coordinates.push(response[0].latitude);
-        location.coordinates.push(response[0].longitude);
-        location.save()
-          .then(location=> {
-          req.flash('success_msg', 'Game Added!');
-          res.redirect('/');
-        });
-      });
-    })
-    .catch(function(err) {
-      console.log(err);
-    });
-    game.save();
-  });
+
+    // geocoder.geocode('29 champs elysée paris')
+    // .then(function(response) {
+    //   console.log(response);
+    //
+    //   new Location()
+    //   .save()
+    //   .then(location=> {
+    //   location.coordinates.push(response[0].latitude);
+    //   location.coordinates.push(response[0].longitude);
+    //   game.mapInfo = location.id;
+    //   location.save();
+    //   req.flash('success_msg', 'Game Added!');
+    //   res.redirect('/');
+    //   });
+    // })
+    // .catch(function(err) {
+    //   console.log(err);
+    // });
+
+
 
 
 
@@ -68,6 +75,7 @@ router.post('/test', (req,res)=> {
     //     game: game
     // });
   // });
+  res.redirect('/games/test');
 });
 
 router.get('/', (req,res)=> {
@@ -153,7 +161,8 @@ router.post('/', ensureAuthenticated, (req,res)=>{
   date: req.body.date,
   experience: req.body.experience,
   description: req.body.description,
-  host: req.user.id
+  host: req.user.id,
+  mapInfo: "5b703c8a0fe6d105dada2004"
   };
 
 
