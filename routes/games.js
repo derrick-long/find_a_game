@@ -37,33 +37,34 @@ router.get('/test', (req,res)=>{
 
 router.post('/test', (req,res)=> {
 
-  Game.findOne({ _id: "5b6f6f3bc5586d05ef14ede5"})
-  .then(game => {
-    game.mapInfo = "5b703c8a0fe6d105dada2004";
-  });
 
+  // bit much but it fuckin works!
 
-// so basically pass addresses to this, making the new location joint
-// then do a bunch of other work
-
-    // geocoder.geocode('29 champs elysée paris')
-    // .then(function(response) {
-    //   console.log(response);
-    //
-    //   new Location()
-    //   .save()
-    //   .then(location=> {
-    //   location.coordinates.push(response[0].latitude);
-    //   location.coordinates.push(response[0].longitude);
-    //   game.mapInfo = location.id;
-    //   location.save();
-    //   req.flash('success_msg', 'Game Added!');
-    //   res.redirect('/');
-    //   });
-    // })
-    // .catch(function(err) {
-    //   console.log(err);
-    // });
+  //so figure out the promise hell i've made for myself
+  // then put it into the add game route (which is long as hell)
+  // when game is made address is put into Geocoder
+  // location is created (lat/long pulled out of geocode )
+  // then that location's id is used in new obj
+    var location_id;
+    geocoder.geocode('29 champs elysée paris')
+    .then(function(response) {
+      new MapInfo()
+      .save()
+      .then(location=> {
+      location.coordinates.push(response[0].latitude);
+      location.coordinates.push(response[0].longitude);
+      location.save();
+      location_id = location.id;
+      Game.findOne({_id: "5b6f6f3bc5586d05ef14ede5"})
+      .then(game=>{
+        game.mapInfo = location.id;
+        game.save();
+      });
+    });
+      })
+    .catch(function(err) {
+      console.log(err);
+    });
 
 
 
@@ -150,6 +151,7 @@ router.post('/', ensureAuthenticated, (req,res)=>{
 
   } else {
 
+//add map info here
 
   const newGame = {
   title: req.body.title,
@@ -162,7 +164,6 @@ router.post('/', ensureAuthenticated, (req,res)=>{
   experience: req.body.experience,
   description: req.body.description,
   host: req.user.id,
-  mapInfo: "5b703c8a0fe6d105dada2004"
   };
 
 
