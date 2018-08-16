@@ -40,9 +40,11 @@ const GameSchema = new Schema ({
     type: Schema.Types.ObjectId,
     ref: 'users'
   },
-  mapInfo: {
-    type: Schema.Types.ObjectId,
-    ref: 'locations'
+  location: {
+    type: { type: String,
+    enum: ['Point'],
+    default: 'Point'},
+    coordinates: []
   },
   date: {
     type: Date
@@ -61,12 +63,8 @@ const GameSchema = new Schema ({
 
 });
 
-// idea here is basically have the players attribute be an array
-// that we add players too, that cannot be larger than the numberOfPlayers
-// look at how we saved comments and users associated with them in storybooks
-// basically should be able to click it, and it takes you to a page that outputs
-// your listed/commited players along with whatever their "star rating is"
-//also store player reviews here and only have them doable by players that attended
-// the game
+GameSchema.index({ location: "2dsphere"});
+
+
 
 mongoose.model('games', GameSchema, 'games');

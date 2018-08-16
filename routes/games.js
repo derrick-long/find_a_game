@@ -36,48 +36,44 @@ router.get('/test', (req,res)=>{
 
 
 router.post('/test', (req,res)=> {
+ //
+ //  MapInfo.find({
+ //  location: {
+ //   $near: {
+ //    $maxDistance: 1000,
+ //    $geometry: {
+ //     type: "Point",
+ //     coordinates: [48.869384, 2.3071868]
+ //    }
+ //   }
+ //  }
+ // }).find((error, results) => {
+ //  if (error) console.log(error);
+ //  console.log(JSON.stringify(results, 0, 2));
+ // });
 
-
-  // bit much but it fuckin works!
-
-  //so figure out the promise hell i've made for myself
-  // then put it into the add game route (which is long as hell)
-  // when game is made address is put into Geocoder
-  // location is created (lat/long pulled out of geocode )
-  // then that location's id is used in new obj
-    var location_id;
+    var  long;
+    var lat;
     geocoder.geocode('29 champs elysée paris')
-    .then(function(response) {
-      new MapInfo()
-      .save()
-      .then(location=> {
-      location.coordinates.push(response[0].latitude);
-      location.coordinates.push(response[0].longitude);
-      location.save();
-      location_id = location.id;
-      Game.findOne({_id: "5b6f6f3bc5586d05ef14ede5"})
-      .then(game=>{
-        game.mapInfo = location.id;
-        game.save();
-      });
-    });
-      })
-    .catch(function(err) {
-      console.log(err);
-    });
-
-
-
-
-
-    // Game.findOne({  _id:"5b3cff0695b13e05be474ec3"})
-    // .then(game => {
-    //   res.render('games/show', {
-    //     game: game
-    // });
-  // });
-  res.redirect('/games/test');
+      .then(function(response) {
+        long = response[0].longitude;
+        lat = response[0].latitude;
+        }).then(mapInfo=> {
+          mapInfo = new MapInfo();
+          mapInfo.location.coordinates.push(long);
+          mapInfo.location.coordinates.push(lat);
+          mapInfo.save();
+        });
+    //   location_id = location.id;
+    //   Game.findOne({_id: "5b6f6f3bc5586d05ef14ede5"})
+    //   .then(game=>{
+    //     game.mapInfo = location.id;
+    //     game.save();
+    //   });
+    // fix catch
+    res.redirect('/');
 });
+
 
 router.get('/', (req,res)=> {
   const currentDate = new Date();
