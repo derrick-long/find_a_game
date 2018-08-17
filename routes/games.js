@@ -36,40 +36,40 @@ router.get('/test', (req,res)=>{
 
 
 router.post('/test', (req,res)=> {
- //
- //  MapInfo.find({
- //  location: {
- //   $near: {
- //    $maxDistance: 1000,
- //    $geometry: {
- //     type: "Point",
- //     coordinates: [48.869384, 2.3071868]
- //    }
- //   }
- //  }
- // }).find((error, results) => {
- //  if (error) console.log(error);
- //  console.log(JSON.stringify(results, 0, 2));
- // });
 
-    var  long;
-    var lat;
-    geocoder.geocode('29 champs elysée paris')
-      .then(function(response) {
-        long = response[0].longitude;
-        lat = response[0].latitude;
-        }).then(mapInfo=> {
-          mapInfo = new MapInfo();
-          mapInfo.location.coordinates.push(long);
-          mapInfo.location.coordinates.push(lat);
-          mapInfo.save();
-        });
-    //   location_id = location.id;
-    //   Game.findOne({_id: "5b6f6f3bc5586d05ef14ede5"})
-    //   .then(game=>{
-    //     game.mapInfo = location.id;
-    //     game.save();
-    //   });
+  MapInfo.find({
+  location: {
+   $near: {
+    $maxDistance: 100000000000000000,
+    $geometry: {
+     type: "Point",
+     coordinates: [48.869384, 3]
+    }
+   }
+  }
+ }).find((error, results) => {
+  if (error) console.log(error);
+  console.log(JSON.stringify(results, 0, 2));
+ });
+
+    // var  long;
+    // var lat;
+    // geocoder.geocode('29 champs elysée paris')
+    //   .then(function(response) {
+    //     long = response[0].longitude;
+    //     lat = response[0].latitude;
+    //     }).then(mapInfo=> {
+    //       mapInfo = new MapInfo();
+    //       mapInfo.location.coordinates.push(long);
+    //       mapInfo.location.coordinates.push(lat);
+    //       mapInfo.save();
+    //     });
+      // location_id = location.id;
+      // Game.findOne({_id: "5b6f6f3bc5586d05ef14ede5"})
+      // .then(game=>{
+      //   game.mapInfo = location.id;
+      //   game.save();
+      // });
     // fix catch
     res.redirect('/');
 });

@@ -13,6 +13,6 @@ const LocationSchema = new Schema ({
 
 });
 
-LocationSchema.index({coordinates: '2dsphere'});
+LocationSchema.index({ location: '2dsphere'});
 
 mongoose.model('locations', LocationSchema, 'locations');
