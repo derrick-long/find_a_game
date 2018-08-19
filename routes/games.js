@@ -4,7 +4,6 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const Game = mongoose.model('games');
 const User = mongoose.model('users');
-const Location = mongoose.model('locations');
 const {ensureAuthenticated} = require('../helpers/auth');
 const errors = [];
 const {ratingsAverage} = require('../helpers/reviews');
@@ -148,7 +147,6 @@ router.post('/', ensureAuthenticated, (req,res)=>{
 
   } else {
 
-//add map info here
 
   const newGame = {
   title: req.body.title,
@@ -179,15 +177,6 @@ router.post('/', ensureAuthenticated, (req,res)=>{
       });
   });
 
-
-  //create game
-  // new Game(newGame)
-  // .save()
-  // .then(game => {
-  //
-  //   req.flash('success_msg', 'Game Added!');
-  //   res.redirect(`/games/show/${game.id}`);
-  // });
   }
 });
 
