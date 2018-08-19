@@ -4,7 +4,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const Game = mongoose.model('games');
 const User = mongoose.model('users');
-const MapInfo = mongoose.model('locations');
+const Location = mongoose.model('locations');
 const {ensureAuthenticated} = require('../helpers/auth');
 const errors = [];
 const {ratingsAverage} = require('../helpers/reviews');
@@ -36,34 +36,32 @@ router.get('/test', (req,res)=>{
 
 
 router.post('/test', (req,res)=> {
+ // example query for near
+ //  MapInfo.find({
+ //  location: {
+ //   $near: {
+ //    $maxDistance: 1000,
+ //    $geometry: {
+ //     type: "Point",
+ //     coordinates: [48.869384, 3]
+ //    }
+ //   }
+ //  }
+ // }).find((error, results) => {
+ //  if (error) console.log(error);
+ //  console.log(JSON.stringify(results, 0, 2));
+ // });
 
-  MapInfo.find({
-  location: {
-   $near: {
-    $maxDistance: 100000000000000000,
-    $geometry: {
-     type: "Point",
-     coordinates: [48.869384, 3]
-    }
-   }
-  }
- }).find((error, results) => {
-  if (error) console.log(error);
-  console.log(JSON.stringify(results, 0, 2));
- });
-
-    // var  long;
-    // var lat;
-    // geocoder.geocode('29 champs elysée paris')
-    //   .then(function(response) {
-    //     long = response[0].longitude;
-    //     lat = response[0].latitude;
-    //     }).then(mapInfo=> {
-    //       mapInfo = new MapInfo();
-    //       mapInfo.location.coordinates.push(long);
-    //       mapInfo.location.coordinates.push(lat);
-    //       mapInfo.save();
-    //     });
+    var  long;
+    var lat;
+    geocoder.geocode('29 champs elysée paris')
+      .then(function(response) {
+        long = response[0].longitude;
+        lat = response[0].latitude;
+      }).then(stuff=>{
+        console.log(long);
+        console.log(lat);
+      });
       // location_id = location.id;
       // Game.findOne({_id: "5b6f6f3bc5586d05ef14ede5"})
       // .then(game=>{
@@ -111,7 +109,10 @@ router.get('/show/:id', (req,res)=> {
 
 //edit
 
+// so run address of game through geoloc
 router.post('/', ensureAuthenticated, (req,res)=>{
+  var lat;
+  var long;
   if(!req.body.title){
     errors.push({text: 'Please add a title.'});
   }
@@ -162,14 +163,31 @@ router.post('/', ensureAuthenticated, (req,res)=>{
   host: req.user.id,
   };
 
+  geocoder.geocode(req.body.address)
+    .then(function(response) {
+      long = response[0].longitude;
+      lat = response[0].latitude;
+      new Game(newGame)
+      .save()
+      .then(game => {
+        game.location.coordinates.splice(0,2);
+        game.location.coordinates.push(lat,long);
+        game.save();
+        console.log(game.location.coordinates);
+        req.flash('success_msg', 'Game Added!');
+        res.redirect(`/games/show/${game.id}`);
+      });
+  });
+
 
   //create game
-  new Game(newGame)
-  .save()
-  .then(game => {
-    req.flash('success_msg', 'Game Added!');
-    res.redirect(`/games/show/${game.id}`);
-  });
+  // new Game(newGame)
+  // .save()
+  // .then(game => {
+  //
+  //   req.flash('success_msg', 'Game Added!');
+  //   res.redirect(`/games/show/${game.id}`);
+  // });
   }
 });
 

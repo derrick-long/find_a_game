@@ -41,10 +41,16 @@ const GameSchema = new Schema ({
     ref: 'users'
   },
   location: {
-    type: { type: String,
-    enum: ['Point'],
-    default: 'Point'},
-    coordinates: []
+    type: {
+      type: String,
+      enum: ['Point'],
+      required: true,
+      default: 'Point'},
+    coordinates: {
+      type: [Number],
+      required: true,
+      default: [0,0]
+    }
   },
   date: {
     type: Date
