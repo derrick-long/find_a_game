@@ -22,7 +22,7 @@ const NodeGeocoder = require('node-geocoder');
 //load models
 require('./models/game');
 require('./models/user');
-require('./models/location');
+
 //passport config
 
 require('./config/passport')(passport);

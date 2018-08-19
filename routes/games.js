@@ -35,32 +35,23 @@ router.get('/test', (req,res)=>{
 
 
 router.post('/test', (req,res)=> {
- // example query for near
- //  MapInfo.find({
- //  location: {
- //   $near: {
- //    $maxDistance: 1000,
- //    $geometry: {
- //     type: "Point",
- //     coordinates: [48.869384, 3]
- //    }
- //   }
- //  }
- // }).find((error, results) => {
- //  if (error) console.log(error);
- //  console.log(JSON.stringify(results, 0, 2));
- // });
 
-    var  long;
-    var lat;
-    geocoder.geocode('29 champs elysée paris')
-      .then(function(response) {
-        long = response[0].longitude;
-        lat = response[0].latitude;
-      }).then(stuff=>{
-        console.log(long);
-        console.log(lat);
-      });
+  Game.find({
+  location: {
+   $near: {
+    $maxDistance: 1000,
+    $geometry: {
+     type: "Point",
+     coordinates: [48.869384, 3]
+    }
+   }
+  }
+ }).find((error, results) => {
+  if (error) console.log(error);
+  console.log(JSON.stringify(results, 0, 2));
+ });
+
+
       // location_id = location.id;
       // Game.findOne({_id: "5b6f6f3bc5586d05ef14ede5"})
       // .then(game=>{
@@ -106,9 +97,14 @@ router.get('/show/:id', (req,res)=> {
   });
 });
 
-//edit
+// post new game
+// need to make a new query with $near taking a zip from front end
+// then returning array of games that are near it
+// then make map markers for that game
+// center in the zip of the query/addy
 
-// so run address of game through geoloc
+
+
 router.post('/', ensureAuthenticated, (req,res)=>{
   var lat;
   var long;
@@ -192,7 +188,7 @@ router.get('/edit/:id', ensureAuthenticated, (req,res)=>{
     });
 });
 
-// do the editing // update to a patch request imo
+// do the editing
 
 router.put('/edit/:id', ensureAuthenticated, (req,res)=>{
   Game.findOne({ _id: req.params.id
@@ -305,7 +301,7 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
 });
 
 
-//add host review
+
 
 router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
 
@@ -342,7 +338,7 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
 });
 
 
-// add player review
+
 
 router.post('/player_review/:id', ensureAuthenticated, (req, res)=>{
 
@@ -388,6 +384,6 @@ router.delete('/:id', ensureAuthenticated, (req,res) => {
     });
 });
 
-// edit placeholder
+
 
 module.exports = router;
