@@ -1,33 +1,50 @@
 <%- include ../partials/dashboard_nav.ejs %>
-
 <h1> <%= title %>   </h1>
-<% games.forEach(function(game){ %>
-  <div class="col-12">
-    <div class="card card-inline border-2 border-secondary">
-      <div class="card-body">
-        <h5 class="card-title"><%= game.title %> </h5>
-        <p class="card-text"><%= truncate(game.description, 250) %> </p>
-        <p class="card-text"> Seeking <%= game.numberOfPlayers %>
-          players </p>
-        <a href="/games/show/<%= game.id %>" class="btn btn-primary m-2"><i class="fas fa-book"></i> Details</a>
-        <% if (game.host == user.id) { %>
-          <form action="/games/<%= game.id %>/?_method=DELETE" method="post" id="delete-form">
-            <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="btn btn-danger m-2"><i class= "fas fa-trash"></i>
-              Delete </button>
-          </form>
-          <a href="/games/edit/<%= game.id%>" class="btn btn-danger m-2"> Edit Game </a>
-        <% } else { %>
-          <form action="/users/drop_player/?_method=DELETE" method="post" id="delete-form">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="hidden" name="game_id" value="<%= game.id %>">
-            <button type="submit" class="btn btn-danger m-2"><i class= "fas fa-trash"></i>
-              Leave Game </button>
-          </form>
 
-        <% } %>
+<% if(games.length == 0) { %>
+
+  <div class="card card-inline">
+      <div class="card-body">
+        <h5 class="card-title"> No Games Added Yet! </h5>
+        <p class="card-text">Add some games to see games listed here instead of this dumb message </p>
+        <a href="games/add" class="btn btn-primary"><i class="fas fa-plus"></i>
+          Add New Game</a>
+      </div>
+  </div>
+
+<% } else { %>
+
+  <% games.forEach(function(game){ %>
+
+    <div class="col-12">
+      <div class="card card-inline border-2 border-secondary">
+        <div class="card-body">
+          <h5 class="card-title"><%= game.title %> </h5>
+          <p class="card-text"><%= truncate(game.description, 250) %> </p>
+          <p class="card-text"> Seeking <%= game.numberOfPlayers %>
+            players </p>
+          <a href="/games/show/<%= game.id %>" class="btn btn-primary m-2"><i class="fas fa-book"></i> Details</a>
+          <% if (game.host == user.id) { %>
+            <form action="/games/<%= game.id %>/?_method=DELETE" method="post" id="delete-form">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit" class="btn btn-danger m-2"><i class= "fas fa-trash"></i>
+                Delete </button>
+            </form>
+            <a href="/games/edit/<%= game.id%>" class="btn btn-danger m-2"> Edit Game </a>
+          <% } else { %>
+            <form action="/users/drop_player/?_method=DELETE" method="post" id="delete-form">
+              <input type="hidden" name="_method" value="DELETE">
+              <input type="hidden" name="game_id" value="<%= game.id %>">
+              <button type="submit" class="btn btn-danger m-2"><i class= "fas fa-trash"></i>
+                Leave Game </button>
+            </form>
+
+          <% } %>
+
+        </div>
       </div>
     </div>
-  </div>
-<% }) %>
+
+  <% }) %>
+<% } %>
  <!-- make a drop down that can populate the players in the game with their names and ratings  -->
