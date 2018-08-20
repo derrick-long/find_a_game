@@ -41,6 +41,12 @@ router.get('/map', (req, res)=> {
   res.render('index/google_map_test');
 });
 
+router.post('/map', (req,res)=> {
+  var query_lat;
+  var query_long;
+  console.log(req.body.searchZip);
+});
+
 
 
 router.post('/test', (req,res)=> {
