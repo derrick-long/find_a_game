@@ -44,6 +44,7 @@ router.get('/map', (req, res)=> {
 router.post('/map', (req,res)=> {
   var query_lat;
   var query_long;
+  var miles = (1609.34 * req.body.radius);
   geocoder.geocode(req.body.searchZip)
     .then(function(response){
       query_lat = response[0].latitude;
@@ -51,7 +52,7 @@ router.post('/map', (req,res)=> {
       Game.find({
        location: {
         $near: {
-         $maxDistance: 100000000,
+         $maxDistance: miles,
          $geometry: {
           type: "Point",
           coordinates: [query_lat, query_long]
