@@ -24,6 +24,8 @@ const geocoder = NodeGeocoder(options);
 /// route for games, probably want sorted by most recent by default
 // or closest?
 
+
+//delete later
 router.get('/test', (req,res)=>{
   res.render('index/test');
   // Game.findOne({  _id:"5b6f157644a01d0606d320c8"})
@@ -34,30 +36,41 @@ router.get('/test', (req,res)=>{
 });
 
 
+
+router.get('/map', (req, res)=> {
+  res.render('index/google_map_test');
+});
+
+
+
 router.post('/test', (req,res)=> {
+  // okay so make a request with
 
-  Game.find({
-  location: {
-   $near: {
-    $maxDistance: 1000,
-    $geometry: {
-     type: "Point",
-     coordinates: [48.869384, 3]
-    }
-   }
-  }
- }).find((error, results) => {
-  if (error) console.log(error);
-  console.log(JSON.stringify(results, 0, 2));
- });
+    geocoder.geocode('23505')
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(err){
+        console.log(err);
+    });
+ //
+ //  Game.find({
+ //  location: {
+ //   $near: {
+ //    $maxDistance: 10000,
+ //    $geometry: {
+ //     type: "Point",
+ //     coordinates: [48.869384, 3]
+ //    }
+ //   }
+ //  }
+ // }).find((error, results) => {
+ //  if (error) console.log(error);
+ //  console.log(JSON.stringify(results, 0, 2));
+ // });
 
 
-      // location_id = location.id;
-      // Game.findOne({_id: "5b6f6f3bc5586d05ef14ede5"})
-      // .then(game=>{
-      //   game.mapInfo = location.id;
-      //   game.save();
-      // });
+
     // fix catch
     res.redirect('/');
 });
