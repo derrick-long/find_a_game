@@ -44,7 +44,28 @@ router.get('/map', (req, res)=> {
 router.post('/map', (req,res)=> {
   var query_lat;
   var query_long;
-  console.log(req.body.searchZip);
+  geocoder.geocode(req.body.searchZip)
+    .then(function(response){
+      query_lat = response[0].latitude;
+      query_long = response[0].longitude;
+      Game.find({
+       location: {
+        $near: {
+         $maxDistance: 100000000,
+         $geometry: {
+          type: "Point",
+          coordinates: [query_lat, query_long]
+         }
+        }
+       }
+      }).find((error, results) => {
+       if (error) console.log(error);
+       console.log(JSON.stringify(results, 0, 2));
+      });
+    })
+    .catch(function(err){
+      console.log(err);
+    });
 });
 
 
@@ -59,21 +80,21 @@ router.post('/test', (req,res)=> {
       .catch(function(err){
         console.log(err);
     });
- //
- //  Game.find({
- //  location: {
- //   $near: {
- //    $maxDistance: 10000,
- //    $geometry: {
- //     type: "Point",
- //     coordinates: [48.869384, 3]
- //    }
- //   }
- //  }
- // }).find((error, results) => {
- //  if (error) console.log(error);
- //  console.log(JSON.stringify(results, 0, 2));
- // });
+
+  Game.find({
+  location: {
+   $near: {
+    $maxDistance: 10000,
+    $geometry: {
+     type: "Point",
+     coordinates: [48.869384, 3]
+    }
+   }
+  }
+ }).find((error, results) => {
+  if (error) console.log(error);
+  console.log(JSON.stringify(results, 0, 2));
+ });
 
 
 

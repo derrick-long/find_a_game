@@ -4,6 +4,8 @@
 </div>
 
 <div id="map-search float-left">
-  <input type="search" id="map-search" placeholder="Find a Game.." name="searchZip">
-  <button class="btn btn-primary"> Search </button>
+  <form action="/games/map" method="post">
+    <input type="search" id="map-search" placeholder="Find a Game.." name="searchZip">
+    <button class="btn btn-primary" type="submit"> Search </button>
+  </form>
 </div>
