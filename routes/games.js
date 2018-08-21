@@ -38,7 +38,9 @@ router.get('/test', (req,res)=>{
 
 
 router.get('/map', (req, res)=> {
-  res.render('index/google_map_test');
+  res.render('index/google_map_test',{
+    games: []
+  });
 });
 
 router.post('/map', (req,res)=> {
@@ -59,45 +61,23 @@ router.post('/map', (req,res)=> {
          }
         }
        }
-      }).find((error, results) => {
+     }).find((error, games) => {
        if (error) console.log(error);
-       console.log(JSON.stringify(results, 0, 2));
+       res.render('index/google_map_test',{
+         games:games
+       });
       });
     })
     .catch(function(err){
       console.log(err);
     });
+
 });
 
 
 
 router.post('/test', (req,res)=> {
   // okay so make a request with
-
-    geocoder.geocode('23505')
-      .then(function(response) {
-        console.log(response);
-      })
-      .catch(function(err){
-        console.log(err);
-    });
-
-  Game.find({
-  location: {
-   $near: {
-    $maxDistance: 10000,
-    $geometry: {
-     type: "Point",
-     coordinates: [48.869384, 3]
-    }
-   }
-  }
- }).find((error, results) => {
-  if (error) console.log(error);
-  console.log(JSON.stringify(results, 0, 2));
- });
-
-
 
     // fix catch
     res.redirect('/');
@@ -213,7 +193,6 @@ router.post('/', ensureAuthenticated, (req,res)=>{
         res.redirect(`/games/show/${game.id}`);
       });
   });
-
   }
 });
 
