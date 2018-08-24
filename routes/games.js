@@ -39,38 +39,40 @@ router.get('/test', (req,res)=>{
 
 router.get('/map', (req, res)=> {
   res.render('index/google_map_test',{
-    games: []
+    games: [],
+    center: []
   });
 });
 
 router.post('/map', (req,res)=> {
-  var query_lat;
-  var query_long;
-  var miles = (1609.34 * req.body.radius);
-  geocoder.geocode(req.body.searchZip)
-    .then(function(response){
-      query_lat = response[0].latitude;
-      query_long = response[0].longitude;
-      Game.find({
-       location: {
-        $near: {
-         $maxDistance: miles,
-         $geometry: {
-          type: "Point",
-          coordinates: [query_lat, query_long]
-         }
-        }
-       }
-     }).find((error, games) => {
-       if (error) console.log(error);
-       res.render('index/google_map_test',{
-         games:games
-       });
-      });
-    })
-    .catch(function(err){
-      console.log(err);
-    });
+  // var query_lat;
+  // var query_long;
+  // var miles = (1609.34 * req.body.radius);
+  // geocoder.geocode(req.body.searchZip)
+  //   .then(function(response){
+  //     query_lat = response[0].latitude;
+  //     query_long = response[0].longitude;
+  //     Game.find({
+  //      location: {
+  //       $near: {
+  //        $maxDistance: miles,
+  //        $geometry: {
+  //         type: "Point",
+  //         coordinates: [query_lat, query_long]
+  //        }
+  //       }
+  //      }
+  //    }).find((error, games) => {
+  //      if (error) console.log(error);
+  //      res.render('index/google_map_test',{
+  //        games:games,
+  //        center: [query_lat, query_long]
+  //      });
+  //     });
+  //   })
+  //   .catch(function(err){
+  //     console.log(err);
+  //   });
 
 });
 

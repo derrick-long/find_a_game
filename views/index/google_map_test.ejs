@@ -13,10 +13,15 @@
       <option value="15">15 miles </option>
       <option value="20">20 miles </option>
     </select>
-    <button class="btn btn-primary" type="submit"> Search </button>
+    <button class="btn btn-primary" type="submit" id="submit"> Search </button>
   </form>
 </div>
 
 <% if (games.length > 0) { %>
-    <h1> howdy there this is a test </h1> 
+    <h1> howdy there this is a test </h1>
+<% } %>
+
+<% if (center.length > 0) { %>
+    <div class="hidden" data-lat= "<%= center[0] %>" data-long= "<%= center[1] %>">
+    </div>
 <% } %>
