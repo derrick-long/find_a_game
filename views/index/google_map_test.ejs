@@ -19,6 +19,9 @@
 
 
 <% if(games.length > 0) { %>
-  <p>   <%= games[0].title %>  </p>
+  <% games.forEach(function(game){ %>
+      <div class="hidden" data-lat="<%= game.location.coordinates[0]%>" data-long="<%= game.location.coordinates[1]%>"></div>
+  <% }) %>
+
 
 <% } %>
