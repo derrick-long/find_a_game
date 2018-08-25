@@ -13,7 +13,8 @@ const NodeGeocoder = require('node-geocoder');
 
 var options = {
   provider: 'google',
-  httpAdapter: 'https', // Default // for Mapquest, OpenCage, Google Premier
+  httpAdapter: 'https',
+  apiKey: 'AIzaSyDGdCjLNhY1u1ZQhXOHhVgTewhOyj71OuU', // Default // for Mapquest, OpenCage, Google Premier
   formatter: null         // 'gpx', 'string', ...
 };
 
