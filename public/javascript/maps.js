@@ -9,7 +9,7 @@ function initMap() {
   });
 
 }
-
+//make an if statement only if my hidden attribs show
 
 // function geocodeAddress(geocoder, resultsMap) {
 //   var address = document.getElementById('map-search').value;
@@ -25,3 +25,44 @@ function initMap() {
 //     }
 //   });
 // }
+
+//one big ajax request -> sends request to back end to find games,
+// then update map data
+
+
+$(function(){
+   $('#submit').click(function(e){
+       e.preventDefault();
+       console.log('select_link clicked');
+
+                    /*$.ajax({
+                       dataType: 'jsonp',
+                       data: "data=yeah",
+                       jsonp: 'callback',
+                       url: 'http://localhost:3000/endpoint?callback=?',
+                       success: function(data) {
+                           console.log('success');
+                           console.log(JSON.stringify(data));
+                       }
+                   });*/
+         var data = '23505';
+
+         $.ajax({
+           type: 'POST',
+           data: data,
+               contentType: 'text',
+                       url: 'http://localhost:5000/games/map',
+                       success: function(data) {
+                           console.log('success');
+                           console.log(JSON.stringify(data));
+                       }
+                   });
+         /*$.ajax('http://localhost:3000/endpoint', {
+                 type: 'POST',
+                 data: JSON.stringify(data),
+                 contentType: 'application/json',
+                 success: function() { console.log('success');},
+                 error  : function() { console.log('error');}
+         });*/
+               });
+           });

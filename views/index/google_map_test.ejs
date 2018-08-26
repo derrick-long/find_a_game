@@ -13,14 +13,14 @@
       <option value="15">15 miles </option>
       <option value="20">20 miles </option>
     </select>
-    <button class="btn btn-primary" type="submit" id="submit"> Search </button>
+    <button class="btn btn-primary submit" type="submit" id="submit"> Search </button>
   </form>
 </div>
 
 
 <% if(games.length > 0) { %>
   <% games.forEach(function(game){ %>
-      <div class="hidden" data-lat="<%= game.location.coordinates[0]%>" data-long="<%= game.location.coordinates[1]%>"></div>
+      <div class="hidden game-coordinates"  data-lat="<%= game.location.coordinates[0]%>" data-long="<%= game.location.coordinates[1]%>"></div>
   <% }) %>
 
 
