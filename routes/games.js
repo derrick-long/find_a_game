@@ -45,6 +45,7 @@ router.get('/map', (req, res)=> {
 });
 
 router.post('/map', (req,res)=> {
+  // update req.body.searchZip to whatever
   var query_lat;
   var query_long;
   var miles = (1609.34 * req.body.radius);
@@ -64,9 +65,7 @@ router.post('/map', (req,res)=> {
        }
      }).find((error, games) => {
        if (error) console.log(error);
-       res.render('index/google_map_test',{
-         games:games
-       });
+       res.send(games);
       });
     })
     .catch(function(err){
