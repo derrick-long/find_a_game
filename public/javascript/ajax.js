@@ -2,10 +2,11 @@ $(function(){
       $('#submit').click(function(e){
             e.preventDefault();
             console.log('select_link clicked');
+            var data = {};
+            data.searchZip = $('#map-search').val();
 
                     //something is wrong with var here
-					 var data = {};
-           data.searchZip = $('#searchZip').val();
+
            $.ajax({
   						type: 'GET',
   						data: data,
@@ -16,12 +17,6 @@ $(function(){
                   //manipulate info here, pass to geoloc and we're in buisness baby
                 }
               });
-					/*$.ajax('http://localhost:3000/endpoint', {
-					        type: 'POST',
-					        data: JSON.stringify(data),
-					        contentType: 'application/json',
-					        success: function() { console.log('success');},
-					        error  : function() { console.log('error');}
-					});*/
+
     });
 });
