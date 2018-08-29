@@ -44,19 +44,19 @@ router.get('/map', (req, res)=> {
   });
 });
 
-router.post('/map', (req,res)=> {
-  // update req.body.searchZip to whatever
+router.get('/endpoint', (req,res)=> {
+
   var query_lat;
   var query_long;
-  var miles = (1609.34 * req.body.radius);
-  geocoder.geocode(req.body.searchZip)
+  var miles = (1609.34 * req.body.radius); //update var here for ajax
+  geocoder.geocode(req.query.searchZip)
     .then(function(response){
       query_lat = response[0].latitude;
       query_long = response[0].longitude;
       Game.find({
        location: {
         $near: {
-         $maxDistance: miles,
+         $maxDistance: 100000, //change back to var
          $geometry: {
           type: "Point",
           coordinates: [query_lat, query_long]
@@ -65,7 +65,7 @@ router.post('/map', (req,res)=> {
        }
      }).find((error, games) => {
        if (error) console.log(error);
-       res.send(games);
+       res.send({games: games});
       });
     })
     .catch(function(err){

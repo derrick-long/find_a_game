@@ -1,26 +1,18 @@
 $(function(){
-      $('#select_link').click(function(e){
+      $('#submit').click(function(e){
             e.preventDefault();
             console.log('select_link clicked');
 
-                     /*$.ajax({
-                        dataType: 'jsonp',
-                        data: "data=yeah",
-                        jsonp: 'callback',
-                        url: 'http://localhost:3000/endpoint?callback=?',
-                        success: function(data) {
-                            console.log('success');
-                            console.log(JSON.stringify(data));
-                        }
-                    });*/
-					 var data = {name:"Wut"};
+                    //something is wrong with var here
+					 var data = {};
+           data.searchZip = $('#searchZip').val();
            $.ajax({
   						type: 'GET',
   						data: data,
   				    contentType: 'application/json',
-              url: 'http://localhost:5000/endpoint',
+              url: 'http://localhost:5000/games/endpoint',
               success: function(response) {
-                  console.log(response.user.firstName);
+                  console.log(response.games[0].title);
                   //manipulate info here, pass to geoloc and we're in buisness baby
                 }
               });
