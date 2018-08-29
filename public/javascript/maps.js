@@ -1,5 +1,7 @@
 
 //maybe change event to onload? use document.ready probably?
+// so add in ajax function here- no longer need to res.render, so no full new request,
+// we can res.send the info then hopefully do something with it on our font end?
 
 function initMap() {
 

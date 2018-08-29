@@ -32,7 +32,7 @@ router.get('/endpoint', function(req, res){
   User.findOne({
     firstName: req.query.name})
     .then(user=>{
-      console.log(user.firstName);
+      res.send({user:user});
       });
 
 });
