@@ -1,32 +1,52 @@
+var map;
+var marker;
 
-//maybe change event to onload? use document.ready probably?
-// so add in ajax function here- no longer need to res.render, so no full new request,
-// we can res.send the info then hopefully do something with it on our font end?
 
 function initMap() {
 
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
-    center: {lat: -34.397, lng: 150.644}
-  });
+	var mapOptions = {
+		center: new google.maps.LatLng(40.680898,-8.684059),
+		zoom: 11,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+
+	map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
 }
+
+
 //make an if statement only if my hidden attribs show
+function createMarker(latlng) {
 
-function geocodeAddress(geocoder, resultsMap) {
-  var address = document.getElementById('map-search').value;
-  geocoder.geocode({'address': address}, function(results, status) {
-    if (status === 'OK') {
-      resultsMap.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-        map: resultsMap,
-        position: results[0].geometry.location
-      });
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
+  if(marker != undefined && marker != ''){
+    marker.setMap(null);
+    marker = '';
+  }
+
+  marker = new google.maps.Marker({
+    map: map,
+    position: latlng
   });
 }
 
+function geocodeAddress() {
+
+	var addressInput = $('#map-search').val();
+
+	var geocoder = new google.maps.Geocoder();
+
+	geocoder.geocode({address: addressInput}, function(results, status) {
+
+		if (status == google.maps.GeocoderStatus.OK) {
+
+      var myResult = results[0].geometry.location;
+
+      createMarker(myResult);
+      map.setCenter(myResult);
+
+      map.setZoom(17);
+		}
+  });
+}
 //one big ajax request -> sends request to back end to find games,
 // then update map data
