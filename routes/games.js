@@ -48,7 +48,7 @@ router.get('/endpoint', (req,res)=> {
 
   var query_lat;
   var query_long;
-  var miles = (1609.34 * req.body.radius); //update var here for ajax
+  var miles = (1609.34 * req.query.radius); //update var here for ajax
   geocoder.geocode(req.query.searchZip)
     .then(function(response){
       query_lat = response[0].latitude;
@@ -56,7 +56,7 @@ router.get('/endpoint', (req,res)=> {
       Game.find({
        location: {
         $near: {
-         $maxDistance: 100000, //change back to var
+         $maxDistance: miles, //change back to var
          $geometry: {
           type: "Point",
           coordinates: [query_lat, query_long]

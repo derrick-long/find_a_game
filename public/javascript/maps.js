@@ -1,6 +1,6 @@
 var map;
 var marker;
-
+var addressInput = $('#map-search').val();
 
 function initMap() {
 
@@ -31,8 +31,6 @@ function createMarker(latlng) {
 
 function geocodeAddress() {
 
-	var addressInput = $('#map-search').val();
-
 	var geocoder = new google.maps.Geocoder();
 
 	geocoder.geocode({address: addressInput}, function(results, status) {
@@ -52,13 +50,11 @@ function geocodeAddress() {
 $(function(){
       $('#submit').click(function(e){
             e.preventDefault();
-            console.log('select_link clicked');
-
 
 						var data = {};
-            data.searchZip = '23505';
-
-                    //something is wrong with var here
+						data.searchZip = addressInput
+						data.radius = $('#radius').val();
+						geocodeAddress();
 
            $.ajax({
   						type: 'GET',
@@ -68,12 +64,17 @@ $(function(){
               success: function(response) {
 									response.games.forEach(function(game){
 										console.log(game.location.coordinates);
+										// add code for empty response, also add in rest of marker logic
+
 									})
                   //manipulate info here, pass to geoloc and we're in buisness baby
-                }
-              });
-		
-    });
+                },
+							error: function(XMLHttpRequest, textStatus, errorThrown) {
+     						console.log(errorThrown);
+  							}
+            });
+
+    	});
 });
 
 //one big ajax request -> sends request to back end to find games,
