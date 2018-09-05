@@ -51,7 +51,7 @@ function geocodeAddress(markers) {
 		}
   });
 }
-// inconsistent clean up marker function
+
 
 $(function(){
       $('#submit').click(function(e){

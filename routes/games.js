@@ -9,7 +9,7 @@ const errors = [];
 const {ratingsAverage} = require('../helpers/reviews');
 const NodeGeocoder = require('node-geocoder');
 
-
+// protect api
 
 var options = {
   provider: 'google',
@@ -20,21 +20,6 @@ var options = {
 
 const geocoder = NodeGeocoder(options);
 
-
-
-/// route for games, probably want sorted by most recent by default
-// or closest?
-
-
-//delete later
-router.get('/test', (req,res)=>{
-  res.render('index/test');
-  // Game.findOne({  _id:"5b6f157644a01d0606d320c8"})
-  // .then(game => {
-  //     console.log(game.mapInfo);
-  // });
-
-});
 
 
 
@@ -76,14 +61,6 @@ router.get('/endpoint', (req,res)=> {
 
 
 
-router.post('/test', (req,res)=> {
-  // okay so make a request with
-
-    // fix catch
-    res.redirect('/');
-});
-
-
 router.get('/', (req,res)=> {
   const currentDate = new Date();
   Game.find({ date: { $gt: currentDate}})
@@ -117,13 +94,6 @@ router.get('/show/:id', (req,res)=> {
     });
   });
 });
-
-// post new game
-// need to make a new query with $near taking a zip from front end
-// then returning array of games that are near it
-// then make map markers for that game
-// center in the zip of the query/addy
-
 
 
 router.post('/', ensureAuthenticated, (req,res)=>{
