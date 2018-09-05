@@ -1,5 +1,5 @@
 var map;
-var marker;
+var markers = [];
 var addressInput = $('#map-search').val();
 
 function initMap() {
@@ -16,20 +16,14 @@ function initMap() {
 
 
 //make an if statement only if my hidden attribs show
-function createMarker(latlng) {
-// watch for weird interaction with map center here
-  if(marker != undefined && marker != ''){
-    marker.setMap(null);
-    marker = '';
-  }
-
-  marker = new google.maps.Marker({
-    map: map,
-    position: latlng
-  });
+function addMarker(props){
+  var marker = new google.maps.Marker({
+  position:props.coords,
+  map:map,
+	});
 }
 
-function geocodeAddress() {
+function geocodeAddress(markers) {
 
 	var geocoder = new google.maps.Geocoder();
 
@@ -38,23 +32,37 @@ function geocodeAddress() {
 		if (status == google.maps.GeocoderStatus.OK) {
 
       var myResult = results[0].geometry.location;
-			//clean up later
+	// 		//clean up later
       map = new google.maps.Map(document.getElementById("map"));
-      map.setCenter(myResult);
 
-      map.setZoom(15);
+			//works fine like this, now we just need to iterate and create the shit
+			// Loop through markers
+
+
+			map.setCenter(myResult);
+
+			map.setZoom(10);
+
+			for(var i = 0;i < markers.length;i++){
+				// Add marker
+				addMarker(markers[i]);
+			}
+			//make scale to radius later
 		}
   });
 }
+// inconsistent clean up marker function
 
 $(function(){
       $('#submit').click(function(e){
-            e.preventDefault();
 
+
+            e.preventDefault();
 						var data = {};
 						data.searchZip = addressInput
 						data.radius = $('#radius').val();
-						geocodeAddress();
+
+
 
            $.ajax({
   						type: 'GET',
@@ -63,19 +71,28 @@ $(function(){
               url: 'http://localhost:5000/games/endpoint',
               success: function(response) {
 									response.games.forEach(function(game){
-										console.log(game.location.coordinates);
+										var lat = game.location.coordinates[0];
+										var lng = game.location.coordinates[1];
+										var props = {}
+										props.coords = {lat: lat, lng: lng};
+										markers.push(props);
+
 										// add code for empty response, also add in rest of marker logic
 
 									})
                   //manipulate info here, pass to geoloc and we're in buisness baby
                 },
 							error: function(XMLHttpRequest, textStatus, errorThrown) {
-     						console.log(errorThrown);
+     						console.log("Error");
   							}
             });
 
     	});
+
 });
 
-//one big ajax request -> sends request to back end to find games,
-// then update map data
+$(document).ajaxComplete(function( event, request, settings ) {
+  geocodeAddress(markers);
+});
+
+// build an object, then iterate through it to create the markers I want
