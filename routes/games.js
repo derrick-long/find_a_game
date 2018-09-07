@@ -33,7 +33,8 @@ router.get('/endpoint', (req,res)=> {
 
   var query_lat;
   var query_long;
-  var miles = (1609.34 * req.query.radius); //update var here for ajax
+  var miles = ( req.query.radius * 1609.34);
+ //update var here for ajax
   geocoder.geocode(req.query.searchZip)
     .then(function(response){
       query_lat = response[0].latitude;
@@ -47,7 +48,7 @@ router.get('/endpoint', (req,res)=> {
           coordinates: [query_lat, query_long]
          }
         }
-       }
+      }
      }).find((error, games) => {
        if (error) console.log(error);
        res.send({games: games});
@@ -148,7 +149,7 @@ router.post('/', ensureAuthenticated, (req,res)=>{
   host: req.user.id,
   };
 
-  geocoder.geocode(req.body.address)
+  geocoder.geocode(req.body.address + " " + req.body.zipcode)
     .then(function(response) {
       long = response[0].longitude;
       lat = response[0].latitude;
