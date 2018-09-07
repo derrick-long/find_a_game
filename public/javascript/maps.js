@@ -1,6 +1,9 @@
 var map;
 var markers = [];
-var addressInput = $('#map-search').val();
+var addressInput;
+
+
+
 
 function initMap() {
 
@@ -26,6 +29,7 @@ function addMarker(props){
 function geocodeAddress(markers) {
 
 	var geocoder = new google.maps.Geocoder();
+	addressInput = $('#map-search').val();
 
 	geocoder.geocode({address: addressInput}, function(results, status) {
 
@@ -56,6 +60,7 @@ function geocodeAddress(markers) {
 $(function(){
       $('#submit').click(function(e){
 
+					 	addressInput = $('#map-search').val();
 
             e.preventDefault();
 						var data = {};
@@ -70,6 +75,10 @@ $(function(){
   				    contentType: 'application/json',
               url: 'http://localhost:5000/games/endpoint',
               success: function(response) {
+									if (response.games.length == 0) {
+										console.log('no games found')
+										//placeholder for now
+									} else {
 									response.games.forEach(function(game){
 										var lat = game.location.coordinates[0];
 										var lng = game.location.coordinates[1];
@@ -77,11 +86,12 @@ $(function(){
 										props.coords = {lat: lat, lng: lng};
 										markers.push(props);
 
-										// add code for empty response, also add in rest of marker logic
 
 									})
                   //manipulate info here, pass to geoloc and we're in buisness baby
-                },
+								}
+
+							},
 							error: function(XMLHttpRequest, textStatus, errorThrown) {
      						console.log("Error");
   							}
