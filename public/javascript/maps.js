@@ -58,51 +58,51 @@ function geocodeAddress(markers) {
 
 
 $(function(){
-      $('#submit').click(function(e){
+  $('#submit').click(function(e){
 
-					 	addressInput = $('#map-search').val();
-
-            e.preventDefault();
-						var data = {};
-						data.searchZip = addressInput
-						data.radius = $('#radius').val();
-
+	 	addressInput = $('#map-search').val();
+		e.preventDefault();
+		var data = {};
+		data.searchZip = addressInput
+		data.radius = $('#radius').val();
 
 
-           $.ajax({
-  						type: 'GET',
-  						data: data,
-  				    contentType: 'application/json',
-              url: 'http://localhost:5000/games/endpoint',
-              success: function(response) {
-									if (response.games.length == 0) {
-										console.log('no games found')
-										//placeholder for now
-									} else {
-									response.games.forEach(function(game){
-										var lat = game.location.coordinates[0];
-										var lng = game.location.coordinates[1];
-										var props = {}
-										props.coords = {lat: lat, lng: lng};
-										markers.push(props);
 
+   $.ajax({
+			type: 'GET',
+			data: data,
+	    contentType: 'application/json',
+      url: 'http://localhost:5000/games/endpoint',
+      success: function(response) {
+					if (response.games.length == 0) {
+						console.log('no games found')
+						//placeholder for now
+					} else {
+					response.games.forEach(function(game){
+						var lat = game.location.coordinates[0];
+						var lng = game.location.coordinates[1];
+						var props = {}
+						props.coords = {lat: lat, lng: lng};
+						markers.push(props);
 
-									})
-                  //manipulate info here, pass to geoloc and we're in buisness baby
-								}
+					})
 
-							},
-							error: function(XMLHttpRequest, textStatus, errorThrown) {
-     						console.log("Error");
-  							}
-            });
+				}
 
-    	});
+			},
+
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+					console.log("Error");
+				}
+    });
+
+  });
 
 });
+
 
 $(document).ajaxComplete(function( event, request, settings ) {
-  geocodeAddress(markers);
-});
 
-// build an object, then iterate through it to create the markers I want
+	geocodeAddress(markers);
+
+});

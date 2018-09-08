@@ -24,7 +24,7 @@ const geocoder = NodeGeocoder(options);
 
 
 router.get('/map', (req, res)=> {
-  res.render('index/google_map_test');
+  res.render('games/find_map');
 });
 
 router.get('/endpoint', (req,res)=> {
