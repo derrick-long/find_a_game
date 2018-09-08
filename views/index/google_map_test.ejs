@@ -5,7 +5,7 @@
 
 <div id="map-search float-left">
   <!-- <form action="/games/map" method="post"> -->
-    <input type="search" id="map-search" placeholder="Find a Game.." name="searchZip">
+    <input type="search" id="map-search" placeholder="Find a Game.." name="searchZip" required>
     <label for="radius"> Radius </label>
     <select class="custom-select d-inline-block" id="radius" name="radius">
       <option value="5">5 miles</option>
@@ -16,3 +16,7 @@
     <button class="btn btn-primary submit" type="submit" id="submit" > Search </button>
   <!-- </form> -->
 </div>
+
+
+<script src="/javascript/maps.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGdCjLNhY1u1ZQhXOHhVgTewhOyj71OuU&callback=initMap" async defer></script>

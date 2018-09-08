@@ -35,6 +35,7 @@ router.get('/endpoint', (req,res)=> {
  //update var here for ajax
   geocoder.geocode(req.query.searchZip)
     .then(function(response){
+      // do stuff if response is undefined
       query_lat = response[0].latitude;
       query_long = response[0].longitude;
       Game.find({
@@ -49,7 +50,9 @@ router.get('/endpoint', (req,res)=> {
       }
      }).find((error, games) => {
        if (error) console.log(error);
-       res.send({games: games});
+
+        res.send({games: games});
+
       });
     })
     .catch(function(err){
