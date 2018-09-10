@@ -29,16 +29,22 @@ router.get('/map', (req, res)=> {
 
 router.get('/endpoint', (req,res)=> {
   // test query errors
+
   var query_lat;
   var query_long;
   var miles = ( req.query.radius * 1609.34);
  //update var here for ajax
+ //get redirect working here
   geocoder.geocode(req.query.searchZip)
     .then(function(response){
       if (response == undefined || response.length == 0) {
-        res.send("invalid address!");
+        req.flash('error_msg', 'Invalid Address!');
+        res.json({
+        success: true,
+        redirectTo: '/games/map'
+        });
       } else {
-      // do stuff if response is undefined
+    //   // do stuff if response is undefined
       query_lat = response[0].latitude;
       query_long = response[0].longitude;
       Game.find({
@@ -57,11 +63,13 @@ router.get('/endpoint', (req,res)=> {
         res.send({games: games});
 
       });
-      }
+    }
     })
+
     .catch(function(err){
       console.log(err);
     });
+
 
 });
 
@@ -81,7 +89,7 @@ router.get('/', (req,res)=> {
 
 // add game
 
-router.get('/add', (req,res)=>{
+router.get('/add', ensureAuthenticated, (req,res)=>{
   res.render('games/add',{
     errors:errors
   });

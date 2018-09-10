@@ -74,8 +74,9 @@ $(function(){
 	    contentType: 'application/json',
       url: 'http://localhost:5000/games/endpoint',
       success: function(response) {
-					if (response.games.length == 0) {
-						console.log('no games found')
+					// if (response.games == undefined || response.games.length == 0) {
+					if(response.success){
+						window.location.replace(response.redirectTo);
 						//placeholder for now
 					} else {
 					response.games.forEach(function(game){
