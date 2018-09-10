@@ -84,6 +84,8 @@ router.get('/', (req,res)=> {
     res.render('games/index', {
       games: games
     });
+  }).catch(err=>{
+    console.log(err);
   });
 });
 
@@ -105,7 +107,9 @@ router.get('/show/:id', (req,res)=> {
   .then(game => {
     res.render('games/show', {
       game: game
-    });
+  }).catch(err=>{
+    console.log(err);
+  });
   });
 });
 
