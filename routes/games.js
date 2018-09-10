@@ -65,7 +65,6 @@ router.get('/endpoint', (req,res)=> {
       });
     }
     })
-
     .catch(function(err){
       console.log(err);
     });
@@ -85,7 +84,7 @@ router.get('/', (req,res)=> {
       games: games
     });
   }).catch(err=>{
-    console.log(err);
+     console.log(err);
   });
 });
 
@@ -100,16 +99,19 @@ router.get('/add', ensureAuthenticated, (req,res)=>{
 
 //single game
 
-router.get('/show/:id', (req,res)=> {
+router.get('/show/:id',ensureAuthenticated, (req,res)=> {
   Game.findOne({  _id: req.params.id })
   .populate('host')
   .populate('players.playerUser')
   .then(game => {
-    res.render('games/show', {
-      game: game
-  }).catch(err=>{
-    console.log(err);
-  });
+    if (game == null){
+      req.flash('error_msg','Game not found');
+      res.redirect('/games');
+    } else {
+      res.render('games/show', {
+        game: game
+      });
+    }
   });
 });
 
