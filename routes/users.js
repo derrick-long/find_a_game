@@ -16,12 +16,16 @@ router.get('/dashboard', ensureAuthenticated, (req,res) => {
 });
 
 
+//test and update if needed
 router.get('/profile/:id', ensureAuthenticated, (req,res) => {
   User.findOne({
     _id: req.params.id})
   .then(user=>{
     res.render('users/profile', {
       profileUser:user
+    })
+    .catch(err=>{
+      console.log(err);
     });
   });
 
@@ -52,6 +56,8 @@ router.put('/:id', ensureAuthenticated, (req,res)=> {
       .then(user=>{
         req.flash('success_msg', 'Profile Updated!');
         res.redirect('/users/dashboard');
+      }).catch(err=>{
+        console.log(err);
       });
 
 
@@ -98,6 +104,7 @@ router.delete('/drop_player', ensureAuthenticated, (req,res) => {
           res.redirect('/users/dashboard');
     });
   });
+
   });
 
 
