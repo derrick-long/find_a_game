@@ -1,13 +1,12 @@
-<h1> This is the edit page </h1>
+<h1> Edit <%= user.firstName %>'s Profile </h1>
 
 
 <form action="/users/<%= user.id %>?_method=PUT" method="post">
   <input type="hidden" name="_method" value="PUT">
 
   <div class="form-group">
-    <label for="profileDescription">Profile Info:</label>
-    <textarea class="form-control" name="profileDescription" placeholder="Tell us a little about yourself...">
-      <%= user.profileInfo %> 
+    <textarea class="form-control" rows="4" name="profileDescription" placeholder="Tell us a little about yourself...">
+      <%= user.profileInfo %>
     </textarea>
   </div>
       <button class="btn btn-danger">Submit Changes</button>

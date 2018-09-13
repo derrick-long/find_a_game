@@ -74,8 +74,7 @@ const UserSchema = new Schema({
     default: 0
   },
   profileInfo: {
-    type: String,
-    default: "This is placeholder, please add a personal touch when you can!"
+    type: String
   }
 
 

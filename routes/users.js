@@ -21,12 +21,17 @@ router.get('/profile/:id', ensureAuthenticated, (req,res) => {
   User.findOne({
     _id: req.params.id})
   .then(user=>{
-    res.render('users/profile', {
-      profileUser:user
-    })
-    .catch(err=>{
-      console.log(err);
-    });
+    if(user){
+      res.render('users/profile', {
+        profileUser:user
+      })
+      .catch(err=>{
+        console.log(err);
+      });
+    } else {
+      req.flash('error_msg', 'User Not Found');
+      res.redirect('/');
+    }
   });
 
 
@@ -35,12 +40,18 @@ router.get('/profile/:id', ensureAuthenticated, (req,res) => {
 // get edit page
 router.get('/profile/edit/:id', ensureAuthenticated, (req,res) => {
   User.findOne({
-    _id: req.params.id})
+    _id: req.user.id})
   .then(user=>{
+    if (req.params.id == req.user.id && user){
     res.render('users/profile_edit', {
       user:user
-
     });
+  } else {
+    req.flash('error_msg', "Invalid User");
+    res.redirect('/');
+  }
+  }).catch(err=>{
+    console.log(err);
   });
 });
 
