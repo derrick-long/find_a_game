@@ -12,11 +12,11 @@ const {starPercentage} = require('../helpers/reviews');
 router.get('/dashboard', ensureAuthenticated, (req,res) => {
   res.render('users/dashboard');
   //find way to display upcoming game, so game with the greatest date,
-  //probably need to add a helper function for that
+
 });
 
 
-//test and update if needed
+
 router.get('/profile/:id', ensureAuthenticated, (req,res) => {
   User.findOne({
     _id: req.params.id})
@@ -56,11 +56,11 @@ router.get('/profile/edit/:id', ensureAuthenticated, (req,res) => {
 });
 
 
-// add put process here
 router.put('/:id', ensureAuthenticated, (req,res)=> {
   User.findOne({
-    _id: req.params.id})
+    _id: req.user.id})
   .then(user=>{
+    if(user){
     user.profileInfo = req.body.profileDescription;
 
     user.save()
@@ -70,13 +70,16 @@ router.put('/:id', ensureAuthenticated, (req,res)=> {
       }).catch(err=>{
         console.log(err);
       });
-
+  } else {
+    req.flash('User not Found!');
+    res.redirect('/');
+  }
 
   });
 });
 
 
-router.get('/hosted',(req,res, next)=> {
+router.get('/hosted', ensureAuthenticated,(req,res, next)=> {
   Game.find({host: req.user.id})
   .populate('user')
   .then(games => {
@@ -89,7 +92,7 @@ router.get('/hosted',(req,res, next)=> {
 
 
 
-router.get('/played', (req,res)=>{
+router.get('/played', ensureAuthenticated, (req,res)=>{
   Game.find({'players.playerUser': req.user.id})
   .populate('user')
   .then(games => {
@@ -106,7 +109,6 @@ router.delete('/drop_player', ensureAuthenticated, (req,res) => {
   Game.findOneAndUpdate({_id:req.body.game_id},
   {$pull: { players : {"playerUser": req.user.id }}}
     ).then(()=> {
-      //see if I can make this just one request
       Game.findOne({_id:req.body.game_id})
         .then(game =>{
           game.numberOfPlayers += 1 ;
@@ -114,6 +116,8 @@ router.delete('/drop_player', ensureAuthenticated, (req,res) => {
           req.flash('success_msg', 'Left Game!');
           res.redirect('/users/dashboard');
     });
+  }).catch(err=>{
+    console.log(err);
   });
 
   });
