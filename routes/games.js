@@ -178,7 +178,6 @@ router.post('/', ensureAuthenticated, (req,res)=>{
         game.location.coordinates.splice(0,2);
         game.location.coordinates.push(lat,long);
         game.save();
-        console.log(game.location.coordinates);
         req.flash('success_msg', 'Game Added!');
         res.redirect(`/games/show/${game.id}`);
       });
@@ -297,13 +296,13 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
       const newPlayer = {
         playerUser: req.user.id
       };
+
       game.players.unshift(newPlayer);
       game.numberOfPlayers -= 1;
 
       game.save()
       .then(game =>{
         req.flash('success_msg', 'Signed up for game!');
-
         res.redirect('/users/dashboard');
       });
     }
@@ -321,29 +320,33 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
   })
   .populate('host')
   .then(game=> {
-    game.host.hostReviews.forEach(function(review){
-      if (review.game == game.id && review.reviewUser == req.user.id){
-          req.flash('error_msg', 'You already added a review!');
-          res.redirect('/');
-      } else {
+    if(game){
+      game.host.hostReviews.forEach(function(review){
+        if (review.game == game.id && review.reviewUser == req.user.id){
+            req.flash('error_msg', 'You already added a review!');
+            res.redirect('/');
+        } else {
 
-        const newHostReview = {
-        game: game.id,
-        reviewBody: req.body.hostReviewBody,
-        reviewScore: req.body.hostReviewScore,
-        reviewUser: req.user.id
-      };
-      //works probably need to clean it up though
-      game.host.hostReviews.unshift(newHostReview);
-      const newAverage = ratingsAverage(game.host,'host');
-      game.host.hostReviewAverage = newAverage;
-      game.host.save()
-      .then(game=> {
-        req.flash('success_msg', 'Review added!');
-        res.redirect('/');
-      });
-    }
-  });
+          const newHostReview = {
+          game: game.id,
+          reviewBody: req.body.hostReviewBody,
+          reviewScore: req.body.hostReviewScore,
+          reviewUser: req.user.id
+        };
+        //works probably need to clean it up though
+        game.host.hostReviews.unshift(newHostReview);
+        const newAverage = ratingsAverage(game.host,'host');
+        game.host.hostReviewAverage = newAverage;
+        game.host.save()
+        .then(game=> {
+          req.flash('success_msg', 'Review added!');
+          res.redirect('/');
+        });
+      }
+    });
+  }
+  }).catch(err=>{
+    console.log(err);
   });
 });
 
@@ -351,8 +354,6 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
 
 
 router.post('/player_review/:id', ensureAuthenticated, (req, res)=>{
-
-
   User.findOne({
     _id: req.body.player_id
   })

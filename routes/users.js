@@ -87,6 +87,8 @@ router.get('/hosted', ensureAuthenticated,(req,res, next)=> {
       games:games,
       title: "Hosted Games"
     });
+  }).catch(err=>{
+    console.log(err);
   });
 });
 
