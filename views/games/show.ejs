@@ -3,39 +3,37 @@
 
   <div class="col">
   </div>
+
   <div class="col-12  bg-light">
     <div class="game-info  d-block">
       <h1 class="floatleft"> <%= game.title %>  </h1>
+
       <span class="float-right"> Game Starts At: <%= dateFormat(game.date, "fullDate") %> | <%= timeChange(game.startTime) %> </span>
 
       <p> <%= game.description %> </p>
 
+      <div class="profile-image float-left">
+        <img src="<%= user.image %>" class="img-fluid rounded-circle" ></img>
+      </div>
 
-
-
-            <div class="profile-image float-left">
-                <img src="<%= user.image %>" class="img-fluid rounded-circle" ></img>
-            </div>
-
-            <div class="rating float-left mr-2" data-rating= "<%= user.hostReviewAverage%>" data-id="<%= user.id %>">
-                <div class="stars-outer">
-                <div class="<%= user.id %> stars-inner"></div>
-                </div>
-            </div>
-
-
-
-            <div class="float-left">
-              <a href= "/users/profile/<%= game.host.id %>" class="plain-link">
-             <span class="align-middle"> Hosted by <%= game.host.firstName %>  <%= game.host.lastName %></span>
-              </a>
-            </div>
-
-          <div class="clearfix">
+      <div class="rating float-left mr-2" data-rating= "<%= user.hostReviewAverage %>" data-id="<%= user.id %>">
+          <div class="stars-outer">
+          <div class="<%= user.id %> stars-inner"></div>
           </div>
+      </div>
+
+    <div class="float-left">
+      <a href= "/users/profile/<%= game.host.id %>" class="plain-link">
+      <span class="align-middle"> Hosted by <%= game.host.firstName %>  <%= game.host.lastName %></span>
+      </a>
+    </div>
+
+    <div class="clearfix">
+    </div>
 
 
     </div>
+
     <% if(user && game.numberOfPlayers > 0) { %>
 
     <form action="/games/player/<%= game.id %>"  method="post">
@@ -65,7 +63,7 @@
 
 
 
-
+<% if(game.players.length > 0) { %>
  <!-- fix formating here so everything is on one line also fix width of elements and general look   -->
     <div class="dropdown float-left m-2">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="playersDropdown" data-toggle="dropdown">
@@ -82,40 +80,32 @@
                 </a>
 
                   <div class="dropdown-item">
+
                     <form action="/games/player_review/<%= game.id %>" method="post">
                       <div class="form-group">
                         <input type="hidden" name="player_id" value="<%= player.playerUser.id %>">
                         <input type="number"  class="form-control" name="playerReviewScore"  min= "1" max="5" placeholder="Rate 1 - 5">
                       </div>
 
-
-
                       <div class="form-group">
                         <label for="playerReviewBody">Player Review: </label>
                         <textarea class="form-control" name="playerReviewBody" placeholder= "Leave feedback for your players here."> </textarea>
                         <button class="btn btn-danger"> Submit </button>
-
                       </div>
                     </form>
-                    </div>
-                   <div class="stars-outer d-inline-block">
+                  </div>
+
+                  <div class="stars-outer d-inline-block">
                      <div class="<%= player.playerUser.id %> stars-inner"></div>
-                   </div>
+                  </div>
 
                </div>
         <% }) %>
       </div>
+      <% } %>
+
     </div>
-
-
-
   </div>
   <div class="col">
   </div>
 </div>
-
-
-<!--
-so review stil happens here because I need to veryify all parties played with eachother, right?
-so now we still need a way to make sure that they aren't reviewed more than once per game
-so I think reviews must save the game ID as well so that we can cross reference dbs?  -->

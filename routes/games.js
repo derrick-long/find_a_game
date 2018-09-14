@@ -10,6 +10,7 @@ const {ratingsAverage} = require('../helpers/reviews');
 const NodeGeocoder = require('node-geocoder');
 
 // protect api
+// add catch/error handling for bad geocode in add game
 
 var options = {
   provider: 'google',
@@ -136,7 +137,7 @@ router.post('/', ensureAuthenticated, (req,res)=>{
   }
   // maybe add a min length for description
   if(errors.length > 0){
-    console.log(errors);
+
     res.render('games/add', {
       errors: errors,
       title: req.body.title,
@@ -170,17 +171,25 @@ router.post('/', ensureAuthenticated, (req,res)=>{
 
   geocoder.geocode(req.body.address + " " + req.body.zipcode)
     .then(function(response) {
-      long = response[0].longitude;
-      lat = response[0].latitude;
-      new Game(newGame)
-      .save()
-      .then(game => {
-        game.location.coordinates.splice(0,2);
-        game.location.coordinates.push(lat,long);
-        game.save();
-        req.flash('success_msg', 'Game Added!');
-        res.redirect(`/games/show/${game.id}`);
-      });
+      if (response == undefined || response.length == 0) {
+        req.flash('error_msg', 'invalid address');
+        res.redirect('/games/add');
+      } else {
+        long = response[0].longitude;
+        lat = response[0].latitude;
+        new Game(newGame)
+        .save()
+        .then(game => {
+          game.location.coordinates.splice(0,2);
+          game.location.coordinates.push(lat,long);
+          game.save();
+          req.flash('success_msg', 'Game Added!');
+          res.redirect(`/games/show/${game.id}`);
+        })
+        .catch(err=>{
+          console.log(err);
+        });
+      }
   });
   }
 });
