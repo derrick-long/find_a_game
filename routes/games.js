@@ -168,11 +168,11 @@ router.post('/', ensureAuthenticated, (req,res)=>{
   description: req.body.description,
   host: req.user.id,
   };
-
+  // handle out of bounds geolocs
   geocoder.geocode(req.body.address + " " + req.body.zipcode)
     .then(function(response) {
       if (response == undefined || response.length == 0) {
-        req.flash('error_msg', 'invalid address');
+        req.flash('error_msg', 'Please enter a valid address');
         res.redirect('/games/add');
       } else {
         long = response[0].longitude;
