@@ -75,7 +75,7 @@ app.use(flash());
 
 //use dateformat in views
 
-app.locals.dateFormat = require('dateFormat');
+app.locals.dateformat = require('dateformat');
 
 //passport middleware
 
