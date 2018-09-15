@@ -45,14 +45,17 @@ app.use(bodyParser.json());
 
 
 
+
 //connect mongoose
+const db = require('./config/database');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost/find-game-dev')
-  .then(()=> console.log('MongoDB Connected...'))
-  .catch(err => console.log(err));
+mongoose.connect(db.mongoURI ,{
 
+})
+.then(()=>console.log('MongoDB Connected...'))
+.catch(err=> console.log(err));
 
 // cookie parser
   app.use(cookieParser());
