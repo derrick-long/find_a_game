@@ -47,11 +47,11 @@ app.use(bodyParser.json());
 
 
 //connect mongoose
-const db = require('./config/database');
+
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(db.mongoURI ,{
+mongoose.connect(keys.mongoURI, {
 
 })
 .then(()=>console.log('MongoDB Connected...'))
