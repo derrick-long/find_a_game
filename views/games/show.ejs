@@ -13,12 +13,12 @@
       <p> <%= game.description %> </p>
 
       <div class="profile-image float-left">
-        <img src="<%= user.image %>" class="img-fluid rounded-circle" ></img>
+        <img src="<%= game.host.image %>" class="img-fluid rounded-circle" ></img>
       </div>
 
-      <div class="rating float-left mr-2" data-rating= "<%= user.hostReviewAverage %>" data-id="<%= user.id %>">
+      <div class="rating float-left mr-2" data-rating= "<%= game.host.hostReviewAverage %>" data-id="<%= game.host.id %>">
           <div class="stars-outer">
-          <div class="<%= user.id %> stars-inner"></div>
+          <div class="<%= game.host.id %> stars-inner"></div>
           </div>
       </div>
 
@@ -73,9 +73,12 @@
         <% game.players.forEach(function(player){ %>
 
 
-               <a href="/users/profile/<%= player.playerUser.id %>" class="player-list plain-link"> <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
-                  <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %>
-                  <div class="rating dropdown-item d-flex" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
+               <a href="/users/profile/<%= player.playerUser.id %>" class="player-list plain-link">
+                 <div class="profile-image float-left">
+                   <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
+                    <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %>
+                    <div class="rating dropdown-item d-flex" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
+                    </div>
                   </div>
                 </a>
 

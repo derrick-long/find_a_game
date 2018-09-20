@@ -320,7 +320,8 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
 
 
 
-
+// works now but something odd going on
+// dry up and fix 
 router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
 
 
@@ -329,8 +330,24 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
   })
   .populate('host')
   .then(game=> {
-    if(game){
-      game.host.hostReviews.forEach(function(review){
+  if(game.host.hostReviews.length == 0 || game.host.hostReviews == undefined){
+    const newHostReview = {
+    game: game.id,
+    reviewBody: req.body.hostReviewBody,
+    reviewScore: req.body.hostReviewScore,
+    reviewUser: req.user.id
+    };
+  //works probably need to clean it up though
+  game.host.hostReviews.unshift(newHostReview);
+  const newAverage = ratingsAverage(game.host,'host');
+  game.host.hostReviewAverage = newAverage;
+  game.host.save()
+  .then(game=> {
+    req.flash('success_msg', 'Review added!');
+    res.redirect('/');
+  });
+  }
+    game.host.hostReviews.forEach(function(review){
         if (review.game == game.id && review.reviewUser == req.user.id){
             req.flash('error_msg', 'You already added a review!');
             res.redirect('/');
@@ -341,7 +358,7 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
           reviewBody: req.body.hostReviewBody,
           reviewScore: req.body.hostReviewScore,
           reviewUser: req.user.id
-        };
+          };
         //works probably need to clean it up though
         game.host.hostReviews.unshift(newHostReview);
         const newAverage = ratingsAverage(game.host,'host');
@@ -353,9 +370,7 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
         });
       }
     });
-  }
-  }).catch(err=>{
-    console.log(err);
+
   });
 });
 
