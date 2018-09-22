@@ -34,6 +34,7 @@
 
     </div>
 
+  <!-- don't display unless user is not already a player in the game  -->
     <% if(user && game.numberOfPlayers > 0) { %>
 
     <form action="/games/player/<%= game.id %>"  method="post">
@@ -42,7 +43,7 @@
 
     <% } %>
 
-    <!-- need to clean up this view logic/make into a drop down   -->
+
 
 
 
@@ -72,35 +73,41 @@
       <div class="dropdown-menu  dropup" aria-labelledby="dropdownMenuButton">
         <% game.players.forEach(function(player){ %>
 
+          <div class="dropdown-item player">
 
-               <a href="/users/profile/<%= player.playerUser.id %>" class="player-list plain-link">
-                 <div class="profile-image float-left">
-                   <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
-                    <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %>
-                    <div class="rating dropdown-item d-flex" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
+             <a href="/users/profile/<%= player.playerUser.id %>" class="player-list plain-link">
+               <div class="profile-image float-left">
+                 <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
+                  <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %>
+                  <div class="rating dropdown-item d-flex" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
+                  </div>
+                </div>
+              </a>
+
+              <div class="clearfix">
+              </div>
+
+              <div class="stars-outer">
+                 <div class="<%= player.playerUser.id %> stars-inner"></div>
+              </div>
+
+
+
+                  <form action="/games/player_review/<%= game.id %>" method="post">
+                    <div class="form-group">
+                      <input type="hidden" name="player_id" value="<%= player.playerUser.id %>">
+                      <input type="number"  class="form-control" name="playerReviewScore"  min= "1" max="5" placeholder="Rate 1 - 5">
                     </div>
-                  </div>
-                </a>
 
-                  <div class="dropdown-item">
+                    <div class="form-group">
+                      <label for="playerReviewBody">Player Review: </label>
+                      <textarea class="form-control" name="playerReviewBody" placeholder= "Leave feedback for your players here."> </textarea>
+                      <button class="btn btn-danger"> Submit </button>
+                    </div>
+                  </form>
+                </div>
 
-                    <form action="/games/player_review/<%= game.id %>" method="post">
-                      <div class="form-group">
-                        <input type="hidden" name="player_id" value="<%= player.playerUser.id %>">
-                        <input type="number"  class="form-control" name="playerReviewScore"  min= "1" max="5" placeholder="Rate 1 - 5">
-                      </div>
 
-                      <div class="form-group">
-                        <label for="playerReviewBody">Player Review: </label>
-                        <textarea class="form-control" name="playerReviewBody" placeholder= "Leave feedback for your players here."> </textarea>
-                        <button class="btn btn-danger"> Submit </button>
-                      </div>
-                    </form>
-                  </div>
-
-                  <div class="stars-outer d-inline-block">
-                     <div class="<%= player.playerUser.id %> stars-inner"></div>
-                  </div>
 
                </div>
         <% }) %>
