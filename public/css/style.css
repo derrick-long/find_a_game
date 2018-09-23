@@ -7,6 +7,9 @@ body {
   width: 2em;
 }
 
+.player-name {
+  white-space: normal;
+}
 
 .profile-image {
   width: 3em;
@@ -26,6 +29,10 @@ body {
     width: 100%;
     height: 60px;
     line-height: 60px;
+}
+
+.player-list {
+  height: 2em;
 }
 
 .plain-link, a.plain-link:hover{
@@ -55,9 +62,6 @@ body {
   background-color: #E9ECEF;
 }
 
-#player-list {
-  height: 2em;
-}
 
 
 
