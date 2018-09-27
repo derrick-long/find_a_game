@@ -5,10 +5,10 @@
     <% if(games.length == 0) { %>
 
 
-      <div class="card card-inline">
+      <div class="card border-2 border-secondary">
           <div class="card-body">
             <h5 class="card-title"> No Games Added Yet! </h5>
-            <p class="card-text">Add some games to see games listed here instead of this dumb message </p>
+            <p class="card-text">Add some games to see games listed here</p>
             <a href="games/add" class="btn btn-primary"><i class="fas fa-plus"></i>
               Add New Game</a>
           </div>
@@ -23,9 +23,9 @@
 
          <% games.forEach(function(game){ %>
 
-            <div class="card card-inline border-2 border-secondary">
+            <div class="card  border-2 border-secondary">
               <div class="card-body">
-                <h5 class="card-title"><%= game.title %> </h5>
+                <h5 class="card-title"> <%= game.title %> </h5>
                 <p class="card-text float-right"> <%= dateformat(game.date, "fullDate") %> | <%= timeChange(game.startTime) %> </p>
                 <p class="card-text"><%= truncate(game.description, 250) %> </p>
                 <% if (game.numberOfPlayers > 0) { %>

@@ -18,6 +18,14 @@
         <a class="nav-link" href="/about"><i class="fas fa-book"></i> About </a>
       </li>
 
+      <% if (user == null) { %>
+
+          <li class="nav-item">
+            <a class="nav-link plain-link ml-auto" href="/auth/google/"> <i class="fab fa-google-plus"></i> Login With Google</a>
+          </li> 
+
+      <% } %>
+
       <% if (user) { %>
         <li class="nav-item">
           <a class="nav-link" href="/users/dashboard"><i class="far fa-address-book"></i> Dashboard </a>
@@ -29,12 +37,6 @@
     </ul>
   </div>
 
-  <% if (user == null) { %>
-    <ul class="nav-bar nav justify-content-end">
-      <li class="nav-item">
-        <a class="nav-link plain-link" href="/auth/google/"> <i class="fab fa-google-plus"></i> Login With Google</a>
-      </li>
-    </ul>
-  <% } %>
+
 
 </nav>
