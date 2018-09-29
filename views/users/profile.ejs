@@ -24,20 +24,20 @@
     </div>
 
     <div class="rating" data-rating= "<%= profileUser.hostReviewAverage%>" data-id="<%= profileUser.id %>">
-      <span class> Host Rating: <%= profileUser.hostReviewAverage%> </span>
+      <span class> Host Rating: </span>
         <div class="stars-outer">
         <div class="<%= profileUser.id %> stars-inner"></div>
         </div>
     </div>
 
     <div class="rating" data-rating= "<%= user.playerReviewAverage%>" data-id="<%= profileUser.id %>">
-      <span> Player Rating: <%= profileUser.playerReviewAverage%> </span>
+      <span> Player Rating:  </span>
         <div class="stars-outer">
         <div class="<%= profileUser.id %> stars-inner"></div>
         </div>
     </div>
 
-  
+
 
       <% if(user.id == profileUser.id) { %>
 

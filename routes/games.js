@@ -28,14 +28,14 @@ router.get('/map', (req, res)=> {
   res.render('games/find_map');
 });
 
-router.get('/endpoint', (req,res)=> {
-  // test query errors
+//put in undefined catch
 
+router.get('/endpoint', (req,res)=> {
+  var currentDate = new Date();
   var query_lat;
   var query_long;
   var miles = ( req.query.radius * 1609.34);
- //update var here for ajax
- //get redirect working here
+
   geocoder.geocode(req.query.searchZip)
     .then(function(response){
       if (response == undefined || response.length == 0) {
@@ -45,39 +45,36 @@ router.get('/endpoint', (req,res)=> {
         redirectTo: '/games/map'
         });
       } else {
-    //   // do stuff if response is undefined
       query_lat = response[0].latitude;
       query_long = response[0].longitude;
+
       Game.find({
        location: {
         $near: {
-         $maxDistance: miles, //change back to var
+         $maxDistance: miles,
          $geometry: {
           type: "Point",
-          coordinates: [query_lat, query_long]
-         }
+          coordinates: [query_lat, query_long]}
         }
-      }
+      },date: { $gt: currentDate}
+
+
      }).find((error, games) => {
        if (error) console.log(error);
-
-        res.send({games: games});
-
-      });
-    }
-    })
-    .catch(function(err){
-      console.log(err);
+      res.send({games:games});
+      })
+    .catch(err=>{
+      res.status(500).json({error: err});
     });
-
-
+  }
+  });
 });
 
 
 
 router.get('/', (req,res)=> {
-  const currentDate = new Date();
-  Game.find({ date: { $gt: currentDate}})
+  var currentDate = new Date();
+  Game.find({ date: { $gt: currentDate}}) /// add this to the find game joint as well
   .populate('host')
   .sort({date:'desc'})
   .then(games =>{
@@ -168,7 +165,7 @@ router.post('/', ensureAuthenticated, (req,res)=>{
   description: req.body.description,
   host: req.user.id,
   };
-  // handle out of bounds geolocs
+
   geocoder.geocode(req.body.address + " " + req.body.zipcode)
     .then(function(response) {
       if (response == undefined || response.length == 0) {
@@ -321,7 +318,7 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
 
 
 // works now but something odd going on
-// dry up and fix 
+// dry up and fix
 router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
 
 
