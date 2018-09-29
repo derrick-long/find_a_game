@@ -143,6 +143,10 @@ app.locals.makePlural = function(item, number){
 //set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+//global var for api
+global.apiURL = keys.apiURL;
+
+
 
 
 //use routes

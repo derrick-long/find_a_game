@@ -1,7 +1,7 @@
 var map;
 var markers = [];
 var addressInput;
-
+var server = document.getElementById('serverInfo');
 
 
 
@@ -72,7 +72,7 @@ $(function(){
 			type: 'GET',
 			data: data,
 	    contentType: 'application/json',
-      url: 'http://localhost:5000/games/endpoint',
+      url: server.dataset.url,
       success: function(response) {
 					// if (response.games == undefined || response.games.length == 0) {
 					if(response.success){
