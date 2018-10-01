@@ -39,7 +39,6 @@ function geocodeAddress(markers) {
 	// 		//clean up later
       map = new google.maps.Map(document.getElementById("map"));
 
-			//works fine like this, now we just need to iterate and create the shit
 			// Loop through markers
 
 
