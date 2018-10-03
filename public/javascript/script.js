@@ -60,6 +60,10 @@ $( document ).ready(function() {
     }
 });
 
+
+
+
+
 // location stuff
 
 //variable error here
@@ -76,15 +80,16 @@ function getAddress (latitude, longitude) {
                   status);
     }
   );
+
 }
 
 function ipLookUp () {
   $.ajax('https://ipapi.co/json')
   .then(
       function success(response) {
-          console.log('User\'s Location Data is ', response.city);
+          console.log('User\'s Location Data is ', response);
           console.log('User\'s Country', response.country);
-          getAdress(response.latitude, response.longitude);
+          getAddress(response.latitude, response.longitude);
 },
 
       function fail(data, status) {
