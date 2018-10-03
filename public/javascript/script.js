@@ -79,12 +79,12 @@ function getAddress (latitude, longitude) {
 }
 
 function ipLookUp () {
-  $.ajax('http://ip-api.com/json')
+  $.ajax('https://ipapi.co/json')
   .then(
       function success(response) {
-          console.log('User\'s Location Data is ', response);
+          console.log('User\'s Location Data is ', response.city);
           console.log('User\'s Country', response.country);
-          getAdress(response.lat, response.lon);
+          getAdress(response.latitude, response.longitude);
 },
 
       function fail(data, status) {
