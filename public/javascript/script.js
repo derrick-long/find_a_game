@@ -62,6 +62,22 @@ $( document ).ready(function() {
 
 // location stuff
 
+//variable error here
+function getAddress (latitude, longitude) {
+  $.ajax('https://maps.googleapis.com/maps/api/geocode/json?' +
+          'latlng=' + latitude + ',' + longitude + '&key=' +
+          'AIzaSyDGdCjLNhY1u1ZQhXOHhVgTewhOyj71OuU')
+  .then(
+    function success (response) {
+      console.log('User\'s Address Data is ', response);
+    },
+    function fail (status) {
+      console.log('Request failed.  Returned status of',
+                  status);
+    }
+  );
+}
+
 function ipLookUp () {
   $.ajax('http://ip-api.com/json')
   .then(
@@ -78,20 +94,6 @@ function ipLookUp () {
   );
 }
 
-function getAddress (latitude, longitude) {
-  $.ajax('https://maps.googleapis.com/maps/api/geocode/json?' +
-          'latlng=' + latitude + ',' + longitude + '&key=' +
-          'AIzaSyDGdCjLNhY1u1ZQhXOHhVgTewhOyj71OuU')
-  .then(
-    function success (response) {
-      console.log('User\'s Address Data is ', response);
-    },
-    function fail (status) {
-      console.log('Request failed.  Returned status of',
-                  status);
-    }
-  );
-}
 
 if ("geolocation" in navigator) {
   // check if geolocation is supported/enabled on current browser
