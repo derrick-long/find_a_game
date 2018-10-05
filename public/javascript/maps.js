@@ -5,24 +5,24 @@ var server = document.getElementById('serverInfo');
 
 
 
-//get user location
+//get user address
 
-
-function getAddress (latitude, longitude) {
-  $.ajax('https://maps.googleapis.com/maps/api/geocode/json?' +
-          'latlng=' + latitude + ',' + longitude + '&key=' +
-          'AIzaSyDGdCjLNhY1u1ZQhXOHhVgTewhOyj71OuU')
-  .then(
-    function success (response) {
-      console.log('User\'s Address Data is ', response);
-    },
-    function fail (status) {
-      console.log('Request failed.  Returned status of',
-                  status);
-    }
-  );
-
-}
+// not needed atm
+// function getAddress (latitude, longitude) {
+//   $.ajax('https://maps.googleapis.com/maps/api/geocode/json?' +
+//           'latlng=' + latitude + ',' + longitude + '&key=' +
+//           'AIzaSyDGdCjLNhY1u1ZQhXOHhVgTewhOyj71OuU')
+//   .then(
+//     function success (response) {
+//       console.log('User\'s Address Data is ', response);
+//     },
+//     function fail (status) {
+//       console.log('Request failed.  Returned status of',
+//                   status);
+//     }
+//   );
+//
+// }
 
 
 
@@ -31,8 +31,7 @@ function ipLookUp () {
   $.ajax('https://ipapi.co/json')
   .then(
       function success(response) {
-				 map = new google.maps.Map(document.getElementById("map"));
-				 map.setCenter({lat:response.latitude,lng: response.longitude});
+				initMap(response.latitude,response.longitude);
 },
 
       function fail(data, status) {
@@ -51,9 +50,7 @@ if ("geolocation" in navigator) {
   navigator.geolocation.getCurrentPosition(
    function success(position) {
      // for when getting location is a success
-     console.log('latitude', position.coords.latitude,
-                 'longitude', position.coords.longitude);
-     getAddress(position.coords.latitude, position.coords.longitude);
+     initMap(position.coords.latitude, position.coords.longitude);
    },
   function error(error_message) {
     // for when getting location results in an error
@@ -70,10 +67,10 @@ if ("geolocation" in navigator) {
 
 // make this only fire after the above
 
-function initMap() {
+function initMap(lat,lng) {
 // basically go through and set up the center depending on outcome of function
 	var mapOptions = {
-		center: new google.maps.LatLng(10.20,40.38),
+		center: new google.maps.LatLng(lat,lng),
 		zoom: 11,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
