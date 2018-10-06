@@ -4,6 +4,15 @@
 
 <div class="container">
 
+  <div class="profile-image float-left">
+      <img src="<%= user.image %>" class="img-fluid rounded-circle" ></img>
+  </div>
+
+  <div class="float-left">
+    <h3 class="align-middle"> <%= user.firstName %>  <%= user.lastName %></h3>
+  </div>
+
+  <div class="clearfix"></div>
 
   <div class="rating" data-rating= "<%= user.hostReviewAverage%>" data-id="<%= user.id %>">
     <span> Host Rating: </span>
@@ -12,15 +21,11 @@
       </div>
   </div>
 
-
-    <div class="rating" data-rating= "<%= user.playerReviewAverage%>" data-id="<%= user.id %>">
+  <div class="rating" data-rating= "<%= user.playerReviewAverage%>" data-id="<%= user.id %>">
       <span> Player Rating:  </span>
         <div class="stars-outer">
         <div class="<%= user.id %> stars-inner"></div>
         </div>
     </div>
-
-
-
 
 </div>
