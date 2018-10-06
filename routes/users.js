@@ -9,9 +9,11 @@ const {ratingsAverage} = require('../helpers/reviews');
 const {starPercentage} = require('../helpers/reviews');
 
 
+
 router.get('/dashboard', ensureAuthenticated, (req,res) => {
+  var currentDate = new Date();
   res.render('users/dashboard');
-  //find way to display upcoming game, so game with the greatest date,
+  //find way to display upcoming game, so game with the date/time closest to current date/time
 
 });
 

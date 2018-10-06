@@ -35,7 +35,7 @@
     </div>
 
   <!-- don't display unless user is not already a player in the game  -->
-    <% if(user && game.numberOfPlayers > 0) { %>
+    <% if(user && game.numberOfPlayers > 0 && game.host.id != user.id) { %>
 
     <form action="/games/player/<%= game.id %>"  method="post">
       <input type="submit" value="Join Game" class="btn btn-success float-left m-2">

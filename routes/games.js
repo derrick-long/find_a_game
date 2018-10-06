@@ -76,7 +76,7 @@ router.get('/', (req,res)=> {
   var currentDate = new Date();
   Game.find({ date: { $gt: currentDate}}) /// add this to the find game joint as well
   .populate('host')
-  .sort({date:'desc'})
+  .sort('-date')
   .then(games =>{
     res.render('games/index', {
       games: games
