@@ -3,7 +3,8 @@ module.exports = {
     if(req.isAuthenticated()){
       return next();
     }
-    req.flash('error_msg', 'Please Sign In');
+    req.flash('error_msg', 'Please <a class=plain-link href='+'/auth/google/>' + 'Sign In </a>' );
+    // add variable here that will get passed to view
     res.redirect('/');
   },
   ensureGuest(req, res, next){
