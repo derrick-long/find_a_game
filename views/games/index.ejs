@@ -26,8 +26,8 @@
             <div class="card  border-2 border-secondary">
               <div class="card-body">
                 <h5 class="card-title"> <%= game.title %> </h5>
-                <% var gameDate = "butt" %>
-                <p class="card-text"> <%= gameDate %> | <%= timeChange(game.startTime) %> </p>
+                <% var gameDate = fromIsoDate(game.date); %>
+                <p class="card-text"> <%= dateformat(gameDate, "fullDate") %>  | <%= timeChange(game.startTime) %> </p>
                 <p class="card-text"><%= truncate(game.description, 250) %> </p>
                 <% if (game.numberOfPlayers > 0) { %>
                 <p class="card-text"> Seeking <%= game.numberOfPlayers %>

@@ -80,6 +80,8 @@ app.use(flash());
 
 app.locals.dateformat = require('dateformat');
 
+
+
 //passport middleware
 
 app.use(passport.initialize());
@@ -110,6 +112,16 @@ app.locals.truncate = function(str, len){
 			return new_str + '...';
 		}
 		return str;
+};
+
+app.locals.fromIsoDate = function(date){
+  date = date.toISOString().substring(0, 10);
+  date = date.split('-');
+  var year = date[0];
+  var month = date[1] - 1;
+  var day = date[2];
+  var gameDate = new Date(year, month, day);
+  return gameDate;
 };
 
 app.locals.timeChange =  function(time) {

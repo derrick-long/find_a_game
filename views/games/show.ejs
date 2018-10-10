@@ -7,14 +7,10 @@
   <div class="col-12  bg-light">
     <div class="game-info  d-block">
       <h1 class="floatleft"> <%= game.title %>  </h1>
-      <% var date = game.date.toISOString().substring(0, 10); %>
-      <% date = date.split('-'); %>
-      <% var year = date[0]; %>
-      <% var month = date[1] - 1; %>
-      <% var day = date[2]; %>
-      <% var gameDate = new Date(year, month, day); %>
-      <span class="float-right"> Game Starts:  <%= dateformat(gameDate, "fullDate") %>  | <%= timeChange(game.startTime) %> </span>
 
+      <% var gameDate = fromIsoDate(game.date); %>
+      <span class="float-right">  <%= dateformat(gameDate, "fullDate") %>  | <%= timeChange(game.startTime) %> </span>
+      <div class="clearfix"></div> 
       <p> <%= game.description %> </p>
 
       <div class="profile-image float-left">
