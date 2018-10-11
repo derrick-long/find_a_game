@@ -9,10 +9,19 @@ const {ratingsAverage} = require('../helpers/reviews');
 const {starPercentage} = require('../helpers/reviews');
 
 
-
+//test
 router.get('/dashboard', ensureAuthenticated, (req,res) => {
   var currentDate = new Date();
-  res.render('users/dashboard');
+  Game.find({
+    $or: [
+      {host:req.user.id, date:{ $gte:currentDate }},
+      {'players.playerUser': req.user.id,date:{ $gte:currentDate }}
+    ]
+  })
+  .sort('date')
+  .then(games=>{
+    res.render('users/dashboard', {upcomingGame: games[0]});
+  });
   //find way to display upcoming game, so game with the date/time closest to current date/time
 
 });
