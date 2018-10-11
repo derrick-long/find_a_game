@@ -7,7 +7,6 @@
   <div class="profile-image float-left">
       <img src="<%= user.image %>" class="img-fluid rounded-circle" ></img>
   </div>
-    <h1> <%= upcomingGame.title %> </h1> 
   <div class="float-left">
     <h3 class="align-middle"> <%= user.firstName %>  <%= user.lastName %></h3>
   </div>
@@ -26,6 +25,25 @@
         <div class="stars-outer">
         <div class="<%= user.id %> stars-inner"></div>
         </div>
+    </div>
+
+
+    <div class="card  border-2 border-secondary mt-4">
+      <div class="card-body">
+        <h5 class="card-title"> <%= upcomingGame.title %> </h5>
+        <% var gameDate = fromIsoDate(upcomingGame.date); %>
+        <p class="card-text"> <%= dateformat(gameDate, "fullDate") %>  | <%= timeChange(upcomingGame.startTime) %> </p>
+        <p class="card-text"><%= truncate(upcomingGame.description, 250) %> </p>
+        <% if (upcomingGame.numberOfPlayers > 0) { %>
+        <p class="card-text"> Seeking <%= upcomingGame.numberOfPlayers %>
+        <%= makePlural('Player', Number(upcomingGame.numberOfPlayers)) %></p>
+        <% } else { %>
+          <div class="alert alert-success"> <p class="card-text">  Full </p>
+          </div>
+        <% } %>
+          <a href="games/show/<%=upcomingGame.id%>" class="btn btn-primary"><i class="fas fa-book"></i>
+            See Details</a>
+      </div>
     </div>
 
 </div>
