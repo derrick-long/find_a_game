@@ -28,22 +28,40 @@
     </div>
 
 
-    <div class="card  border-2 border-secondary mt-4">
-      <div class="card-body">
-        <h5 class="card-title"> <%= upcomingGame.title %> </h5>
-        <% var gameDate = fromIsoDate(upcomingGame.date); %>
-        <p class="card-text"> <%= dateformat(gameDate, "fullDate") %>  | <%= timeChange(upcomingGame.startTime) %> </p>
-        <p class="card-text"><%= truncate(upcomingGame.description, 250) %> </p>
-        <% if (upcomingGame.numberOfPlayers > 0) { %>
-        <p class="card-text"> Seeking <%= upcomingGame.numberOfPlayers %>
-        <%= makePlural('Player', Number(upcomingGame.numberOfPlayers)) %></p>
-        <% } else { %>
-          <div class="alert alert-success"> <p class="card-text">  Full </p>
-          </div>
-        <% } %>
-          <a href="games/show/<%=upcomingGame.id%>" class="btn btn-primary"><i class="fas fa-book"></i>
-            See Details</a>
+  <% if(upcomingGame == null) { %>
+
+
+        <div class="card border-2 border-secondary mt-4">
+            <div class="card-body">
+              <h5 class="card-title"> No Games Added Yet! </h5>
+              <p class="card-text">Add some games to see games listed here</p>
+              <a href="games/add" class="btn btn-primary"><i class="fas fa-plus"></i>
+                Add New Game</a>
+                <!-- update links  -->
+            </div>
+        </div>
+
+  <% } else { %>
+
+
+      <div class="card  border-2 border-secondary mt-4">
+        <div class="card-body">
+          <h5 class="card-title"> <%= upcomingGame.title %> </h5>
+          <% var gameDate = fromIsoDate(upcomingGame.date); %>
+          <p class="card-text"> <%= dateformat(gameDate, "fullDate") %>  | <%= timeChange(upcomingGame.startTime) %> </p>
+          <p class="card-text"><%= truncate(upcomingGame.description, 250) %> </p>
+          <% if (upcomingGame.numberOfPlayers > 0) { %>
+          <p class="card-text"> Seeking <%= upcomingGame.numberOfPlayers %>
+          <%= makePlural('Player', Number(upcomingGame.numberOfPlayers)) %></p>
+          <% } else { %>
+            <div class="alert alert-success"> <p class="card-text">  Full </p>
+            </div>
+          <% } %>
+            <a href="games/show/<%=upcomingGame.id%>" class="btn btn-primary"><i class="fas fa-book"></i>
+              See Details</a>
+        </div>
       </div>
-    </div>
+
+  <% } %>
 
 </div>
