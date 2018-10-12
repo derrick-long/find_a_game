@@ -11,7 +11,7 @@
       <span class="mb-2">  <%= dateformat(gameDate, "fullDate") %>  | <%= timeChange(game.startTime) %> </span>
       <div class="clearfix"></div>
 
-      <p> <%= game.description %> </p>
+      <p class="m-2"> <%= truncate(game.description, 500) %> </p>
 
       <div class="profile-image float-left ">
         <img src="<%= game.host.image %>" class="img-fluid rounded-circle" ></img>

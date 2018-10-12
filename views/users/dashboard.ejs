@@ -53,9 +53,9 @@
           <p class="card-text"> <%= dateformat(gameDate, "fullDate") %>  | <%= timeChange(upcomingGame.startTime) %> </p>
           <p class="card-text"><%= truncate(upcomingGame.description, 250) %> </p>
           <% if (upcomingGame.numberOfPlayers > 0) { %>
-          <p class="card-text"> Seeking <%= upcomingGame.numberOfPlayers %>
+          <p class="card-text text-muted"> Seeking <%= upcomingGame.numberOfPlayers %>
 
-          <%= makePlural('Player', Number(upcomingGame.numberOfPlayers)) %></p>
+            <%= makePlural('Player', Number(upcomingGame.numberOfPlayers)) %></p>
 
           <% } else { %>
 
