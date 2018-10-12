@@ -13,7 +13,7 @@
 
   <div class="clearfix"></div>
 
-  <div class="rating" data-rating= "<%= user.hostReviewAverage%>" data-id="<%= user.id %>">
+  <div class="rating mt-2" data-rating= "<%= user.hostReviewAverage%>" data-id="<%= user.id %>">
     <span> Host Rating: </span>
       <div class="stars-outer">
       <div class="<%= user.id %> stars-inner"></div>
@@ -34,9 +34,11 @@
         <div class="card border-2 border-secondary mt-4">
             <div class="card-body">
               <h5 class="card-title"> No Games Added Yet! </h5>
-              <p class="card-text">Add some games to see games listed here</p>
-              <a href="games/add" class="btn btn-primary"><i class="fas fa-plus"></i>
-                Add New Game</a>
+              <p class="card-text"> Your next game would be here if you joined or made one!</p>
+              <a href="/games/add" class="btn btn-primary"><i class="fas fa-plus"></i>
+                Host A Game</a>
+              <a href="/games/map" class="btn btn-success"><i class="fas fa-plus"></i>
+                Join A Game</a>
                 <!-- update links  -->
             </div>
         </div>
