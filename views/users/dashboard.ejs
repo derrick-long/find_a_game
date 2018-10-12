@@ -54,12 +54,17 @@
           <p class="card-text"><%= truncate(upcomingGame.description, 250) %> </p>
           <% if (upcomingGame.numberOfPlayers > 0) { %>
           <p class="card-text"> Seeking <%= upcomingGame.numberOfPlayers %>
+
           <%= makePlural('Player', Number(upcomingGame.numberOfPlayers)) %></p>
+
           <% } else { %>
+
             <div class="alert alert-success"> <p class="card-text">  Full </p>
             </div>
+
           <% } %>
-            <a href="games/show/<%=upcomingGame.id%>" class="btn btn-primary"><i class="fas fa-book"></i>
+
+            <a href="/games/show/<%=upcomingGame.id%>" class="btn btn-primary"><i class="fas fa-book"></i>
               See Details</a>
         </div>
       </div>

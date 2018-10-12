@@ -23,14 +23,14 @@
 
          <% games.forEach(function(game){ %>
 
-            <div class="card  border-2 border-secondary">
+            <div class="card  border-2 border-secondary my-2">
               <div class="card-body">
                 <h5 class="card-title"> <%= game.title %> </h5>
                 <% var gameDate = fromIsoDate(game.date); %>
                 <p class="card-text"> <%= dateformat(gameDate, "fullDate") %>  | <%= timeChange(game.startTime) %> </p>
-                <p class="card-text"><%= truncate(game.description, 250) %> </p>
+                <p class="card-text m-2"><%= truncate(game.description, 250) %> </p>
                 <% if (game.numberOfPlayers > 0) { %>
-                <p class="card-text"> Seeking <%= game.numberOfPlayers %>
+                <p class="card-text text-muted"> Seeking <%= game.numberOfPlayers %>
                 <%= makePlural('Player', Number(game.numberOfPlayers)) %></p>
                 <% } else { %>
                   <div class="alert alert-success"> <p class="card-text"> Game Full </p>
