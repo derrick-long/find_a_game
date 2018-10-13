@@ -71,7 +71,7 @@
       <button class="btn btn-secondary dropdown-toggle standard-width m-2 d-block" type="button" id="playersDropdown" data-toggle="dropdown">
         Player List
       </button>
-      <div class="dropdown-menu  dropup" aria-labelledby="dropdownMenuButton">
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <% game.players.forEach(function(player){ %>
 
           <div class="dropdown-item player">
@@ -92,22 +92,22 @@
                  <div class="<%= player.playerUser.id %> stars-inner"></div>
               </div>
 
+              <% if (player.playerUser.id != user.id) { %>
+              <!-- consider making another dropdown  -->
+                    <form action="/games/player_review/<%= game.id %>" method="post">
+                      <div class="form-group">
+                        <input type="hidden" name="player_id" value="<%= player.playerUser.id %>">
+                        <input type="number"  class="form-control" name="playerReviewScore"  min= "1" max="5" placeholder="Rate 1 - 5">
+                      </div>
 
-
-                  <form action="/games/player_review/<%= game.id %>" method="post">
-                    <div class="form-group">
-                      <input type="hidden" name="player_id" value="<%= player.playerUser.id %>">
-                      <input type="number"  class="form-control" name="playerReviewScore"  min= "1" max="5" placeholder="Rate 1 - 5">
-                    </div>
-
-                    <div class="form-group">
-                      <label for="playerReviewBody">Player Review: </label>
-                      <textarea class="form-control" name="playerReviewBody" placeholder= "Leave feedback for your players here."> </textarea>
-                      <button class="btn btn-danger mt-2"> Submit </button>
-                    </div>
-                  </form>
-                </div>
-
+                      <div class="form-group">
+                        <label for="playerReviewBody">Player Review: </label>
+                        <textarea class="form-control" name="playerReviewBody" placeholder= "Leave feedback for your players here."> </textarea>
+                        <button class="btn btn-danger mt-2"> Submit </button>
+                      </div>
+                    </form>
+                  </div>
+              <% } %>
 
 
                </div>
