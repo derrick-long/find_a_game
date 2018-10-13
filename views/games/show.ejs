@@ -39,7 +39,7 @@
     <% if(user && game.numberOfPlayers > 0 && game.host.id != user.id) { %>
 
     <form action="/games/player/<%= game.id %>"  method="post">
-      <input type="submit" value="Join Game" class="btn btn-success float-left m-2">
+      <input type="submit" value="Join Game" class="btn btn-success float-left standard-width my-2 d-block">
     </form>
 
     <% } %>
@@ -52,7 +52,7 @@
    <% if(user) { %>
       <% game.players.forEach(function(player){
         if(player.playerUser.id == user.id) { %>
-          <div class="dropdown d-inline-block  float-left m-2">
+          <div class="dropdown d-inline-block  float-left">
                 <%- include ../partials/host_review.ejs %>
           </div>
         <% } else { %>
@@ -68,7 +68,7 @@
 <% if(game.players.length > 0) { %>
  <!-- fix formating here so everything is on one line also fix width of elements and general look   -->
     <div class="dropdown float-left">
-      <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="playersDropdown" data-toggle="dropdown">
+      <button class="btn btn-secondary dropdown-toggle standard-width my-2 d-block" type="button" id="playersDropdown" data-toggle="dropdown">
         Player List
       </button>
       <div class="dropdown-menu  dropup" aria-labelledby="dropdownMenuButton">

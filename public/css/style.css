@@ -23,6 +23,10 @@ body {
   width: 3em;
   margin-right: 1em;
 }
+
+.standard-width {
+  width: 10em;
+}
 .tag {
   font-size: .75em;
 }
