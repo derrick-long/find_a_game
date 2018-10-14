@@ -76,14 +76,16 @@
 
           <div class="dropdown-item player">
 
-             <a href="/users/profile/<%= player.playerUser.id %>" class="player-list plain-link">
-               <div class="profile-image float-left">
-                 <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
-                  <span class="player-name"><%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </span>
-                  <div class="rating dropdown-item d-flex" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
+              <div class="profile-display align-center">
+               <a href="/users/profile/<%= player.playerUser.id %>" class="player-list plain-link">
+                 <div class="profile-image float-left">
+                   <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
+                    <span><%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </span>
+                    <div class="rating dropdown-item d-flex" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
+                    </div>
                   </div>
-                </div>
-              </a>
+                </a>
+              </div>
 
               <div class="clearfix">
               </div>
@@ -102,13 +104,13 @@
 
                       <div class="form-group">
                         <label for="playerReviewBody">Player Review: </label>
-                        <textarea class="form-control" name="playerReviewBody" placeholder= "Leave feedback for your players here."> </textarea>
-                        <button class="btn btn-danger mt-2"> Submit </button>
+                        <textarea class="form-control" name="playerReviewBody" placeholder= "Leave feedback for players here."></textarea>
+                        <button class="btn  btn-primary standard-width m-2 d-block"> Submit </button>
                       </div>
                     </form>
-                  </div>
-              <% } %>
 
+              <% } %>
+                </div>
 
                </div>
         <% }) %>
