@@ -1,12 +1,9 @@
-<!-- <div class="row">
-  <div class="col-md-12 col-lg-2"> -->
+
     <button class="btn btn-secondary dropdown-toggle  m-2 btn-block" type="button" id="hostReviewDropdown" data-toggle="dropdown">
     Review Host
     </button>
-  <!-- </div>
-</div> -->
 
-  <div class="dropdown-menu">
+  <div class="dropdown-menu dropdown-size col-md-12 col-lg-4">
 
     <div class="dropdown-item">
       <form action="/games/host_review/<%= game.id %>" method="post">
@@ -19,11 +16,9 @@
 
           <textarea class="form-control" name="hostReviewBody" placeholder= "Leave feedback for your game master here."></textarea>
 
-          <div class="row">
-            <div class="col-md-12 col-lg-2">
+
               <button class="btn btn-primary my-2 btn-block"> Submit </button>
-            </div>
-          </div>
+
         </div>
       </form>
 

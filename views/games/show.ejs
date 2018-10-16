@@ -5,7 +5,7 @@
 
   <div class="col-12 bg-light">
     <div class="game-info  d-block">
-      <h1 class="floatleft"> <%= game.title %>  </h1>
+      <h1> <%= game.title %>  </h1>
       <% var gameDate = fromIsoDate(game.date); %>
       <span class="mb-2">  <%= dateformat(gameDate, "fullDate") %>  | <%= timeChange(game.startTime) %> </span>
       <div class="clearfix"></div>
@@ -36,13 +36,13 @@
 
   <!-- don't display unless user is not already a player in the game  -->
     <% if(user && game.numberOfPlayers > 0 && game.host.id != user.id) { %>
-      <div class="row">
-        <div class="col-md-12 col-lg-2">
+      <!-- <div class="row">
+        <div class="col-md-12 col-lg-2"> -->
           <form action="/games/player/<%= game.id %>"  method="post">
             <input type="submit" value="Join Game" class="btn btn-success  m-2 btn-block">
           </form>
-        </div>
-      </div>
+        <!-- </div>
+      </div> -->
 
     <% } %>
 
@@ -54,9 +54,13 @@
    <% if(user) { %>
       <% game.players.forEach(function(player){
         if(player.playerUser.id == user.id) { %>
-          <div class="dropdown">
-                <%- include ../partials/host_review.ejs %>
-          </div>
+          <!-- <div class="row">
+            <div class="col-md-12 col-lg-2"> -->
+            <div class="dropdown">
+                  <%- include ../partials/host_review.ejs %>
+            </div>
+          <!-- </div>
+        </div>  -->
         <% } %>
       <% }) %>
   <% } %>
@@ -69,37 +73,44 @@
 <% if(game.players.length > 0) { %>
  <!-- fix formating here so everything is on one line also fix width of elements and general look   -->
 
-      <div class="dropdown">
-        <!-- <div class="col-md-12 col-lg-2"> -->
+
+
+    <div class="dropdown">
+
+      <!-- <div class="row">
+        <div class="col-md-12 col-lg-2"> -->
           <button class="btn btn-secondary dropdown-toggle m-2 btn-block" type="button" id="playersDropdown" data-toggle="dropdown">
-                Player List
+            Player List
           </button>
-        <!-- </div> -->
+        <!-- </div>
+      </div> -->
 
+      <div class="dropdown-menu dropdown-size col-md-12 col-lg-4" aria-labelledby="dropdownMenuButton">
 
-
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <% game.players.forEach(function(player){ %>
 
           <div class="dropdown-item player">
 
-              <div class="profile-display align-center">
+              <div class="profile-display align-center float-left">
                  <a href="/users/profile/<%= player.playerUser.id %>" class="player-list plain-link">
-                 <div class="profile-image float-left">
+                 <div class="profile-image">
                    <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
                     <span> <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </span>
                     <div class="rating dropdown-item d-flex" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
                     </div>
-                  </div>
+                </div>
                 </a>
               </div>
+
+              <div class="stars-outer float-left">
+                 <div class="<%= player.playerUser.id %> stars-inner align-center"></div>
+              </div>
+
+
 
               <div class="clearfix">
               </div>
 
-              <div class="stars-outer">
-                 <div class="<%= player.playerUser.id %> stars-inner"></div>
-              </div>
 
               <% if (player.playerUser.id != user.id) { %>
               <!-- consider making another dropdown  -->
@@ -123,15 +134,14 @@
                     </form>
 
               <% } %>
-                </div>
 
-               </div>
-        <% }) %>
+            <% }) %>
+
+          </div>
+        </div>
       </div>
-      <% } %>
+
+    <% } %>
 
     </div>
   </div>
-  <!-- <div class="col">
-  </div> -->
-</div>

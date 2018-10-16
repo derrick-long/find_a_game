@@ -7,6 +7,10 @@ body {
   width: 2em;
 }
 
+.dropdown-size {
+  position: static;
+}
+
 .card{
   overflow: hidden;
 }
