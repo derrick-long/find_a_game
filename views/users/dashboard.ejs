@@ -35,10 +35,20 @@
             <div class="card-body">
               <h5 class="card-title"> No Games Added Yet! </h5>
               <p class="card-text"> Your next game would be here if you joined or made one!</p>
-              <a href="/games/add" class="btn btn-primary"><i class="fas fa-plus"></i>
-                Host A Game</a>
-              <a href="/games/map" class="btn btn-success"><i class="fas fa-plus"></i>
-                Join A Game</a>
+
+              <div class="row">
+                <div class="col-md-12 col-lg-2">
+                  <a href="/games/add" class="btn btn-primary btn-block"><i class="fas fa-plus"></i>
+                  Host A Game</a>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 col-lg-2">
+                  <a href="/games/map" class="btn btn-success btn-block"><i class="fas fa-plus"></i>
+                  Join A Game</a>
+                </div>
+            </div>
                 <!-- update links  -->
             </div>
         </div>
@@ -64,25 +74,40 @@
             </div>
 
           <% } %>
-
-            <a href="/games/show/<%=upcomingGame.id%>" class="btn btn-primary standard-width my-2 d-block"><i class="fas fa-book"></i> See Details</a>
+          <div class="row">
+            <div class="col-md-12 col-lg-2">
+              <a href ="/games/show/<%=upcomingGame.id%>" class="btn btn-primary btn-block"><i class="fas fa-book"></i> See Details</a>
+            </div>
+          </div>
 
             <% if (upcomingGame.host == user.id) { %>
 
-              <a href="/games/edit/<%= upcomingGame.id%>" class="btn btn-dark standard-width my-2 d-block"> Edit Game </a>
+              <div class="row">
+                <div class="col-md-12 col-lg-2">
+                  <a href="/games/edit/<%= upcomingGame.id%>" class="btn btn-dark  my-2 btn-block"> Edit Game </a>
+                </div>
+              </div>
 
               <form action="/games/<%= upcomingGame.id %>/?_method=DELETE" method="post" id="delete-form">
                 <input type="hidden" name="_method" value="DELETE">
-                <button type="submit" class="btn btn-danger my-2 standard-width d-block"><i class= "fas fa-trash"></i>
-                  Delete </button>
+                <div class="row">
+                  <div class="col-md-12 col-lg-2">
+                    <button type="submit" class="btn btn-danger my-2  btn-block"><i class= "fas fa-trash"></i>
+                    Delete </button>
+                  </div>
+                </div>
               </form>
 
             <% } else { %>
               <form action="/users/drop_player/?_method=DELETE" method="post" id="delete-form">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="game_id" value="<%= upcomingGame.id %>">
-                <button type="submit" class="btn btn-danger  standard-width my-2"><i class= "fas fa-trash"></i>
-                  Leave Game </button>
+                <div class="row">
+                  <div class="col-md-12 col-lg-2">
+                    <button type="submit" class="btn btn-danger  btn-block my-2"><i class= "fas fa-trash"></i>
+                    Leave Game </button>
+                  </div>
+                </div>
               </form>
             <% } %>
         </div>

@@ -24,23 +24,41 @@
           <p class="card-text"><%= truncate(game.description, 250) %> </p>
           <p class="card-text text-muted"> Seeking <%= game.numberOfPlayers %>
             players </p>
-          <a href="/games/show/<%= game.id %>" class="btn btn-primary my-2 standard-width d-block"><i class="fas fa-book"></i> Details</a>
+
+          <div class="row">
+            <div class="col-md-12 col-lg-2">
+              <a href="/games/show/<%= game.id %>" class="btn btn-primary my-2  btn-block"><i class="fas fa-book"></i> Details</a>
+            </div>
+          </div>
+
           <% if (game.host == user.id) { %>
 
-            <a href="/games/edit/<%= game.id%>" class="btn btn-dark my-2 standard-width d-block"> Edit Game </a>
+            <div class="row">
+              <div class="col-md-12 col-lg-2">
+                <a href="/games/edit/<%= game.id%>" class="btn btn-dark my-2 btn-block"> Edit Game </a>
+              </div>
+            </div>
 
             <form action="/games/<%= game.id %>/?_method=DELETE" method="post" id="delete-form">
               <input type="hidden" name="_method" value="DELETE">
-              <button type="submit" class="btn btn-danger my-2 standard-width d-block"><i class= "fas fa-trash"></i>
-                Delete </button>
+              <div class="row">
+                <div class="col-md-12 col-lg-2">
+                  <button type="submit" class="btn btn-danger my-2 btn-block"><i class= "fas fa-trash"></i>
+                  Delete </button>
+                </div>
+              </div>
             </form>
 
           <% } else { %>
             <form action="/users/drop_player/?_method=DELETE" method="post" id="delete-form">
               <input type="hidden" name="_method" value="DELETE">
               <input type="hidden" name="game_id" value="<%= game.id %>">
-              <button type="submit" class="btn btn-danger my-2 standard-width d-block"><i class= "fas fa-trash"></i>
-                Leave Game </button>
+              <div class="row">
+                <div class="col-md-12 col-lg-2">
+                  <button type="submit" class="btn btn-danger my-2 btn-block"><i class= "fas fa-trash"></i>
+                  Leave Game </button>
+                </div>
+              </div>
             </form>
 
           <% } %>

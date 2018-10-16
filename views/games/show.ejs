@@ -1,10 +1,9 @@
 
 <div class="row h-100">
  <!-- change order of layout here  -->
-  <div class="col">
-  </div>
 
-  <div class="col-12  bg-light">
+
+  <div class="col-12 bg-light">
     <div class="game-info  d-block">
       <h1 class="floatleft"> <%= game.title %>  </h1>
       <% var gameDate = fromIsoDate(game.date); %>
@@ -37,10 +36,13 @@
 
   <!-- don't display unless user is not already a player in the game  -->
     <% if(user && game.numberOfPlayers > 0 && game.host.id != user.id) { %>
-
-    <form action="/games/player/<%= game.id %>"  method="post">
-      <input type="submit" value="Join Game" class="btn btn-success  standard-width m-2 d-block">
-    </form>
+      <div class="row">
+        <div class="col-md-12 col-lg-2">
+          <form action="/games/player/<%= game.id %>"  method="post">
+            <input type="submit" value="Join Game" class="btn btn-success  m-2 btn-block">
+          </form>
+        </div>
+      </div>
 
     <% } %>
 
@@ -55,7 +57,6 @@
           <div class="dropdown">
                 <%- include ../partials/host_review.ejs %>
           </div>
-        <% } else { %>
         <% } %>
       <% }) %>
   <% } %>
@@ -67,20 +68,26 @@
 
 <% if(game.players.length > 0) { %>
  <!-- fix formating here so everything is on one line also fix width of elements and general look   -->
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle standard-width m-2 d-block" type="button" id="playersDropdown" data-toggle="dropdown">
-        Player List
-      </button>
+
+      <div class="dropdown">
+        <!-- <div class="col-md-12 col-lg-2"> -->
+          <button class="btn btn-secondary dropdown-toggle m-2 btn-block" type="button" id="playersDropdown" data-toggle="dropdown">
+                Player List
+          </button>
+        <!-- </div> -->
+
+
+
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <% game.players.forEach(function(player){ %>
 
           <div class="dropdown-item player">
 
               <div class="profile-display align-center">
-               <a href="/users/profile/<%= player.playerUser.id %>" class="player-list plain-link">
+                 <a href="/users/profile/<%= player.playerUser.id %>" class="player-list plain-link">
                  <div class="profile-image float-left">
                    <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
-                    <span><%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </span>
+                    <span> <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </span>
                     <div class="rating dropdown-item d-flex" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
                     </div>
                   </div>
@@ -105,7 +112,13 @@
                       <div class="form-group">
                         <label for="playerReviewBody">Player Review: </label>
                         <textarea class="form-control" name="playerReviewBody" placeholder= "Leave feedback for players here."></textarea>
-                        <button class="btn  btn-primary standard-width m-2 d-block"> Submit </button>
+
+                        <div class="row">
+                          <div class="col-md-12 col-lg-2">
+                            <button class="btn  btn-primary  m-2 btn-block"> Submit </button>
+                          </div>
+                        </div>
+
                       </div>
                     </form>
 
@@ -119,6 +132,6 @@
 
     </div>
   </div>
-  <div class="col">
-  </div>
+  <!-- <div class="col">
+  </div> -->
 </div>
