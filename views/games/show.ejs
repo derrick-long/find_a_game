@@ -12,24 +12,27 @@
 
       <p class="m-2"> <%= truncate(game.description, 500) %> </p>
 
-      <div class="profile-image float-left ">
+     <!-- make name and pic one div to align  -->
+
+      <div class="profile-image float-left mb-3">
         <img src="<%= game.host.image %>" class="img-fluid rounded-circle" ></img>
       </div>
 
-      <div class="rating float-left mr-2" data-rating= "<%= game.host.hostReviewAverage %>" data-id="<%= game.host.id %>">
-          <div class="stars-outer">
-          <div class="<%= game.host.id %> stars-inner"></div>
-          </div>
-      </div>
-
-      <div class="float-left">
+      <div class="float-left align-center mr-2">
         <a href= "/users/profile/<%= game.host.id %>" class="plain-link">
         <span class="align-middle"> Hosted by <%= game.host.firstName %>  <%= game.host.lastName %></span>
         </a>
       </div>
 
-      <div class="clearfix">
+
+      <div class="rating  align-center mx-2" data-rating= "<%= game.host.hostReviewAverage %>" data-id="<%= game.host.id %>">
+          <div class="stars-outer">
+          <div class="<%= game.host.id %> stars-inner"></div>
+          </div>
       </div>
+
+
+
 
 
     </div>
@@ -91,25 +94,23 @@
 
           <div class="dropdown-item player">
 
-              <div class="profile-display align-center float-left">
+              <div class="profile-display align-center d-inline-block">
                  <a href="/users/profile/<%= player.playerUser.id %>" class="player-list plain-link">
                  <div class="profile-image">
                    <img src="<%= player.playerUser.image %>" class="img-fluid rounded-circle" ></img>
                     <span> <%= player.playerUser.firstName %>  <%= player.playerUser.lastName %> </span>
+                    <div class="stars-outer align-center">
+                       <div class="<%= player.playerUser.id %> stars-inner align-center"></div>
+                    </div>
                     <div class="rating dropdown-item d-flex" data-rating= "<%= player.playerUser.playerReviewAverage%>" data-id="<%= player.playerUser.id %>">
                     </div>
                 </div>
                 </a>
               </div>
 
-              <div class="stars-outer float-left">
-                 <div class="<%= player.playerUser.id %> stars-inner align-center"></div>
-              </div>
 
 
 
-              <div class="clearfix">
-              </div>
 
 
               <% if (player.playerUser.id != user.id) { %>
@@ -121,11 +122,11 @@
                       </div>
 
                       <div class="form-group">
-                        <label for="playerReviewBody">Player Review: </label>
+                        <label for="playerReviewBody"> Review:</label>
                         <textarea class="form-control" name="playerReviewBody" placeholder= "Leave feedback for players here."></textarea>
 
                         <div class="row">
-                          <div class="col-md-12 col-lg-2">
+                          <div class="col-md-12 col-lg-4">
                             <button class="btn  btn-primary  m-2 btn-block"> Submit </button>
                           </div>
                         </div>
