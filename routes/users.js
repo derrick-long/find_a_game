@@ -8,6 +8,7 @@ const {ensureAuthenticated} = require('../helpers/auth');
 const {ratingsAverage} = require('../helpers/reviews');
 const {starPercentage} = require('../helpers/reviews');
 
+//switch to .exec method in place of then, also call .catch at end and make sure it executes
 
 //test
 router.get('/dashboard', ensureAuthenticated, (req,res) => {
@@ -19,11 +20,13 @@ router.get('/dashboard', ensureAuthenticated, (req,res) => {
     ]
   })
   .sort('date')
-  .then(games=>{
+  .exec()
+  .then((games)=>{
     res.render('users/dashboard', {upcomingGame: games[0]});
+  })
+  .catch((err)=> {
+    res.send(err);
   });
-  //find way to display upcoming game, so game with the date/time closest to current date/time
-
 });
 
 

@@ -12,6 +12,8 @@ router.get('/google/callback',
   res.redirect('/users/dashboard');
 });
 
+//delete verify route
+
 router.get('/verify', (req, res) => {
     if(req.user){
       console.log(req.user);
