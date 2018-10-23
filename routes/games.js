@@ -9,7 +9,7 @@ const errors = [];
 const {ratingsAverage} = require('../helpers/reviews');
 const NodeGeocoder = require('node-geocoder');
 
-// protect api
+
 // add catch/error handling for bad geocode in add game
 
 var options = {
@@ -34,7 +34,7 @@ router.get('/endpoint', (req,res)=> {
   var currentDate = new Date();
   var query_lat;
   var query_long;
-  var miles = ( req.query.radius * 1609.34);
+  var miles = (req.query.radius * 1609.34);
 
   geocoder.geocode(req.query.searchZip)
     .then(function(response){
@@ -57,7 +57,6 @@ router.get('/endpoint', (req,res)=> {
           coordinates: [query_lat, query_long]}
         }
       },date: { $gt: currentDate}
-  // add exec cal so catch works
 
      }).find((error, games) => {
        if (error) console.log(error);
@@ -74,7 +73,7 @@ router.get('/endpoint', (req,res)=> {
 
 router.get('/', (req,res)=> {
   var currentDate = new Date();
-  Game.find({ date: { $gt: currentDate}}) /// add this to the find game joint as well
+  Game.find({ date: { $gt: currentDate}})
   .populate('host')
   .sort('date')
   .exec()
@@ -179,6 +178,7 @@ router.post('/', ensureAuthenticated, (req,res)=>{
         lat = response[0].latitude;
         new Game(newGame)
         .save()
+        .exec()
         .then(game => {
           game.location.coordinates.splice(0,2);
           game.location.coordinates.push(lat,long);
@@ -198,11 +198,14 @@ router.post('/', ensureAuthenticated, (req,res)=>{
 
 router.get('/edit/:id', ensureAuthenticated, (req,res)=>{
   Game.findOne({ _id: req.params.id
-  }).then(game=>{
+  }).exec()
+  .then(game=>{
     res.render('games/edit',{
         errors: errors,
         game: game,
       });
+    }).catch(err=>{
+      console.log(err);
     });
 });
 
@@ -210,7 +213,8 @@ router.get('/edit/:id', ensureAuthenticated, (req,res)=>{
 
 router.put('/edit/:id', ensureAuthenticated, (req,res)=>{
   Game.findOne({ _id: req.params.id
-  }).then(game=>{
+  }).exec()
+  .then(game=>{
     if(!req.body.title){
       errors.push({text: 'Please add a title.'});
     }
@@ -261,6 +265,8 @@ router.put('/edit/:id', ensureAuthenticated, (req,res)=>{
     .then(game => {
       req.flash('success_msg', 'Game Updated!');
       res.redirect(`/games/show/${game.id}`);
+    }).catch(err=>{
+      console.log(err);
     });
     }
   });
@@ -273,7 +279,8 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
   Game.findOne({
     _id:req.params.id
   })
-  .then(game => {
+  .exec()
+  .then(game =>{
 
     if(req.user.id == game.host) {
         req.flash('error_msg', 'Hosts cannot be players');
@@ -297,6 +304,8 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
           .then(game =>{
             req.flash('success_msg', 'Signed up for game!');
             res.redirect('/users/dashboard');
+          }).catch(err=>{
+            console.log(err);
           });
         }
       });
@@ -313,39 +322,41 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
       .then(game =>{
         req.flash('success_msg', 'Signed up for game!');
         res.redirect('/users/dashboard');
+      }).catch(err =>{
+        console.log(err);
       });
     }
-    });
+  }).catch(err=>{
+    console.log(err);
+  });
 });
 
 
 
-// works now but something odd going on
-// dry up and fix
 router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
-
 
   Game.findOne({
     _id: req.params.id
   })
   .populate('host')
   .then(game=> {
-  if(game.host.hostReviews.length == 0 || game.host.hostReviews == undefined){
-    const newHostReview = {
-    game: game.id,
-    reviewBody: req.body.hostReviewBody,
-    reviewScore: req.body.hostReviewScore,
-    reviewUser: req.user.id
-    };
-  //works probably need to clean it up though
-  game.host.hostReviews.unshift(newHostReview);
-  const newAverage = ratingsAverage(game.host,'host');
-  game.host.hostReviewAverage = newAverage;
-  game.host.save()
-  .then(game=> {
-    req.flash('success_msg', 'Review added!');
-    res.redirect('/');
-  });
+    if(game.host.hostReviews.length == 0 || game.host.hostReviews == undefined){
+
+      const newHostReview = {
+        game: game.id,
+        reviewBody: req.body.hostReviewBody,
+        reviewScore: req.body.hostReviewScore,
+        reviewUser: req.user.id
+      };
+
+    game.host.hostReviews.unshift(newHostReview);
+    const newAverage = ratingsAverage(game.host,'host');
+    game.host.hostReviewAverage = newAverage;
+    game.host.save()
+    .then(game=> {
+      req.flash('success_msg', 'Review added!');
+      res.redirect('/');
+    });
   }
     game.host.hostReviews.forEach(function(review){
         if (review.game == game.id && review.reviewUser == req.user.id){
@@ -354,12 +365,12 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
         } else {
 
           const newHostReview = {
-          game: game.id,
-          reviewBody: req.body.hostReviewBody,
-          reviewScore: req.body.hostReviewScore,
-          reviewUser: req.user.id
+            game: game.id,
+            reviewBody: req.body.hostReviewBody,
+            reviewScore: req.body.hostReviewScore,
+            reviewUser: req.user.id
           };
-        //works probably need to clean it up though
+
         game.host.hostReviews.unshift(newHostReview);
         const newAverage = ratingsAverage(game.host,'host');
         game.host.hostReviewAverage = newAverage;
@@ -413,9 +424,12 @@ router.post('/player_review/:id', ensureAuthenticated, (req, res)=>{
 // remove game
 router.delete('/:id', ensureAuthenticated, (req,res) => {
   Game.remove({_id: req.params.id})
+    .exec()
     .then(()=> {
       req.flash('success_msg', 'Game Removed!');
       res.redirect('/users/dashboard');
+    }).catch(err=>{
+      console.log(err);
     });
 });
 
