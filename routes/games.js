@@ -57,7 +57,7 @@ router.get('/endpoint', (req,res)=> {
           coordinates: [query_lat, query_long]}
         }
       },date: { $gt: currentDate}
-
+  // add exec cal so catch works
 
      }).find((error, games) => {
        if (error) console.log(error);
@@ -77,6 +77,7 @@ router.get('/', (req,res)=> {
   Game.find({ date: { $gt: currentDate}}) /// add this to the find game joint as well
   .populate('host')
   .sort('date')
+  .exec()
   .then(games =>{
     res.render('games/index', {
       games: games
@@ -95,21 +96,23 @@ router.get('/add', ensureAuthenticated, (req,res)=>{
 });
 
 
-//single game
 
 router.get('/show/:id',ensureAuthenticated, (req,res)=> {
-  Game.findOne({  _id: req.params.id })
+  Game.findOne({  _id:req.params.id })
   .populate('host')
   .populate('players.playerUser')
+  .exec()
   .then(game => {
-    if (game == null){
-      req.flash('error_msg','Game not found');
-      res.redirect('/games');
-    } else {
+    if (game){
       res.render('games/show', {
         game: game
       });
+    } else {
+      req.flash('error_msg','Game not found');
+      res.redirect('/games');
     }
+  }).catch(err=>{
+    console.log(err);
   });
 });
 

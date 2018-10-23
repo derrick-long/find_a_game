@@ -8,9 +8,7 @@ const {ensureAuthenticated} = require('../helpers/auth');
 const {ratingsAverage} = require('../helpers/reviews');
 const {starPercentage} = require('../helpers/reviews');
 
-//switch to .exec method in place of then, also call .catch at end and make sure it executes
 
-//test
 router.get('/dashboard', ensureAuthenticated, (req,res) => {
   var currentDate = new Date();
   Game.find({
@@ -34,18 +32,18 @@ router.get('/dashboard', ensureAuthenticated, (req,res) => {
 router.get('/profile/:id', ensureAuthenticated, (req,res) => {
   User.findOne({
     _id: req.params.id})
-  .then(user=>{
-    if(user){
-      res.render('users/profile', {
-        profileUser:user
-      })
-      .catch(err=>{
-        console.log(err);
-      });
-    } else {
-      req.flash('error_msg', 'User Not Found');
-      res.redirect('/');
-    }
+    .exec()
+    .then(user=>{
+      if(user){
+        res.render('users/profile', {
+          profileUser:user
+        });
+      } else {
+        req.flash('error_msg', 'User Not Found');
+        res.redirect('/');
+      }
+    }).catch(err=>{
+      console.log(err);
   });
 
 
@@ -96,6 +94,7 @@ router.put('/:id', ensureAuthenticated, (req,res)=> {
 router.get('/hosted', ensureAuthenticated,(req,res, next)=> {
   Game.find({host: req.user.id})
   .populate('user')
+  .exec()
   .then(games => {
     res.render('users/user_games', {
       games:games,
@@ -111,10 +110,13 @@ router.get('/hosted', ensureAuthenticated,(req,res, next)=> {
 router.get('/played', ensureAuthenticated, (req,res)=>{
   Game.find({'players.playerUser': req.user.id})
   .populate('user')
+  .exec()
   .then(games => {
     res.render('users/user_games', {
       games:games,
       title: "Games Played In"
+    }).catch(err=>{
+      console.log(err);
     });
   });
 
@@ -131,8 +133,8 @@ router.delete('/drop_player', ensureAuthenticated, (req,res) => {
           game.save();
           req.flash('success_msg', 'Left Game!');
           res.redirect('/users/dashboard');
-    });
-  }).catch(err=>{
+        });
+    }).catch(err=>{
     console.log(err);
   });
 
@@ -142,7 +144,6 @@ router.delete('/drop_player', ensureAuthenticated, (req,res) => {
 });
 
 
-//need to add star interface
 
 
 
