@@ -178,7 +178,6 @@ router.post('/', ensureAuthenticated, (req,res)=>{
         lat = response[0].latitude;
         new Game(newGame)
         .save()
-        .exec()
         .then(game => {
           game.location.coordinates.splice(0,2);
           game.location.coordinates.push(lat,long);
@@ -356,6 +355,9 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
     .then(game=> {
       req.flash('success_msg', 'Review added!');
       res.redirect('/');
+    })
+    .catch(err=>{
+      console.log(err);
     });
   }
     game.host.hostReviews.forEach(function(review){
@@ -378,6 +380,9 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
         .then(game=> {
           req.flash('success_msg', 'Review added!');
           res.redirect('/');
+        })
+        .catch(err=> {
+          console.log(err);
         });
       }
     });
@@ -386,7 +391,7 @@ router.post('/host_review/:id', ensureAuthenticated, (req, res)=>{
 });
 
 
-
+// need exec here
 
 router.post('/player_review/:id', ensureAuthenticated, (req, res)=>{
   User.findOne({

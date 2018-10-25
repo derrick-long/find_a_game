@@ -1,6 +1,6 @@
 
 <div class="row h-100">
- <!-- change order of layout here  -->
+
 
 
   <div class="col-12 bg-light">
@@ -12,11 +12,12 @@
 
       <p class="m-2"> <%= truncate(game.description, 500) %> </p>
 
-     <!-- make name and pic one div to align  -->
+
 
       <div class="profile-image float-left mb-3">
         <img src="<%= game.host.image %>" class="img-fluid rounded-circle" ></img>
       </div>
+
 
       <div class="float-left align-center mr-2">
         <a href= "/users/profile/<%= game.host.id %>" class="plain-link">
