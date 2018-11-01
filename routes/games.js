@@ -28,7 +28,7 @@ router.get('/map', (req, res)=> {
   res.render('games/find_map');
 });
 
-//put in undefined catch
+
 
 router.get('/endpoint', (req,res)=> {
   var currentDate = new Date();
@@ -117,7 +117,7 @@ router.get('/show/:id',ensureAuthenticated, (req,res)=> {
 
 
 
-// add saved inputs for incorrect address 
+// add saved inputs for incorrect address
 router.post('/', ensureAuthenticated, (req,res)=>{
   var lat;
   var long;
@@ -169,7 +169,7 @@ router.post('/', ensureAuthenticated, (req,res)=>{
   description: req.body.description,
   host: req.user.id,
   };
-
+  // move this up above, use the if response here to add one to the error []
   geocoder.geocode(req.body.address + " " + req.body.zipcode)
     .then(function(response) {
       if (response == undefined || response.length == 0) {
@@ -295,7 +295,7 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
             res.redirect('/games');
         } else {
 
-          const newPlayer = {
+          let newPlayer = {
             playerUser: req.user.id
           };
 
@@ -311,8 +311,8 @@ router.post('/player/:id', ensureAuthenticated, (req, res)=>{
         }
       });
     } else {
-      //dry up later
-      const newPlayer = {
+      
+      let newPlayer = {
         playerUser: req.user.id
       };
 
