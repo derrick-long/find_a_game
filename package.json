@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "An application for finding tabletop games/ players for your games",
   "main": "app.js",
+  "engines": {
+    "node": "11.1.0"
+  },
   "scripts": {
     "start": "node app.js"
   },
