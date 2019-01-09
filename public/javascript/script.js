@@ -1,4 +1,10 @@
 
+var jumbotron =  '<div class="jumbotron jumbotron-fluid mt-4">' +
+'<div class="container">' + 
+  '<h1 class="display-4">Find a Game </h1>' + 
+  '<p class="lead"><a href="/games/add" class="plain-link">Host a game for players</a> or <a href= "/games/map" class="plain-link"> find a game.</a></p>' +
+'</div>';
+
 
 const starTotal = 5;
 
@@ -59,3 +65,8 @@ $( document ).ready(function() {
       });
     }
 });
+
+//jumbotron outside container 
+if ($('#welcome').length > 0){
+  $(jumbotron).insertBefore("#main-content");
+};
