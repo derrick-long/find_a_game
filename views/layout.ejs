@@ -19,10 +19,12 @@
     <div class="hidden" id="serverInfo" data-url= "<%= apiURL %>"> </div>
 
     <%- include partials/navbar.ejs %>
-
+    
+    <div class="container">
+      <%- include partials/flash_messages %>
+    </div> 
     
     <div class="container" id="main-content">
-      <%- include partials/flash_messages %>
       <%- body %>
     </div>
     
